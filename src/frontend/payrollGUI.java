@@ -4,7 +4,15 @@
  */
 package frontend;
 
+
+import common.rmiinterface;
 import java.awt.CardLayout;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,7 +23,7 @@ public class payrollGUI extends javax.swing.JFrame {
     /**
      * Creates new form payrollGUI
      */
-    public payrollGUI() {
+    public payrollGUI(){
         initComponents();
         this.cardLayout = (CardLayout) getContentPane().getLayout();
     }
@@ -220,8 +228,21 @@ public class payrollGUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new payrollGUI().setVisible(true);
+
             }
         });
+        
+         rmiinterface Obj;
+        try {
+            Obj = (rmiinterface)Naming.lookup("rmi://localhost:1040/AutomatedPayrollSystem");
+            Obj.checkConnection();
+        } catch (NotBoundException ex) {
+            Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
