@@ -4,17 +4,23 @@
  */
 package frontend;
 
+import backend.connection.RMI_Interface;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 /**
  *
  * @author wjing
  */
 public class payrollGUI extends javax.swing.JFrame {
-
     /**
      * Creates new form payrollGUI
      */
+    private static RMI_Interface obj;
+    
     public payrollGUI() {
         initComponents();
+        
     }
 
     /**
@@ -26,39 +32,162 @@ public class payrollGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        personal_details_panel = new javax.swing.JPanel();
+        personal_details_label = new javax.swing.JLabel();
+        personal_name_label = new javax.swing.JLabel();
+        name_text_field = new javax.swing.JTextField();
+        ic_text_field = new javax.swing.JTextField();
+        ic_no_label = new javax.swing.JLabel();
+        contact_no_label = new javax.swing.JLabel();
+        contact_text_field = new javax.swing.JTextField();
+        title_text_field = new javax.swing.JTextField();
+        job_title_label = new javax.swing.JLabel();
+        department_label = new javax.swing.JLabel();
+        department_text_field = new javax.swing.JTextField();
+        pd_salary_button = new javax.swing.JButton();
+        pd_back_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+        personal_details_label.setFont(new java.awt.Font("Noto Sans", 1, 36)); // NOI18N
+        personal_details_label.setText("Personal Details");
+
+        personal_name_label.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+        personal_name_label.setText("Name:");
+
+        name_text_field.setEditable(false);
+        name_text_field.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+
+        ic_text_field.setEditable(false);
+        ic_text_field.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+
+        ic_no_label.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+        ic_no_label.setText("IC No.:");
+
+        contact_no_label.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+        contact_no_label.setText("Contact No.:");
+
+        contact_text_field.setEditable(false);
+        contact_text_field.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+
+        title_text_field.setEditable(false);
+        title_text_field.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+
+        job_title_label.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+        job_title_label.setText("Job Title:");
+
+        department_label.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+        department_label.setText("Department:");
+
+        department_text_field.setEditable(false);
+        department_text_field.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+
+        pd_salary_button.setFont(new java.awt.Font("Noto Sans", 0, 12)); // NOI18N
+        pd_salary_button.setText("Salary Details");
+        pd_salary_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pd_salary_buttonMouseClicked(evt);
+            }
+        });
+
+        pd_back_button.setFont(new java.awt.Font("Noto Sans", 0, 12)); // NOI18N
+        pd_back_button.setText("Back");
+
+        javax.swing.GroupLayout personal_details_panelLayout = new javax.swing.GroupLayout(personal_details_panel);
+        personal_details_panel.setLayout(personal_details_panelLayout);
+        personal_details_panelLayout.setHorizontalGroup(
+            personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(personal_details_panelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(personal_details_panelLayout.createSequentialGroup()
+                        .addComponent(personal_name_label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(contact_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(personal_details_panelLayout.createSequentialGroup()
+                        .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ic_no_label)
+                            .addComponent(contact_no_label))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ic_text_field, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(title_text_field)))
+                    .addGroup(personal_details_panelLayout.createSequentialGroup()
+                        .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(department_label)
+                            .addComponent(job_title_label))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(department_text_field, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(name_text_field, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(171, 171, 171))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, personal_details_panelLayout.createSequentialGroup()
+                .addContainerGap(302, Short.MAX_VALUE)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, personal_details_panelLayout.createSequentialGroup()
+                        .addComponent(personal_details_label)
+                        .addGap(292, 292, 292))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, personal_details_panelLayout.createSequentialGroup()
+                        .addComponent(pd_salary_button)
+                        .addGap(18, 18, 18)
+                        .addComponent(pd_back_button)
+                        .addGap(12, 12, 12))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+        personal_details_panelLayout.setVerticalGroup(
+            personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(personal_details_panelLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(personal_details_label)
+                .addGap(18, 18, 18)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(personal_name_label)
+                    .addComponent(contact_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ic_no_label)
+                    .addComponent(ic_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(contact_no_label)
+                    .addComponent(title_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(job_title_label)
+                    .addComponent(name_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(department_label)
+                    .addComponent(department_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(64, 64, 64)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pd_salary_button)
+                    .addComponent(pd_back_button))
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(personal_details_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(personal_details_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void pd_salary_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pd_salary_buttonMouseClicked
+        // TODO add your handling code here:
+        obj.viewSalaryDetails();
+    }//GEN-LAST:event_pd_salary_buttonMouseClicked
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws MalformedURLException, RemoteException, NotBoundException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -81,6 +210,7 @@ public class payrollGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(payrollGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        obj = Client.connect();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -91,6 +221,19 @@ public class payrollGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel contact_no_label;
+    private javax.swing.JTextField contact_text_field;
+    private javax.swing.JLabel department_label;
+    private javax.swing.JTextField department_text_field;
+    private javax.swing.JLabel ic_no_label;
+    private javax.swing.JTextField ic_text_field;
+    private javax.swing.JLabel job_title_label;
+    private javax.swing.JTextField name_text_field;
+    private javax.swing.JButton pd_back_button;
+    private javax.swing.JButton pd_salary_button;
+    private javax.swing.JLabel personal_details_label;
+    private javax.swing.JPanel personal_details_panel;
+    private javax.swing.JLabel personal_name_label;
+    private javax.swing.JTextField title_text_field;
     // End of variables declaration//GEN-END:variables
 }

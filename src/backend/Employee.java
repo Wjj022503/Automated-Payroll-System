@@ -9,6 +9,7 @@ package backend;
  * @author wjing
  */
 public class Employee {
+    private String id;
     private String name;
     private String password;
     private String ic_no;
@@ -16,7 +17,11 @@ public class Employee {
     private String department;
     
     //constructor
-    Employee(String name,String password,String ic_no,String contact_no,String department){
+    public Employee(){
+    
+    }
+    
+    public Employee(String name,String password,String ic_no,String contact_no,String department){
         this.name = name;
         this.password = password;
         this.ic_no = ic_no;
@@ -31,4 +36,28 @@ public class Employee {
     
     
     //public methods
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setIc_no(String ic_no) {
+        this.ic_no = ic_no;
+    }
+
+    public void setContact_no(String contact_no) {
+        this.contact_no = contact_no;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 }
