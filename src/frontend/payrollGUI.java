@@ -7,12 +7,15 @@ package frontend;
 
 import common.rmiinterface;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextField;
 
 /**
  *
@@ -20,14 +23,34 @@ import java.util.logging.Logger;
  */
 public class payrollGUI extends javax.swing.JFrame {
     private CardLayout cardLayout;
+    private boolean isShowPassword;    
+    private boolean isUsernamePlaceholder = true;    
+    private boolean isPasswordPlaceholder = true;
+
+
     /**
      * Creates new form payrollGUI
      */
     public payrollGUI(){
         initComponents();
         this.cardLayout = (CardLayout) getContentPane().getLayout();
+        addPlaceholderStyle(LoginUsernameInput);        
+        addPlaceholderStyle(LoginPasswordInput);
     }
 
+    public void addPlaceholderStyle(JTextField textField){
+        Font font = textField.getFont();
+        font = font.deriveFont(Font.ITALIC);
+        textField.setFont(font);
+        textField.setForeground(Color.gray);
+    }
+    
+    public void removePlaceholderStyle(JTextField textField){
+        Font font = textField.getFont();
+        font = font.deriveFont(Font.PLAIN|Font.BOLD);
+        textField.setFont(font);
+        textField.setForeground(Color.black);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,12 +62,12 @@ public class payrollGUI extends javax.swing.JFrame {
 
         LoginPage = new javax.swing.JPanel();
         LoginButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        LoginUsernameInput = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         LoginButton1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        ShowPasswordCheckBox = new javax.swing.JCheckBox();
+        LoginPasswordInput = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -60,14 +83,16 @@ public class payrollGUI extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("jTextField1");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        LoginUsernameInput.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        LoginUsernameInput.setText("Username");
+        LoginUsernameInput.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                LoginUsernameInputFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                LoginUsernameInputFocusLost(evt);
             }
         });
-
-        jTextField2.setText("jTextField2");
 
         jLabel1.setText("Username");
 
@@ -80,10 +105,22 @@ public class payrollGUI extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("Show Password");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+        ShowPasswordCheckBox.setText("Show Password");
+        ShowPasswordCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ShowPasswordCheckBoxStateChanged(evt);
+            }
+        });
+
+        LoginPasswordInput.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        LoginPasswordInput.setText("Password");
+        LoginPasswordInput.setEchoChar('\u0000');
+        LoginPasswordInput.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                LoginPasswordInputFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                LoginPasswordInputFocusLost(evt);
             }
         });
 
@@ -91,45 +128,42 @@ public class payrollGUI extends javax.swing.JFrame {
         LoginPage.setLayout(LoginPageLayout);
         LoginPageLayout.setHorizontalGroup(
             LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(LoginPageLayout.createSequentialGroup()
+                    .addGap(261, 261, 261)
+                    .addComponent(LoginButton))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPageLayout.createSequentialGroup()
+                    .addGap(391, 391, 391)
+                    .addComponent(LoginButton1)))
             .addGroup(LoginPageLayout.createSequentialGroup()
                 .addGap(259, 259, 259)
-                .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(LoginPageLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(LoginButton))
-                    .addGroup(LoginPageLayout.createSequentialGroup()
-                        .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(56, 56, 56)
-                        .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
-                            .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField1)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPageLayout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(LoginButton1)))
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(56, 56, 56)
+                .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ShowPasswordCheckBox)
+                    .addComponent(LoginPasswordInput)
+                    .addComponent(LoginUsernameInput)))
         );
         LoginPageLayout.setVerticalGroup(
             LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginPageLayout.createSequentialGroup()
                 .addGap(148, 148, 148)
                 .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LoginUsernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(39, 39, 39)
                 .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(LoginPasswordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
-                .addComponent(jCheckBox1)
+                .addComponent(ShowPasswordCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LoginButton)
                     .addComponent(LoginButton1))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         getContentPane().add(LoginPage, "card3");
@@ -184,18 +218,63 @@ public class payrollGUI extends javax.swing.JFrame {
         this.cardLayout.show(getContentPane(), "card2");
     }//GEN-LAST:event_gotoPayRollPage
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void gotoRegisterPage(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gotoRegisterPage
         // TODO add your handling code here:
         this.cardLayout.show(getContentPane(), "card4");
     }//GEN-LAST:event_gotoRegisterPage
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void LoginUsernameInputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_LoginUsernameInputFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+        if(LoginUsernameInput.getText().equals("Username") && isUsernamePlaceholder){
+            LoginUsernameInput.setText(null);
+            LoginUsernameInput.requestFocus();
+            removePlaceholderStyle(LoginUsernameInput);
+            isUsernamePlaceholder = false;
+        }
+    }//GEN-LAST:event_LoginUsernameInputFocusGained
+
+    private void LoginPasswordInputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_LoginPasswordInputFocusGained
+        // TODO add your handling code here:
+        if(LoginPasswordInput.getText().equals("Password") && isPasswordPlaceholder){
+            LoginPasswordInput.setText(null);
+            LoginPasswordInput.requestFocus();
+            if(!this.isShowPassword){
+                LoginPasswordInput.setEchoChar('●');
+            }
+            removePlaceholderStyle(LoginPasswordInput);
+            isPasswordPlaceholder = false;
+        }
+    }//GEN-LAST:event_LoginPasswordInputFocusGained
+
+    private void ShowPasswordCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ShowPasswordCheckBoxStateChanged
+        // TODO add your handling code here:
+        isShowPassword = ShowPasswordCheckBox.isSelected();
+        if(isShowPassword){
+            LoginPasswordInput.setEchoChar('\u0000');
+        }
+        else if(LoginPasswordInput.getText().length() > 0 && !isPasswordPlaceholder){
+            LoginPasswordInput.setEchoChar('●');
+        }
+    }//GEN-LAST:event_ShowPasswordCheckBoxStateChanged
+
+    private void LoginUsernameInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_LoginUsernameInputFocusLost
+        // TODO add your handling code here:
+        if(LoginUsernameInput.getText().length() == 0){
+            LoginUsernameInput.setText("Username");
+            addPlaceholderStyle(LoginUsernameInput);
+            isUsernamePlaceholder = true;
+        }
+    }//GEN-LAST:event_LoginUsernameInputFocusLost
+
+    private void LoginPasswordInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_LoginPasswordInputFocusLost
+        // TODO add your handling code here:
+        if(LoginPasswordInput.getText().length() == 0){
+            LoginPasswordInput.setText("Password");
+            LoginPasswordInput.setEchoChar('\u0000');
+            addPlaceholderStyle(LoginPasswordInput);
+            isPasswordPlaceholder = true;
+        }
+    }//GEN-LAST:event_LoginPasswordInputFocusLost
 
     /**
      * @param args the command line arguments
@@ -228,7 +307,6 @@ public class payrollGUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new payrollGUI().setVisible(true);
-
             }
         });
         
@@ -249,14 +327,14 @@ public class payrollGUI extends javax.swing.JFrame {
     private javax.swing.JButton LoginButton;
     private javax.swing.JButton LoginButton1;
     private javax.swing.JPanel LoginPage;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JPasswordField LoginPasswordInput;
+    private javax.swing.JTextField LoginUsernameInput;
+    private javax.swing.JCheckBox ShowPasswordCheckBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
