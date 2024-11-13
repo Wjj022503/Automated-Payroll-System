@@ -27,8 +27,8 @@ public class Server extends UnicastRemoteObject implements rmiinterface{
         System.out.println("Server Connected");
     }
     
-    public boolean Login(String username, String password) throws SQLException{
-        
+    public boolean Login(String username, String password) throws RemoteException{
+        System.out.println("User Log in Successfully");
         return true;
     }
 }

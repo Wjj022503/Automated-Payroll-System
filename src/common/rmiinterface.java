@@ -15,5 +15,7 @@ import java.rmi.RemoteException;
  * @author shifong0303
  */
 public interface rmiinterface extends Remote{
-    public void checkConnection() throws RemoteException;
+    public void checkConnection() throws RemoteException;    
+    public boolean Login(String username, String password) throws RemoteException;
+
 }

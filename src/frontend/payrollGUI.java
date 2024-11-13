@@ -36,6 +36,8 @@ public class payrollGUI extends javax.swing.JFrame {
         this.cardLayout = (CardLayout) getContentPane().getLayout();
         addPlaceholderStyle(LoginUsernameInput);        
         addPlaceholderStyle(LoginPasswordInput);
+        LoginInvalidMsgTitle.setVisible(false);
+        LoginInvalidContent.setVisible(false);
     }
 
     public void addPlaceholderStyle(JTextField textField){
@@ -63,11 +65,13 @@ public class payrollGUI extends javax.swing.JFrame {
         LoginPage = new javax.swing.JPanel();
         LoginButton = new javax.swing.JButton();
         LoginUsernameInput = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        LoginUsernameLabel = new javax.swing.JLabel();
+        LoginPasswordLabel = new javax.swing.JLabel();
         LoginButton1 = new javax.swing.JButton();
-        ShowPasswordCheckBox = new javax.swing.JCheckBox();
+        LoginShowPasswordCheckBox = new javax.swing.JCheckBox();
         LoginPasswordInput = new javax.swing.JPasswordField();
+        LoginInvalidMsgTitle = new javax.swing.JLabel();
+        LoginInvalidContent = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -82,6 +86,11 @@ public class payrollGUI extends javax.swing.JFrame {
                 gotoPayRollPage(evt);
             }
         });
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginButtonActionPerformed(evt);
+            }
+        });
 
         LoginUsernameInput.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         LoginUsernameInput.setText("Username");
@@ -94,9 +103,9 @@ public class payrollGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Username");
+        LoginUsernameLabel.setText("Username");
 
-        jLabel2.setText("Password");
+        LoginPasswordLabel.setText("Password");
 
         LoginButton1.setText("Register");
         LoginButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -105,10 +114,11 @@ public class payrollGUI extends javax.swing.JFrame {
             }
         });
 
-        ShowPasswordCheckBox.setText("Show Password");
-        ShowPasswordCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
+        LoginShowPasswordCheckBox.setText("Show Password");
+        LoginShowPasswordCheckBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LoginShowPasswordCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                ShowPasswordCheckBoxStateChanged(evt);
+                LoginLoginShowPasswordCheckBoxStateChanged(evt);
             }
         });
 
@@ -124,46 +134,71 @@ public class payrollGUI extends javax.swing.JFrame {
             }
         });
 
+        LoginInvalidMsgTitle.setForeground(new java.awt.Color(255, 0, 0));
+        LoginInvalidMsgTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LoginInvalidMsgTitle.setText("Wrong Credentials");
+
+        LoginInvalidContent.setForeground(new java.awt.Color(255, 51, 51));
+        LoginInvalidContent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LoginInvalidContent.setText("Invalid Username or Password");
+
         javax.swing.GroupLayout LoginPageLayout = new javax.swing.GroupLayout(LoginPage);
         LoginPage.setLayout(LoginPageLayout);
         LoginPageLayout.setHorizontalGroup(
             LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(LoginPageLayout.createSequentialGroup()
-                    .addGap(261, 261, 261)
-                    .addComponent(LoginButton))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPageLayout.createSequentialGroup()
-                    .addGap(391, 391, 391)
-                    .addComponent(LoginButton1)))
             .addGroup(LoginPageLayout.createSequentialGroup()
-                .addGap(259, 259, 259)
                 .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(56, 56, 56)
-                .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ShowPasswordCheckBox)
-                    .addComponent(LoginPasswordInput)
-                    .addComponent(LoginUsernameInput)))
+                    .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, LoginPageLayout.createSequentialGroup()
+                            .addGap(399, 399, 399)
+                            .addComponent(LoginButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(LoginPageLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(LoginShowPasswordCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(LoginInvalidContent, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(LoginPageLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(LoginInvalidMsgTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(LoginPageLayout.createSequentialGroup()
+                                    .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(LoginPasswordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(LoginUsernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                                    .addGap(84, 84, 84)
+                                    .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(LoginUsernameInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(LoginPasswordInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
         LoginPageLayout.setVerticalGroup(
             LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginPageLayout.createSequentialGroup()
-                .addGap(148, 148, 148)
+                .addContainerGap(150, Short.MAX_VALUE)
                 .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LoginUsernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(39, 39, 39)
-                .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(LoginPasswordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addComponent(ShowPasswordCheckBox)
+                    .addComponent(LoginUsernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LoginUsernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(LoginPageLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(LoginPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPageLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LoginPasswordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(LoginShowPasswordCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LoginButton)
-                    .addComponent(LoginButton1))
-                .addContainerGap(155, Short.MAX_VALUE))
+                    .addComponent(LoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LoginButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LoginInvalidMsgTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LoginInvalidContent, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         getContentPane().add(LoginPage, "card3");
@@ -177,14 +212,14 @@ public class payrollGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(272, 272, 272)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap(273, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(360, Short.MAX_VALUE))
+                .addContainerGap(439, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, "card2");
@@ -196,7 +231,7 @@ public class payrollGUI extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(304, Short.MAX_VALUE)
+                .addContainerGap(292, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(279, 279, 279))
         );
@@ -205,7 +240,7 @@ public class payrollGUI extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(364, Short.MAX_VALUE))
+                .addContainerGap(443, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, "card4");
@@ -213,25 +248,15 @@ public class payrollGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void gotoPayRollPage(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gotoPayRollPage
+    private void LoginPasswordInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_LoginPasswordInputFocusLost
         // TODO add your handling code here:
-        this.cardLayout.show(getContentPane(), "card2");
-    }//GEN-LAST:event_gotoPayRollPage
-
-    private void gotoRegisterPage(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gotoRegisterPage
-        // TODO add your handling code here:
-        this.cardLayout.show(getContentPane(), "card4");
-    }//GEN-LAST:event_gotoRegisterPage
-
-    private void LoginUsernameInputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_LoginUsernameInputFocusGained
-        // TODO add your handling code here:
-        if(LoginUsernameInput.getText().equals("Username") && isUsernamePlaceholder){
-            LoginUsernameInput.setText(null);
-            LoginUsernameInput.requestFocus();
-            removePlaceholderStyle(LoginUsernameInput);
-            isUsernamePlaceholder = false;
+        if(LoginPasswordInput.getText().length() == 0){
+            LoginPasswordInput.setText("Password");
+            LoginPasswordInput.setEchoChar('\u0000');
+            addPlaceholderStyle(LoginPasswordInput);
+            isPasswordPlaceholder = true;
         }
-    }//GEN-LAST:event_LoginUsernameInputFocusGained
+    }//GEN-LAST:event_LoginPasswordInputFocusLost
 
     private void LoginPasswordInputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_LoginPasswordInputFocusGained
         // TODO add your handling code here:
@@ -246,16 +271,21 @@ public class payrollGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LoginPasswordInputFocusGained
 
-    private void ShowPasswordCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ShowPasswordCheckBoxStateChanged
+    private void LoginLoginShowPasswordCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_LoginLoginShowPasswordCheckBoxStateChanged
         // TODO add your handling code here:
-        isShowPassword = ShowPasswordCheckBox.isSelected();
+        isShowPassword = LoginShowPasswordCheckBox.isSelected();
         if(isShowPassword){
             LoginPasswordInput.setEchoChar('\u0000');
         }
         else if(LoginPasswordInput.getText().length() > 0 && !isPasswordPlaceholder){
             LoginPasswordInput.setEchoChar('●');
         }
-    }//GEN-LAST:event_ShowPasswordCheckBoxStateChanged
+    }//GEN-LAST:event_LoginLoginShowPasswordCheckBoxStateChanged
+
+    private void gotoRegisterPage(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gotoRegisterPage
+        // TODO add your handling code here:
+        this.cardLayout.show(getContentPane(), "card4");
+    }//GEN-LAST:event_gotoRegisterPage
 
     private void LoginUsernameInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_LoginUsernameInputFocusLost
         // TODO add your handling code here:
@@ -266,15 +296,34 @@ public class payrollGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LoginUsernameInputFocusLost
 
-    private void LoginPasswordInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_LoginPasswordInputFocusLost
+    private void LoginUsernameInputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_LoginUsernameInputFocusGained
         // TODO add your handling code here:
-        if(LoginPasswordInput.getText().length() == 0){
-            LoginPasswordInput.setText("Password");
-            LoginPasswordInput.setEchoChar('\u0000');
-            addPlaceholderStyle(LoginPasswordInput);
-            isPasswordPlaceholder = true;
+        if(LoginUsernameInput.getText().equals("Username") && isUsernamePlaceholder){
+            LoginUsernameInput.setText(null);
+            LoginUsernameInput.requestFocus();
+            removePlaceholderStyle(LoginUsernameInput);
+            isUsernamePlaceholder = false;
         }
-    }//GEN-LAST:event_LoginPasswordInputFocusLost
+    }//GEN-LAST:event_LoginUsernameInputFocusGained
+
+    private void gotoPayRollPage(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gotoPayRollPage
+        // TODO add your handling code here:
+        rmiinterface Obj = getRMIObject();
+        try {
+            if(Obj.Login(LoginUsernameInput.getText(), LoginPasswordInput.getText())){
+                this.cardLayout.show(getContentPane(), "card2");
+            }else{
+                LoginInvalidMsgTitle.setVisible(true);
+                LoginInvalidContent.setVisible(true);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_gotoPayRollPage
+
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LoginButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,29 +358,28 @@ public class payrollGUI extends javax.swing.JFrame {
                 new payrollGUI().setVisible(true);
             }
         });
-        
-         rmiinterface Obj;
-        try {
-            Obj = (rmiinterface)Naming.lookup("rmi://localhost:1040/AutomatedPayrollSystem");
-            Obj.checkConnection();
-        } catch (NotBoundException ex) {
-            Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (RemoteException ex) {
-            Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
+    private rmiinterface getRMIObject() {
+        try {
+            return (rmiinterface) Naming.lookup("rmi://localhost:1040/AutomatedPayrollSystem");
+        } catch (NotBoundException | MalformedURLException | RemoteException ex) {
+            Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
+            return null; // Return null if there is an exception
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LoginButton;
     private javax.swing.JButton LoginButton1;
+    private javax.swing.JLabel LoginInvalidContent;
+    private javax.swing.JLabel LoginInvalidMsgTitle;
     private javax.swing.JPanel LoginPage;
     private javax.swing.JPasswordField LoginPasswordInput;
+    private javax.swing.JLabel LoginPasswordLabel;
+    private javax.swing.JCheckBox LoginShowPasswordCheckBox;
     private javax.swing.JTextField LoginUsernameInput;
-    private javax.swing.JCheckBox ShowPasswordCheckBox;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel LoginUsernameLabel;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
