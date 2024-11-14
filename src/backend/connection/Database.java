@@ -38,6 +38,8 @@ public class Database{
             // Create and populate the DTO
             Employee employee = new Employee();
             employee.setName(loginEmployee.getString("name"));
+            employee.setName(loginEmployee.getString("username"));
+            employee.setName(loginEmployee.getString("salt"));
             employee.setPassword(loginEmployee.getString("password"));
             employee.setICNO(loginEmployee.getString("ic_no"));
             employee.setContactNO(loginEmployee.getString("contact_no"));

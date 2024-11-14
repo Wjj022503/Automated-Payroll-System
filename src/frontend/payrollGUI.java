@@ -9,6 +9,13 @@ import common.rmiinterface;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -24,9 +31,10 @@ import javax.swing.JTextField;
 public class payrollGUI extends javax.swing.JFrame {
     private CardLayout cardLayout;
     private boolean isShowPassword;    
+    private boolean isRemenberMe;
     private boolean isUsernamePlaceholder = true;    
     private boolean isPasswordPlaceholder = true;
-
+    private rmiinterface Obj;
 
     /**
      * Creates new form payrollGUI
@@ -38,6 +46,26 @@ public class payrollGUI extends javax.swing.JFrame {
         addPlaceholderStyle(LoginPasswordInput);
         LoginInvalidMsgTitle.setVisible(false);
         LoginInvalidContent.setVisible(false);
+        
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("user.usr"));
+            LoginUsernameInput.setText((String) in.readObject());
+            removePlaceholderStyle(LoginUsernameInput);
+            in.close();
+            
+            LoginRemenberMeCheckBox.setSelected(true);
+            
+            File file = new File("user.usr");
+            if (file.delete()) {
+                System.out.println("File deleted successfully");
+            } else {
+                System.out.println("Failed to delete the file");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void addPlaceholderStyle(JTextField textField){
@@ -67,11 +95,12 @@ public class payrollGUI extends javax.swing.JFrame {
         LoginUsernameInput = new javax.swing.JTextField();
         LoginUsernameLabel = new javax.swing.JLabel();
         LoginPasswordLabel = new javax.swing.JLabel();
-        LoginButton1 = new javax.swing.JButton();
+        LoginRegisterButton = new javax.swing.JButton();
         LoginShowPasswordCheckBox = new javax.swing.JCheckBox();
         LoginPasswordInput = new javax.swing.JPasswordField();
         LoginInvalidMsgTitle = new javax.swing.JLabel();
         LoginInvalidContent = new javax.swing.JLabel();
+        LoginRemenberMeCheckBox = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -84,11 +113,6 @@ public class payrollGUI extends javax.swing.JFrame {
         LoginButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 gotoPayRollPage(evt);
-            }
-        });
-        LoginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginButtonActionPerformed(evt);
             }
         });
 
@@ -107,8 +131,8 @@ public class payrollGUI extends javax.swing.JFrame {
 
         LoginPasswordLabel.setText("Password");
 
-        LoginButton1.setText("Register");
-        LoginButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        LoginRegisterButton.setText("Register");
+        LoginRegisterButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 gotoRegisterPage(evt);
             }
@@ -142,21 +166,31 @@ public class payrollGUI extends javax.swing.JFrame {
         LoginInvalidContent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LoginInvalidContent.setText("Invalid Username or Password");
 
+        LoginRemenberMeCheckBox.setText("Remenber Me");
+        LoginRemenberMeCheckBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LoginRemenberMeCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                LoginRemenberMeCheckBoxStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout LoginPageLayout = new javax.swing.GroupLayout(LoginPage);
         LoginPage.setLayout(LoginPageLayout);
         LoginPageLayout.setHorizontalGroup(
             LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginPageLayout.createSequentialGroup()
                 .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, LoginPageLayout.createSequentialGroup()
-                            .addGap(399, 399, 399)
-                            .addComponent(LoginButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(LoginPageLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(LoginShowPasswordCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(LoginInvalidContent, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(LoginPageLayout.createSequentialGroup()
+                        .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, LoginPageLayout.createSequentialGroup()
+                                .addGap(399, 399, 399)
+                                .addComponent(LoginRegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(LoginPageLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(LoginShowPasswordCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LoginInvalidContent, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(3, 3, 3))
                     .addGroup(LoginPageLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,36 +203,42 @@ public class payrollGUI extends javax.swing.JFrame {
                                         .addComponent(LoginUsernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
                                     .addGap(84, 84, 84)
                                     .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(LoginUsernameInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(LoginPasswordInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(201, Short.MAX_VALUE))
+                                        .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LoginUsernameInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(LoginPasswordInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(LoginPageLayout.createSequentialGroup()
+                                            .addGap(3, 3, 3)
+                                            .addComponent(LoginRemenberMeCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
         LoginPageLayout.setVerticalGroup(
             LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginPageLayout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
+                .addContainerGap(153, Short.MAX_VALUE)
                 .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LoginUsernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LoginUsernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(LoginPageLayout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(LoginPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(7, 7, 7))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPageLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LoginRemenberMeCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(LoginPasswordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(LoginShowPasswordCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LoginButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(LoginRegisterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LoginInvalidMsgTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LoginInvalidContent, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         getContentPane().add(LoginPage, "card3");
@@ -212,7 +252,7 @@ public class payrollGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(272, 272, 272)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +271,7 @@ public class payrollGUI extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(292, Short.MAX_VALUE)
+                .addContainerGap(298, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(279, 279, 279))
         );
@@ -311,6 +351,14 @@ public class payrollGUI extends javax.swing.JFrame {
         rmiinterface Obj = getRMIObject();
         try {
             if(Obj.Login(LoginUsernameInput.getText(), LoginPasswordInput.getText())){
+                if(isRemenberMe){
+                    String LoginUsername = LoginUsernameInput.getText();
+                    FileOutputStream fout = new FileOutputStream("user.usr");
+                    ObjectOutputStream out = new ObjectOutputStream(fout);
+                    out.writeObject(LoginUsername);
+                    out.flush();
+                    out.close();
+                }
                 this.cardLayout.show(getContentPane(), "card2");
             }else{
                 LoginInvalidMsgTitle.setVisible(true);
@@ -318,12 +366,17 @@ public class payrollGUI extends javax.swing.JFrame {
             }
         } catch (RemoteException ex) {
             Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_gotoPayRollPage
 
-    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+    private void LoginRemenberMeCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_LoginRemenberMeCheckBoxStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_LoginButtonActionPerformed
+        isRemenberMe = LoginRemenberMeCheckBox.isSelected();
+    }//GEN-LAST:event_LoginRemenberMeCheckBoxStateChanged
 
     /**
      * @param args the command line arguments
@@ -361,22 +414,25 @@ public class payrollGUI extends javax.swing.JFrame {
     }
 
     private rmiinterface getRMIObject() {
-        try {
-            return (rmiinterface) Naming.lookup("rmi://localhost:1040/AutomatedPayrollSystem");
-        } catch (NotBoundException | MalformedURLException | RemoteException ex) {
-            Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
-            return null; // Return null if there is an exception
+        if (Obj == null) { 
+            try {
+                Obj = (rmiinterface) Naming.lookup("rmi://localhost:1040/AutomatedPayrollSystem");
+            } catch (NotBoundException | MalformedURLException | RemoteException ex) {
+                Logger.getLogger(payrollGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        return Obj;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LoginButton;
-    private javax.swing.JButton LoginButton1;
     private javax.swing.JLabel LoginInvalidContent;
     private javax.swing.JLabel LoginInvalidMsgTitle;
     private javax.swing.JPanel LoginPage;
     private javax.swing.JPasswordField LoginPasswordInput;
     private javax.swing.JLabel LoginPasswordLabel;
+    private javax.swing.JButton LoginRegisterButton;
+    private javax.swing.JCheckBox LoginRemenberMeCheckBox;
     private javax.swing.JCheckBox LoginShowPasswordCheckBox;
     private javax.swing.JTextField LoginUsernameInput;
     private javax.swing.JLabel LoginUsernameLabel;

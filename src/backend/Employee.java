@@ -10,6 +10,8 @@ package backend;
  */
 public class Employee {
     private String name;
+    private String username;
+    private String salt;
     private String password;
     private String ic_no;
     private String contact_no;
@@ -29,6 +31,12 @@ public class Employee {
     //get set methods
     public String getName(){ return this.name; }
     public void setName(String name){ this.name = name; }
+    
+    public String getUsername(){ return this.username; }
+    public void setUsername(String username){ this.username = username; }
+    
+    public String getSalt(){ return this.salt; }
+    public void setSalt(String salt){ this.salt = salt; }
     
     public String getPassword(){ return this.password; }
     public void setPassword(String password){ this.password = password; }
