@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package registration;
+package registration.frontend;
+import java.rmi.Naming;
 
 import javax.swing.JOptionPane;
 
@@ -91,7 +92,6 @@ public class registrationGUI extends javax.swing.JFrame {
             }
         });
 
-        readretypepassword.setPreferredSize(new java.awt.Dimension(64, 22));
         readretypepassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 readretypepasswordActionPerformed(evt);
@@ -551,10 +551,26 @@ public class registrationGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "The Input Field can't be Empty");
         }
         
+        userData userdata = new userData();
+        
         if (validfullname && validic && validcontact){
-            firstpage.setVisible(false);
-            secondpage.setVisible(false);
-            invalidinputNote2.setVisible(false);
+            userdata.setUsername(readusername.getText());
+            userdata.setPassword(new String(readpassword.getPassword()));
+            userdata.setFullName(fullname);
+            userdata.setIC(ic);
+            userdata.setDepartment((String)departmentdropdown.getSelectedItem());
+            userdata.setContact(contact);
+            
+            String response = sendUserData(userdata);
+            if (response.equals("Success")){
+                JOptionPane.showMessageDialog(rootPane, "User registered successfully!");
+                firstpage.setVisible(false);
+                secondpage.setVisible(false);
+                invalidinputNote2.setVisible(false);
+            } else{
+                JOptionPane.showMessageDialog(rootPane, "Error: " + response);
+                firstpage.setVisible(true);
+            }
         }else{
             firstpage.setVisible(false);
             secondpage.setVisible(true);
@@ -615,6 +631,17 @@ public class registrationGUI extends javax.swing.JFrame {
         
         feedback.append("</html>");
         return feedback.toString();
+    }
+    
+    private static String sendUserData(userData userdata){
+        try {
+            registration_interface service = (registration_interface) Naming.lookup("rmi://192.168.100.33:5000/registration_interface");
+            String response = service.registrationRequest(userdata);
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error: Unable to connect to the server.";
+        }
     }
     
     private static String isValidUsername (String username){
