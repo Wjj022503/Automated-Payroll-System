@@ -23,7 +23,7 @@ public class Database{
     private static final String username = "wjj123";
     private static final String password = "wjj02252003";
     
-    public Database()throws SQLException{
+    public Database() throws SQLException{
         this.connection = DriverManager.getConnection(this.address, this.username, this.password);
         if (connection != null){
             System.out.println("Connected to Database.");
@@ -64,12 +64,5 @@ public class Database{
         }
 
         return employee;
-    }
-    
-    public Payroll getPayRoll(Date curretnDate){
-        Payroll pr;
-        
-        
-        return pr;
     }
 }
