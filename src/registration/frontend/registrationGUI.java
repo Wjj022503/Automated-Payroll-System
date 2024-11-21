@@ -570,6 +570,7 @@ public class registrationGUI extends javax.swing.JFrame {
             } else{
                 JOptionPane.showMessageDialog(rootPane, "Error: " + response);
                 firstpage.setVisible(true);
+                secondpage.setVisible(false);
             }
         }else{
             firstpage.setVisible(false);

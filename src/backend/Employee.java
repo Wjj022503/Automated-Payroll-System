@@ -16,7 +16,9 @@ public class Employee {
     private String department;
     
     //constructor
-     public Employee(){ super(); }
+     Employee(){
+     
+     }
     
     Employee(String name,String password,String ic_no,String contact_no,String department){
         this.name = name;
