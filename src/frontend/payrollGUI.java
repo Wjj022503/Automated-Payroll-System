@@ -4,6 +4,7 @@
  */
 package frontend;
 
+import backend.Employee;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -15,10 +16,10 @@ public class payrollGUI extends javax.swing.JFrame {
     /**
      * Creates new form payrollGUI
      */
+    Employee current_user = Client.get_curr_user();
     
     public payrollGUI() {
         initComponents();
-        
     }
 
     /**

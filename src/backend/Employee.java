@@ -29,13 +29,30 @@ public class Employee {
         this.department = department;
     }
     
-    //get set methods
+    //get set method
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getIc_no() {
+        return ic_no;
+    }
+
+    public String getContact_no() {
+        return contact_no;
+    }
     
-    
-    //private methods
-    
-    
-    //public methods
+    public String getDepartment() {    
+        return department;
+    }
 
     public void setId(String id) {
         this.id = id;
