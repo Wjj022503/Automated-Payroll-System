@@ -13,6 +13,7 @@ public class SalaryDetail {
     private double base_salary;
     private int working_hours;
     private double hourly_rate;
+    private String employee_id;
     
     //constructor
     public SalaryDetail(){
@@ -42,6 +43,10 @@ public class SalaryDetail {
     public double getHourly_rate() {
         return hourly_rate;
     }
+    
+    public String getEmployee_Id(){
+        return this.employee_id;
+    }
 
     public void setSd_id(String sd_id) {
         this.sd_id = sd_id;
@@ -57,5 +62,9 @@ public class SalaryDetail {
 
     public void setHourly_rate(double hourly_rate) {
         this.hourly_rate = hourly_rate;
+    }
+    
+    public void setEmployee_Id(String employee_id){
+        this.employee_id = employee_id;
     }
 }

@@ -69,24 +69,11 @@ public class Database{
     }
     
     public SalaryDetail getSD_by_empID(String employeeId) throws SQLException{
-        String sd_id_query = "SELECT sd_id FROM EMPLOYEE_SALARY_HISTORY WHERE employee_id = ?";
-        String sl_query = "SELECT * FROM EMPLOYEE_SALARY_DETAILS WHERE sd_id = ?";
-        String sd_id = null;
+        String sl_query = "SELECT * FROM EMPLOYEE_SALARY_DETAILS employee_id = ?";
         SalaryDetail sl_detail = null;
         
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sd_id_query)) {
-            preparedStatement.setString(1, employeeId);
-
-            try (ResultSet sd_id_result = preparedStatement.executeQuery()) {
-                if (sd_id_result.next()) {
-                    sd_id = sd_id_result.getString("sd_id");
-                }
-            }
-        }
-        
-        
         try (PreparedStatement preparedStatement = connection.prepareStatement(sl_query)) {
-            preparedStatement.setString(1, sd_id);
+            preparedStatement.setString(1, employeeId);
             
             try (ResultSet sd_result = preparedStatement.executeQuery()) {
                 if (sd_result.next()) {
@@ -94,6 +81,7 @@ public class Database{
                     sl_detail.setBase_salary(sd_result.getDouble("base_salary"));
                     sl_detail.setHourly_rate(sd_result.getDouble("hourly_rate"));
                     sl_detail.setWorking_hours(sd_result.getInt("working_hours"));
+                    sl_detail.setEmployee_Id(sd_result.getString("employee_id"));
                 }
             }
         }

@@ -41,7 +41,7 @@ public class Server extends UnicastRemoteObject implements RMI_Interface{
             db.closeConnection();
         } catch (SQLException ex) {
             System.out.println(ex);
-        } 
+        }
         return sd;
    }
     
