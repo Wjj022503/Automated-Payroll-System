@@ -10,13 +10,14 @@ package backend;
  */
 public class Payroll {
     private Employee employee;
-    private Salary salary;
+    private SalaryDetail salary_detail;
+    private SalaryHistory salary_history;
     private Deduction deduction;
     
     //constructor
-    Payroll(Employee employee, Salary salary, Deduction deduction) {
+    Payroll(Employee employee, SalaryHistory salary_history, Deduction deduction) {
         this.employee = employee;
-        this.salary = salary;
+        this.salary_history = salary_history;
         this.deduction = deduction;
     }
     
@@ -25,6 +26,7 @@ public class Payroll {
     
     //public methods
     public double getNetSalary() {
-        return salary.getGrossSalary() - deduction.getTotalDeductions(salary.getGrossSalary());
+        double gross_salary = salary_history.getGrossSalary(salary_detail.getBase_salary(),salary_detail.getHourly_rate());
+        return gross_salary - deduction.getTotalDeductions(gross_salary);
     }
 }

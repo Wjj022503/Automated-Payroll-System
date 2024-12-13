@@ -19,12 +19,12 @@ public class Tax {
     private double income_tax;
     
     //constructor
-    Tax(){
-    
-    }    
-    
-    
-    //private methods
+    Tax(double epf ,double socso, double eis, double income_tax){
+        this.epf = epf;
+        this.socso = socso;
+        this.eis = eis;
+        this.income_tax = income_tax;
+    }
     
     
     // public methods
@@ -54,5 +54,21 @@ public class Tax {
 
     public double getIncomeTax() {
         return this.income_tax;
+    }
+
+    public void setEpf(double epf) {
+        this.epf = epf;
+    }
+
+    public void setSocso(double socso) {
+        this.socso = socso;
+    }
+
+    public void setEis(double eis) {
+        this.eis = eis;
+    }
+
+    public void setIncome_tax(double income_tax) {
+        this.income_tax = income_tax;
     }
 }
