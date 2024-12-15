@@ -4,11 +4,13 @@
  */
 package backend;
 
+import java.io.Serializable;
+
 /**
  *
  * @author wjing
  */
-public class Tax {
+public class Tax implements Serializable{
     private static final double EPF_RATE = 0.11; // 11% of gross salary
     private static final double SOCSO_RATE = 0.005; // 0.5% of gross salary
     private static final double EIS_RATE = 0.002; // 0.2% of gross salary
@@ -19,7 +21,10 @@ public class Tax {
     private double income_tax;
     
     //constructor
-    Tax(double epf ,double socso, double eis, double income_tax){
+    public Tax(){
+    
+    }
+    public Tax(double epf ,double socso, double eis, double income_tax){
         this.epf = epf;
         this.socso = socso;
         this.eis = eis;
@@ -28,12 +33,14 @@ public class Tax {
     
     
     // public methods
-    public double getTotalTax(double grossSalary){
+    public void tax_calculate(double grossSalary){
         this.epf = grossSalary * EPF_RATE;
         this.socso = grossSalary * SOCSO_RATE;
         this.eis = grossSalary * EIS_RATE;
         this.income_tax = grossSalary * INCOME_TAX_RATE;
-        
+    }
+    
+    public double getTotalTax(){
         return this.epf + this.socso + this.eis + this.income_tax;
     }
 

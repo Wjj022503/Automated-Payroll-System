@@ -4,11 +4,13 @@
  */
 package backend;
 
+import java.io.Serializable;
+
 /**
  *
  * @author wjing
  */
-public class SalaryDetail {
+public class SalaryDetail implements Serializable{
     private String sd_id;
     private double base_salary;
     private int working_hours;

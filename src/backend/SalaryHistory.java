@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package backend;
+import java.io.Serializable;
 import java.sql.Date;
 /**
  *
  * @author wjing
  */
-public class SalaryHistory {
+public class SalaryHistory implements Serializable{
     private String sh_id;
     private Date date;
     private double allowance;
@@ -27,17 +28,6 @@ public class SalaryHistory {
         this.date = date;
         this.allowance = allowance;
         this.overtime_hours = overtime_hours;
-    }
-    
-    //private methods
-    private double getOvertimePay(double hourly_rate){
-        double overtime_hrs = this.overtime_hours;
-        return overtime_hrs * hourly_rate;
-    }
-    
-    //public methods
-    public double getGrossSalary(double base_salary,double hourly_rate){
-        return base_salary + this.allowance + this.getOvertimePay(hourly_rate);
     }
     
     //get set methods

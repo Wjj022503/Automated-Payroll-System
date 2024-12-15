@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package backend;
+import java.io.Serializable;
 
 /**
  *
  * @author wjing
  */
-public class Deduction {
+public class Deduction implements Serializable{
     private String dd_id;
     private Tax tax;
     private double leave_deduction;
@@ -70,7 +71,8 @@ public class Deduction {
     }
 
     public double getTotalDeductions(double gross_salary) {
-        return tax.getTotalTax(gross_salary) + this.leave_deduction + this.other_deduction;
+        tax.tax_calculate(gross_salary);
+        return tax.getTotalTax() + this.leave_deduction + this.other_deduction;
     }
     
     public String getOtherDeductionReason(){

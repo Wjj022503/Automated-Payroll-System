@@ -4,11 +4,13 @@
  */
 package backend;
 
+import java.io.Serializable;
+
 /**
  *
  * @author wjing
  */
-public class Employee {
+public class Employee implements Serializable{
     private String id;
     private String name;
     private String password;
