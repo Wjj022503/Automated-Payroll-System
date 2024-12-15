@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[750, 450]"/>
+    </Property>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-62,0,0,3,-63"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="LoginPage">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+          <CardConstraints cardName="login"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="319" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="LoginShowPasswordCheckBox" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                              <Component id="LoginInvalidContent" alignment="1" min="-2" pref="333" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="LoginButton" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="LoginInvalidMsgTitle" alignment="1" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="LoginPasswordLabel" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="LoginUsernameLabel" alignment="0" pref="111" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                              <Component id="LoginUsernameInput" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                                              <Component id="LoginPasswordInput" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                              <Component id="LoginRemenberMeCheckBox" min="-2" pref="138" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="306" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="368" max="32767" attributes="0"/>
+                  <Component id="EmployeeLoginLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="350" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="EmployeeLoginLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="LoginUsernameInput" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="LoginUsernameLabel" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                          <Component id="LoginPasswordLabel" min="-2" pref="40" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="LoginRemenberMeCheckBox" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="LoginPasswordInput" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="LoginShowPasswordCheckBox" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                  <Component id="LoginButton" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="LoginInvalidMsgTitle" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="LoginInvalidContent" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace pref="64" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="LoginButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Login"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="LoginButtongotoPayRollPage"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoginButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="LoginUsernameInput">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Username"/>
+          </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="LoginUsernameInputFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="LoginUsernameInputFocusLost"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LoginUsernameLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Username"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LoginPasswordLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Password"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="LoginShowPasswordCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Show Password"/>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="LoginLoginShowPasswordCheckBoxStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="LoginPasswordInput">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Password"/>
+            <Property name="echoChar" type="char" value="\u0000" containsInvalidXMLChars="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="LoginPasswordInputFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="LoginPasswordInputFocusLost"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LoginInvalidMsgTitle">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Wrong Credentials"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LoginInvalidContent">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="ff" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Invalid Username or Password"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="LoginRemenberMeCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Remember Me"/>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="LoginRemenberMeCheckBoxStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="EmployeeLoginLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="36" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Employee Login "/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="firstpage">
+      <Properties>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[750, 450]"/>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+          <CardConstraints cardName="register1"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
+                  <Component id="employeeregistrationLabelf" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="usernameLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="readusername" min="-2" pref="186" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="usernameNote" min="-2" pref="188" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="backbutton1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="135" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="retypepasswordNote" pref="173" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="retypepasswordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="passwordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="readretypepassword" alignment="0" pref="173" max="32767" attributes="0"/>
+                          <Component id="readpassword" alignment="0" max="32767" attributes="0"/>
+                          <Component id="passwordNote" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="retypepasswordvisible" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="passwordvisible" min="-2" pref="85" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="invalidinputNote" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="nextpagebutton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="employeeregistrationLabelf" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="usernameLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="readusername" min="-2" pref="28" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="usernameNote" min="-2" pref="39" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="passwordLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="readpassword" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="passwordvisible" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="passwordNote" min="-2" pref="65" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <Component id="retypepasswordLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="readretypepassword" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="retypepasswordvisible" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="invalidinputNote" pref="30" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="nextpagebutton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="backbutton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="retypepasswordNote" min="-2" pref="43" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="employeeregistrationLabelf">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="36" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Employee Registration "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="passwordLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Password"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="usernameLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="User Name"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="retypepasswordLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Retype Password"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="readusername">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="readusernameActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="readusernameKeyReleased"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="readretypepassword">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="readretypepasswordActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="readretypepasswordKeyReleased"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="readpassword">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="readpasswordActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="readpasswordKeyReleased"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="usernameNote">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="12" style="1"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[64, 22]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="passwordNote">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="12" style="1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="retypepasswordvisible">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="show"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="retypepasswordvisibleActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="passwordvisible">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="show"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordvisibleActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="nextpagebutton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Next"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nextpagebuttonMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextpagebuttonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="retypepasswordNote">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="12" style="1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="invalidinputNote">
+        </Component>
+        <Component class="javax.swing.JButton" name="backbutton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Back"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backbutton1ActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="secondpage">
+      <Properties>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[750, 450]"/>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+          <CardConstraints cardName="register2"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="fullnameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="icLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="readfullname" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="fullnameNote" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
+                              <Component id="readIC" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="icNote" alignment="0" min="-2" pref="233" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="129" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="departmentLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="contactnoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="readcontactnumber" alignment="0" max="32767" attributes="0"/>
+                              <Component id="departmentdropdown" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                              <Component id="contactNote" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
+                          <Component id="employeeregistrationLabels" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="backbutton2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="invalidinputNote2" max="32767" attributes="0"/>
+                              <Component id="nextpagebutton2" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <Component id="employeeregistrationLabels" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="fullnameLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="readfullname" min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="fullnameNote" min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="icLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="readIC" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="departmentLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="departmentdropdown" min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="contactnoLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="readcontactnumber" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="contactNote" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="icNote" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="36" max="32767" attributes="0"/>
+                  <Component id="invalidinputNote2" min="-2" pref="28" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="nextpagebutton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="backbutton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="departmentLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Department "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="icLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="IC "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="contactnoLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Contact Number "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="fullnameLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Full Name"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="employeeregistrationLabels">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="36" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Employee Registration "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="readfullname">
+        </Component>
+        <Component class="javax.swing.JTextField" name="readIC">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="readICActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="readICKeyReleased"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="icNote">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="12" style="1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="contactNote">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="12" style="1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="readcontactnumber">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="readcontactnumberKeyReleased"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="departmentdropdown">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Finance&quot;, &quot;Developer&quot;, &quot;Manager&quot;, &quot;Human Resource&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="departmentdropdownActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="frontendGUI_departmentdropdown"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="fullnameNote">
+        </Component>
+        <Component class="javax.swing.JButton" name="nextpagebutton2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Register"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextpagebutton2ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="invalidinputNote2">
+        </Component>
+        <Component class="javax.swing.JButton" name="backbutton2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Back"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backbutton2ActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
