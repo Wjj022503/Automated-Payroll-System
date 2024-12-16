@@ -15,6 +15,7 @@ public class SalaryHistory implements Serializable{
     private double allowance;
     private double overtime_hours;
     private double net_salary;
+    private double gross_salary;
     private String sd_id;
     private String dd_id;
     
@@ -51,6 +52,10 @@ public class SalaryHistory implements Serializable{
         return this.net_salary;
     }
     
+    public double getGross_salary(){
+        return this.gross_salary;
+    }
+    
     public String getSD_ID(){
         return this.sd_id;
     }
@@ -77,6 +82,10 @@ public class SalaryHistory implements Serializable{
     
     public void setNetSalary(double net_salary){
         this.net_salary = net_salary;
+    }
+    
+    public void setGrossSalary(double gross_salary){
+        this.gross_salary = gross_salary;
     }
     
     public void setSD_ID(String sd_id){

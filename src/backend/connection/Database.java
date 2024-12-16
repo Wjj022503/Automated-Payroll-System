@@ -125,6 +125,32 @@ public class Database{
                     sh_detail.setAllowance(sh_result.getDouble("allowance"));
                     sh_detail.setDate(sh_result.getDate("date"));
                     sh_detail.setNetSalary(sh_result.getDouble("net_salary"));
+                    sh_detail.setGrossSalary(sh_result.getDouble("gross_salary"));
+                    sh_detail.setOvertime_hours(sh_result.getInt("overtime_hours"));
+                    sh_detail.setSD_ID(sh_result.getString("fk_sd_id"));
+                    sh_detail.setDD_ID(sh_result.getString("fk_dd_id"));
+                }
+            }
+        }
+        
+        return sh_detail;
+    }
+    
+    public SalaryHistory getSHById(String sh_id, Date date) throws SQLException{
+        String sh_query = "SELECT * FROM EMPLOYEE_SALARY_HISTORY WHERE sh_id = ? AND MONTH(date) = ? AND YEAR(date) = ?";
+        SalaryHistory sh_detail = new SalaryHistory();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sh_query)) {
+            preparedStatement.setString(1, sh_id);
+            preparedStatement.setInt(2, date.toLocalDate().getMonthValue());
+            preparedStatement.setInt(3, date.toLocalDate().getYear());
+
+            try (ResultSet sh_result = preparedStatement.executeQuery()) {
+                if (sh_result.next()) {
+                    sh_detail.setSHId(sh_result.getString("sh_id"));
+                    sh_detail.setAllowance(sh_result.getDouble("allowance"));
+                    sh_detail.setDate(sh_result.getDate("date"));
+                    sh_detail.setNetSalary(sh_result.getDouble("net_salary"));
+                    sh_detail.setGrossSalary(sh_result.getDouble("gross_salary"));
                     sh_detail.setOvertime_hours(sh_result.getInt("overtime_hours"));
                     sh_detail.setSD_ID(sh_result.getString("fk_sd_id"));
                     sh_detail.setDD_ID(sh_result.getString("fk_dd_id"));
@@ -173,6 +199,7 @@ public class Database{
                     sh.setAllowance(sh_result.getDouble("allowance"));
                     sh.setOvertime_hours(sh_result.getDouble("overtime_hours"));
                     sh.setNetSalary(sh_result.getDouble("net_salary"));
+                    sh.setGrossSalary(sh_result.getDouble("gross_salary"));
                     sh.setSD_ID(sh_result.getString("fk_sd_id"));
                     sh.setDD_ID(sh_result.getString("fk_dd_id"));
                     sh_list.add(sh);
@@ -182,105 +209,72 @@ public class Database{
         return sh_list;
     }
     
-    public int updateSalaryDetail(SalaryDetail sd)throws SQLException{
-        SalaryDetail sd_from_db = getSDByID(sd.getSd_id());
-        if (sd_from_db.getSd_id() != null){
-            String sd_update_query = "UPDATE EMPLOYEE_SALALRY_DETAILS SET base_salary = ?, working_hours = ?, hourly_rate = ? WHERE sd_id = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sd_update_query)){
-                preparedStatement.setDouble(1,sd.getBase_salary());
-                preparedStatement.setInt(2,sd.getWorking_hours());
-                preparedStatement.setDouble(3, sd.getHourly_rate());
-                preparedStatement.setString(4, sd_from_db.getSd_id());
-                
-                int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0){
-                    System.out.println("Update complete. Rows affected: " + rowsAffected);
-                    return 1; //updated successful
-                }
-                else{
-                    return 3; //updated failed
-                }
-            }
-        }else{
-            boolean add_result = addSalaryDetail(sd);
-            if (add_result){
-                return 2; //added successful
+    public boolean updateSalaryDetail(SalaryDetail sd)throws SQLException{
+        String sd_update_query = "UPDATE EMPLOYEE_SALARY_DETAILS SET base_salary = ?, working_hours = ?, hourly_rate = ? WHERE sd_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sd_update_query)){
+            preparedStatement.setDouble(1,sd.getBase_salary());
+            preparedStatement.setInt(2,sd.getWorking_hours());
+            preparedStatement.setDouble(3, sd.getHourly_rate());
+            preparedStatement.setString(4, sd.getSd_id());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0){
+                System.out.println("Update complete. Rows affected: " + rowsAffected);
+                return true; //updated successful
             }
             else{
-                return 4; //added failed
+                return false; //updated failed
             }
         }
     }
     
-    public int updateSalaryHistory(SalaryHistory sh, Date date)throws SQLException{
-        SalaryHistory sh_from_db = getEmpSH(sh.getSHId(),date);
-        if (sh_from_db.getSHId() != null){
-            String sh_update_query = "UPDATE EMPLOYEE_SALALRY_HISTORY SET allowance = ?, overtime_hours = ?, net_salalry = ? WHERE sh_id = ? AND MONTH(date) = ? AND YEAR(date) = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sh_update_query)){
-                
-                preparedStatement.setDouble(1, sh.getAllowance());
-                preparedStatement.setDouble(2, sh.getOvertime_hours());
-                preparedStatement.setDouble(3, sh.getNet_salary());
-                preparedStatement.setString(4, sh_from_db.getSHId());
-                preparedStatement.setInt(5, date.toLocalDate().getMonthValue());
-                preparedStatement.setInt(6, date.toLocalDate().getYear());
-                
-                int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0){
-                    System.out.println("Update complete. Rows affected: " + rowsAffected);
-                    return 1; //updated successful
-                }
-                else{
-                    return 3; //updated failed
-                }
-            }
-        }else{
-            boolean add_result = addSalaryHistory(sh);
-            if (add_result){
-                return 2; //added successful
+    public boolean updateSalaryHistory(SalaryHistory sh, Date date)throws SQLException{
+        String sh_update_query = "UPDATE EMPLOYEE_SALARY_HISTORY SET allowance = ?, overtime_hours = ?, net_salary = ?, gross_salary = ? WHERE sh_id = ? AND MONTH(date) = ? AND YEAR(date) = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sh_update_query)){
+
+            preparedStatement.setDouble(1, sh.getAllowance());
+            preparedStatement.setDouble(2, sh.getOvertime_hours());
+            preparedStatement.setDouble(3, sh.getNet_salary());
+            preparedStatement.setDouble(4, sh.getGross_salary());
+            preparedStatement.setString(5, sh.getSHId());
+            preparedStatement.setInt(6, date.toLocalDate().getMonthValue());
+            preparedStatement.setInt(7, date.toLocalDate().getYear());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0){
+                System.out.println("Update complete. Rows affected: " + rowsAffected);
+                return true; //updated successful
             }
             else{
-                return 4; //added failed
-            }
-        }   
-    }
-    
-    public int updateSalaryDeduction(Deduction dd)throws SQLException{
-        Deduction dd_from_db = getEmpDeduction(dd.getDd_id());
-        if (dd_from_db.getDd_id() != null){
-            String dd_update_query = "UPDATE EMPLOYEE_DEDUCTION_DETAILS SET epf = ?, socso = ?, eis = ?, income_tax = ?, leave_deductions = ?, additional_deductions = ?, deduction_reason = ? WHERE dd_id = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(dd_update_query)){
-                preparedStatement.setDouble(1, dd.getTax().getEPF());
-                preparedStatement.setDouble(2, dd.getTax().getSOCSO());
-                preparedStatement.setDouble(3, dd.getTax().getEIS());
-                preparedStatement.setDouble(4, dd.getTax().getIncomeTax());
-                preparedStatement.setDouble(5, dd.getLeave_deduction());
-                preparedStatement.setDouble(6, dd.getOther_deduction());
-                preparedStatement.setString(7, dd.getOther_deduction_reason());
-                preparedStatement.setString(8, dd.getDd_id());
-                
-                int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0){
-                    System.out.println("Update complete. Rows affected: " + rowsAffected);
-                    return 1; //updated successful
-                }
-                else{
-                    return 3; //updated failed
-                }
-            }
-        }else{
-            boolean add_result = addDeduction(dd);
-            if (add_result){
-                return 2; //added successful
-            }
-            else{
-                return 4; //added failed
+                return false; //updated failed
             }
         }
     }
     
-    //private methods    
-    private boolean addSalaryDetail(SalaryDetail sd)throws SQLException{
+    public boolean updateSalaryDeduction(Deduction dd)throws SQLException{
+        String dd_update_query = "UPDATE EMPLOYEE_DEDUCTION_DETAILS SET epf = ?, socso = ?, eis = ?, income_tax = ?, leave_deductions = ?, additional_deductions = ?, deduction_reason = ? WHERE dd_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(dd_update_query)){
+            preparedStatement.setDouble(1, dd.getTax().getEPF());
+            preparedStatement.setDouble(2, dd.getTax().getSOCSO());
+            preparedStatement.setDouble(3, dd.getTax().getEIS());
+            preparedStatement.setDouble(4, dd.getTax().getIncomeTax());
+            preparedStatement.setDouble(5, dd.getLeave_deduction());
+            preparedStatement.setDouble(6, dd.getOther_deduction());
+            preparedStatement.setString(7, dd.getOther_deduction_reason());
+            preparedStatement.setString(8, dd.getDd_id());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0){
+                System.out.println("Update complete. Rows affected: " + rowsAffected);
+                return true; //updated successful
+            }
+            else{
+                return false; //updated failed
+            }
+        }
+    }
+      
+    public boolean addSalaryDetail(SalaryDetail sd)throws SQLException{
         String add_sd_query = "INSERT INTO EMPLOYEE_SALARY_HISTORY (sd_id,base_salary,working_hours,hourly_rate,fk_emp_id) VALUES (?,?,?,?,?);";
         try (PreparedStatement preparedStatement = connection.prepareStatement(add_sd_query)){
             preparedStatement.setString(1, getNew_SDID());
@@ -302,7 +296,7 @@ public class Database{
         }
     }
     
-    private boolean addDeduction(Deduction deduction)throws SQLException{
+    public boolean addDeduction(Deduction deduction)throws SQLException{
         String add_dd_query = "INSERT INTO EMPLOYEE_DEDUCTION_DETAILS (dd_id,epf,socso,eis,income_tax,leave_deductions,addtional_deductions,deduction_reason) VALUES (?,?,?,?,?,?,?,?);";
         try (PreparedStatement preparedStatement = connection.prepareStatement(add_dd_query)){
             preparedStatement.setString(1, getNew_DDID());
@@ -326,16 +320,17 @@ public class Database{
         }
     }
     
-    private boolean addSalaryHistory(SalaryHistory sh)throws SQLException{
-        String add_sh_query = "INSERT INTO EMPLOYEE_SALARY_HISTORY (sh_id,date,allowance,overtime_hours,net_salary,fk_sd_id,fk_dd_id) VALUES (?,?,?,?,?,?,?);";
+    public boolean addSalaryHistory(SalaryHistory sh)throws SQLException{
+        String add_sh_query = "INSERT INTO EMPLOYEE_SALARY_HISTORY (sh_id,date,allowance,overtime_hours,net_salary,gross_salary,fk_sd_id,fk_dd_id) VALUES (?,?,?,?,?,?,?,?);";
         try (PreparedStatement preparedStatement = connection.prepareStatement(add_sh_query)){
             preparedStatement.setString(1, getNew_SHID());
             preparedStatement.setDate(2, sh.getDate());
             preparedStatement.setDouble(3, sh.getAllowance());
             preparedStatement.setDouble(4, sh.getOvertime_hours());
             preparedStatement.setDouble(5,sh.getNet_salary());
-            preparedStatement.setString(6,sh.getSD_ID());
-            preparedStatement.setString(7,sh.getDD_ID());
+            preparedStatement.setDouble(6,sh.getGross_salary());
+            preparedStatement.setString(7,sh.getSD_ID());
+            preparedStatement.setString(8,sh.getDD_ID());
             
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
@@ -348,6 +343,7 @@ public class Database{
         }
     }
     
+    //private methods  
     private String getNew_SHID()throws SQLException{
         String new_shid_query = "SELECT sh_id FROM EMPLOYEE_SALARY_HISTORY ORDER BY sd_id DESC LIMIT 1";
         String shid = "";
@@ -365,7 +361,7 @@ public class Database{
     }
     
     private String getNew_DDID()throws SQLException{
-        String new_ddid_query = "SELECT sh_id FROM EMPLOYEE_DEDUCTION_DETAILS ORDER BY dd_id DESC LIMIT 1";
+        String new_ddid_query = "SELECT dd_id FROM EMPLOYEE_DEDUCTION_DETAILS ORDER BY dd_id DESC LIMIT 1";
         String ddid = "";
         try (PreparedStatement preparedStatement = connection.prepareStatement(new_ddid_query)){
             try (ResultSet ddid_result = preparedStatement.executeQuery()){

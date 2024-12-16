@@ -23,7 +23,8 @@ public class Employee implements Serializable{
     
     }
     
-    public Employee(String name,String password,String ic_no,String contact_no,String department){
+    public Employee(String id,String name,String password,String ic_no,String contact_no,String department){
+        this.id = id;
         this.name = name;
         this.password = password;
         this.ic_no = ic_no;

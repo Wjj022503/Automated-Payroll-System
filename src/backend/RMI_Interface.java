@@ -12,14 +12,13 @@ import java.util.List;
  * 
  */
 public interface RMI_Interface extends Remote{
-    public Employee getCurrentUser()throws RemoteException;
-       public Employee getEmpDetails(String employee_id) throws RemoteException;
-       public SalaryDetail getEmpSD(String employee_id)throws RemoteException;
-       public SalaryDetail getSDbyID(String sd_id)throws RemoteException;
-       public Deduction getEmpDD(String dd_id)throws RemoteException;
-       public SalaryHistory getEmpSH(String employee_id, Date date)throws RemoteException;
-       public List<SalaryHistory> searchHistoryByDate(Date date) throws RemoteException;
-       public boolean updateSalaryDetail(SalaryDetail sd)throws RemoteException;
-       public boolean updateSalaryDeduction(Deduction dd) throws RemoteException;
-       public boolean updateSalaryHistory(SalaryHistory sh, Date date) throws RemoteException;
+    public Employee getEmpDetails(String employee_id) throws RemoteException;
+    public SalaryDetail getEmpSD(String employee_id)throws RemoteException;
+    public SalaryDetail getSDbyID(String sd_id)throws RemoteException;
+    public Deduction getEmpDD(String dd_id)throws RemoteException;
+    public SalaryHistory getEmpSH(String employee_id, Date date)throws RemoteException;
+    public List<SalaryHistory> searchHistoryByDate(Date date) throws RemoteException;
+    public boolean updateSalaryDetail(SalaryDetail sd)throws RemoteException;
+    public boolean updateSalaryDeduction(String employee_id,Deduction dd) throws RemoteException;
+    public boolean updateSalaryHistory(SalaryHistory sh, Date date) throws RemoteException;
 }

@@ -71,7 +71,7 @@ public class Deduction implements Serializable{
     }
 
     public double getTotalDeductions(double gross_salary) {
-        tax.tax_calculate(gross_salary);
+        tax.tax_update(gross_salary);
         return tax.getTotalTax() + this.leave_deduction + this.other_deduction;
     }
     

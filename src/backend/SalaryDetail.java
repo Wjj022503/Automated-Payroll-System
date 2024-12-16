@@ -22,11 +22,12 @@ public class SalaryDetail implements Serializable{
     
     }
     
-    public SalaryDetail(String sd_id, double base_salary, int working_hours, double hourly_rate) {
+    public SalaryDetail(String sd_id, double base_salary, int working_hours, double hourly_rate, String employee_id) {
         this.sd_id = sd_id;
         this.base_salary = base_salary;
         this.working_hours = working_hours;
         this.hourly_rate = hourly_rate;
+        this.employee_id = employee_id;
     }
     
     //get set methods

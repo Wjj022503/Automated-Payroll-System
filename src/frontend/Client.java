@@ -22,24 +22,6 @@ public class Client {
     private static RMI_Interface obj;
     private static String address = "rmi://localhost:1040/main";
     
-    public static Employee getCurrentUser(){
-        Employee current_user = new Employee();
-        try{
-            obj = (RMI_Interface)Naming.lookup(address);
-            current_user = obj.getCurrentUser();
-        }
-        catch(MalformedURLException e){
-            e.printStackTrace();
-        }
-        catch(NotBoundException e){
-            e.printStackTrace();
-        }
-        catch (RemoteException e){
-            e.printStackTrace();
-        }
-        return current_user;
-    }
-    
     public static Employee getEmployee(String emp_id){
         Employee emp = new Employee();
         try{
@@ -94,11 +76,11 @@ public class Client {
         return sd;
     }
     
-    public static SalaryHistory getSalaryHistory(Date date){
+    public static SalaryHistory getEmpSH(String sd_id, Date date){
         SalaryHistory sh = new SalaryHistory();
         try{
             obj = (RMI_Interface)Naming.lookup(address);
-            sh = obj.getEmpSH(getCurrentUser().getId(), date);
+            sh = obj.getEmpSH(sd_id, date);
         }
         catch(MalformedURLException e){
             e.printStackTrace();
@@ -146,10 +128,12 @@ public class Client {
         }
     }
     
-    public static void updateBaseSalary(String emp_id,Double bs,int wh,Double hrs_rt){
+    public static boolean updateBaseSalary(String sd_id,Double bs,int wh,Double hrs_rt,String emp_id){
         try{
             obj = (RMI_Interface)Naming.lookup(address);
-            
+            SalaryDetail sd = new SalaryDetail(sd_id,bs,wh,hrs_rt,emp_id);
+            boolean update_result = obj.updateSalaryDetail(sd);
+            return update_result;
         }
         catch(MalformedURLException e){
             e.printStackTrace();
@@ -160,6 +144,7 @@ public class Client {
         catch (RemoteException e){
             e.printStackTrace();
         }
+        return false;
     }
     
     public static List<SalaryHistory> searchHistorybyDate(Date date){

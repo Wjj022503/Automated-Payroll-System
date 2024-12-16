@@ -33,7 +33,7 @@ public class Tax implements Serializable{
     
     
     // public methods
-    public void tax_calculate(double grossSalary){
+    public void tax_update(double grossSalary){
         this.epf = grossSalary * EPF_RATE;
         this.socso = grossSalary * SOCSO_RATE;
         this.eis = grossSalary * EIS_RATE;

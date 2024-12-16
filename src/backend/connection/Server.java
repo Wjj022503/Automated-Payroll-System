@@ -14,6 +14,7 @@ import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 /**
@@ -22,23 +23,11 @@ import java.util.ArrayList;
  */
 public class Server extends UnicastRemoteObject implements RMI_Interface{
     
-    private String current_user_id = "E100001";
+    private LocalDate ld = LocalDate.now();
+    private Date current_date = Date.valueOf(ld);
     
     public Server() throws RemoteException{
         super();
-    }
-    
-    public Employee getCurrentUser()throws RemoteException{
-        Employee current_user = new Employee();
-        try {
-            Database db = new Database();
-            current_user = db.getEmployee(current_user_id);
-            db.closeConnection();
-            return current_user;
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-        return null;
     }
     
     public Employee getEmpDetails(String employee_id) throws RemoteException{
@@ -78,7 +67,7 @@ public class Server extends UnicastRemoteObject implements RMI_Interface{
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        return sd;
+        return null;
    }
    
    public SalaryDetail getSDbyID(String sd_id)throws RemoteException{
@@ -164,25 +153,36 @@ public class Server extends UnicastRemoteObject implements RMI_Interface{
    public boolean updateSalaryDetail(SalaryDetail sd)throws RemoteException{
         try {
             Database db = new Database();
-            int result_flag = db.updateSalaryDetail(sd);
+            //update salary details
+            boolean update_result = false;
+            boolean add_result = false;
+            
+            SalaryDetail sd_from_db = db.getSDByID(sd.getSd_id());
+            
+            if(sd_from_db.getSd_id() != null){
+                //update salary detail
+                update_result = db.updateSalaryDetail(sd);
+                SalaryHistory sh = db.getEmpSH(sd.getSd_id(), current_date);
+                Deduction dd = db.getEmpDeduction(sh.getDD_ID());
+                //update salary history
+                updateSalaryDeduction(sd.getEmployee_Id(),dd);
+            }else{
+                //add salary detail
+                add_result = db.addSalaryDetail(sd);
+                Payroll pr = new Payroll();
+                SalaryHistory sh =  new SalaryHistory();
+                sh.setDate(current_date);
+                //calculate and add tax deduction
+                db.addSalaryHistory(sh);
+            }
             db.closeConnection();
             
-            switch(result_flag){
-                case 1:
-                    System.out.println("Salary detail update succesfully.");
-                    return true;
-                case 2:
-                    System.out.println("Salary detail add succesfully.");
-                    return true;
-                case 3:
-                    System.out.println("Salary detail update failed.");
-                    return false;
-                case 4:
-                    System.out.println("Salary detail add failed.");
-                    return false;
-                default:
-                    System.out.println("Unknowed Error, update failed.");
-                    return false;
+            if(update_result || add_result){
+                System.out.println("Salary detail update succesfully.");
+                return true;
+            }else{
+                System.out.println("Salary detail update failed.");
+                return false;
             }
             
         } catch (SQLException ex) {
@@ -191,28 +191,49 @@ public class Server extends UnicastRemoteObject implements RMI_Interface{
         return false;
    }
    
-   public boolean updateSalaryDeduction(Deduction dd) throws RemoteException{
+   public boolean updateSalaryDeduction(String employee_id,Deduction dd) throws RemoteException{
         try {
             Database db = new Database();
-            int result_flag = db.updateSalaryDeduction(dd);
+            boolean update_result = false;
+            boolean add_result = false;
+            
+            Deduction dd_from_db = db.getEmpDeduction(dd.getDd_id());
+            
+            if(dd_from_db.getDd_id() != null){
+                //update deduction detail to DB
+                update_result = db.updateSalaryDeduction(dd);
+                
+                //re-calculate gross salary, net salary and update
+                Payroll pr = new Payroll();
+                SalaryDetail sd = db.getEmpSD(employee_id);
+                SalaryHistory sh = db.getEmpSH(sd.getSd_id(), current_date);
+                double gross_salary = pr.getGrossSalary(sd.getBase_salary(), sd.getHourly_rate(), sh.getOvertime_hours(), sh.getAllowance());
+                double net_salary = pr.getNetSalary(gross_salary, dd.getTotalDeductions(gross_salary));
+                sh.setGrossSalary(gross_salary);
+                sh.setNetSalary(net_salary);
+                db.updateSalaryHistory(sh, current_date);
+            }else{
+                //add deduction to DB
+                add_result = db.addDeduction(dd);
+                
+                //calculate net salary and update
+                Payroll pr = new Payroll();
+                SalaryDetail sd = db.getEmpSD(employee_id);
+                SalaryHistory sh = db.getEmpSH(sd.getSd_id(), current_date);
+                double gross_salary = pr.getGrossSalary(sd.getBase_salary(), sd.getHourly_rate(), sh.getOvertime_hours(), sh.getAllowance());
+                pr.getNetSalary(gross_salary, dd.getTotalDeductions(gross_salary));
+                sh.setNetSalary(gross_salary);                
+                db.updateSalaryHistory(sh, current_date);
+            }
+            
             db.closeConnection();
             
-            switch(result_flag){
-                case 1:
-                    System.out.println("Salary detail update succesfully.");
-                    return true;
-                case 2:
-                    System.out.println("Salary detail add succesfully.");
-                    return true;
-                case 3:
-                    System.out.println("Salary detail update failed.");
-                    return false;
-                case 4:
-                    System.out.println("Salary detail add failed.");
-                    return false;
-                default:
-                    System.out.println("Unknowed Error, update failed.");
-                    return false;
+            if(update_result || add_result){
+                System.out.println("Salary detail update succesfully.");
+                return true;
+            }else{    
+                System.out.println("Salary detail update failed.");
+                return false;
             }
             
         } catch (SQLException ex) {
@@ -224,27 +245,29 @@ public class Server extends UnicastRemoteObject implements RMI_Interface{
     public boolean updateSalaryHistory(SalaryHistory sh, Date date) throws RemoteException{
         try {
             Database db = new Database();
-            int result_flag = db.updateSalaryHistory(sh,date);
-            db.closeConnection();
+            boolean add_result = false;
+            boolean update_result = false;
             
-            switch(result_flag){
-                case 1:
-                    System.out.println("Salary detail update succesfully.");
-                    return true;
-                case 2:
-                    System.out.println("Salary detail add succesfully.");
-                    return true;
-                case 3:
-                    System.out.println("Salary detail update failed.");
-                    return false;
-                case 4:
-                    System.out.println("Salary detail add failed.");
-                    return false;
-                default:
-                    System.out.println("Unknowed Error, update failed.");
-                    return false;
+            SalaryHistory sh_from_db = db.getSHById(sh.getSHId(), date);
+            
+            if(sh_from_db.getSHId() != null){
+                update_result = db.updateSalaryHistory(sh, date);
+            }
+            else{
+                sh.setDate(date);
+                add_result = db.addSalaryHistory(sh);
             }
             
+            db.closeConnection();
+            
+            if(update_result || add_result){
+                System.out.println("Salary detail update succesfully.");
+                return true;
+            }
+            else{
+                System.out.println("Salary detail update failed.");
+                return false;
+            }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
