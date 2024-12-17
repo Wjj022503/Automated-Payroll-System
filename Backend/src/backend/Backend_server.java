@@ -7,15 +7,14 @@ import database_table.Employee;
 import shared.rmi_interface;
 
 public class Backend_server extends UnicastRemoteObject implements rmi_interface{
-    private Employee currentuser;
-    
     public Backend_server() throws RemoteException{
         super();
     }
     
     @Override
     
-    public boolean Login(String username, String password) throws RemoteException{
+    public Employee Login(String username, String password) throws RemoteException{
+        Employee currentUser = null;
         String salt;
         String correctPassword = null;
         String hashPassword = null;
@@ -23,9 +22,14 @@ public class Backend_server extends UnicastRemoteObject implements rmi_interface
         
         try{
            Database db = new Database();
-           this.currentuser = db.getEmployeebyUsername(username);
-           salt = currentuser.getSalt();
-           correctPassword = currentuser.getPassword();
+           currentUser = db.getEmployeebyUsername(username);
+           
+           if (currentUser == null){
+               return null;
+           }
+           
+           salt = currentUser.getSalt();
+           correctPassword = currentUser.getPassword();
            hashPassword = password + salt;
         } catch(SQLException ex){
            ex.printStackTrace();
@@ -42,14 +46,14 @@ public class Backend_server extends UnicastRemoteObject implements rmi_interface
             }
         } catch (NoSuchAlgorithmException e) {
             System.out.println("SHA-256 algorithm not found.");
-            return false;
+            return null;
         }
         
-        if(hexString != null && hexString.toString().equals(correctPassword) && correctPassword != null){
-            return true;
+        if(hexString.toString().equals(correctPassword) && correctPassword != null){
+            return currentUser;
         }
         
-        return false;
+        return null;
     }
     
     @Override

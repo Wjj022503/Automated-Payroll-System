@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 package frontend;
-import java.rmi.Naming;
 import java.rmi.*;
-import java.net.MalformedURLException;
 import java.io.*;
 import java.awt.*;
 import javax.swing.JTextField;
@@ -20,6 +18,7 @@ import shared.rmi_interface;
  */
 public class frontendGUI extends javax.swing.JFrame {
     
+    private Employee currentUser = null;
     private CardLayout cardLayout;
     private boolean isShowPassword;    
     private boolean isRemenberMe;
@@ -95,6 +94,7 @@ public class frontendGUI extends javax.swing.JFrame {
         LoginInvalidContent = new javax.swing.JLabel();
         LoginRemenberMeCheckBox = new javax.swing.JCheckBox();
         EmployeeLoginLabel = new javax.swing.JLabel();
+        QuitButton = new javax.swing.JButton();
         firstpage = new javax.swing.JPanel();
         employeeregistrationLabelf = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
@@ -198,46 +198,53 @@ public class frontendGUI extends javax.swing.JFrame {
         EmployeeLoginLabel.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
         EmployeeLoginLabel.setText("Employee Login ");
 
+        QuitButton.setText("Quit");
+        QuitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QuitButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout LoginPageLayout = new javax.swing.GroupLayout(LoginPage);
         LoginPage.setLayout(LoginPageLayout);
         LoginPageLayout.setHorizontalGroup(
             LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginPageLayout.createSequentialGroup()
+                .addGap(173, 173, 173)
                 .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPageLayout.createSequentialGroup()
-                        .addContainerGap(319, Short.MAX_VALUE)
-                        .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LoginShowPasswordCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LoginInvalidContent, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(3, 3, 3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPageLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EmployeeLoginLabel)
+                        .addGap(44, 44, 44))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(LoginInvalidMsgTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(LoginPageLayout.createSequentialGroup()
                             .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(LoginInvalidMsgTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LoginPasswordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LoginUsernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(84, 84, 84)
+                            .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LoginUsernameInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LoginPasswordInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(LoginPageLayout.createSequentialGroup()
-                                    .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(LoginPasswordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(LoginUsernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
-                                    .addGap(84, 84, 84)
-                                    .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LoginUsernameInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(LoginPasswordInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(LoginPageLayout.createSequentialGroup()
-                                            .addGap(3, 3, 3)
-                                            .addComponent(LoginRemenberMeCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                .addContainerGap(306, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPageLayout.createSequentialGroup()
-                .addGap(0, 368, Short.MAX_VALUE)
-                .addComponent(EmployeeLoginLabel)
-                .addGap(350, 350, 350))
+                                    .addGap(3, 3, 3)
+                                    .addComponent(LoginRemenberMeCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPageLayout.createSequentialGroup()
+                        .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LoginInvalidContent, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(LoginPageLayout.createSequentialGroup()
+                                .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(70, 70, 70)
+                                .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(LoginShowPasswordCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                                    .addComponent(QuitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(3, 3, 3)))
+                .addContainerGap(225, Short.MAX_VALUE))
         );
         LoginPageLayout.setVerticalGroup(
             LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginPageLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(38, 38, 38)
                 .addComponent(EmployeeLoginLabel)
                 .addGap(38, 38, 38)
                 .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -256,12 +263,14 @@ public class frontendGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(LoginShowPasswordCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(QuitButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LoginInvalidMsgTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LoginInvalidContent, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGap(58, 58, 58))
         );
 
         getContentPane().add(LoginPage, "login");
@@ -375,9 +384,9 @@ public class frontendGUI extends javax.swing.JFrame {
                     .addGroup(firstpageLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(backbutton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(firstpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(retypepasswordNote, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                    .addComponent(retypepasswordNote, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
                     .addGroup(firstpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(retypepasswordLabel)
                         .addComponent(passwordLabel)
@@ -514,7 +523,7 @@ public class frontendGUI extends javax.swing.JFrame {
                             .addComponent(fullnameNote, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(readIC, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(icNote, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                         .addGroup(secondpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(departmentLabel)
                             .addComponent(contactnoLabel)
@@ -576,20 +585,6 @@ public class frontendGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private static rmi_interface Obj;
-    
-    private static rmi_interface getRMIObject() {
-        if (Obj == null) { 
-            try {
-                Obj = (rmi_interface) Naming.lookup("rmi://localhost:5000/AutomatedPayrollSystem");
-            } catch (NotBoundException | MalformedURLException | RemoteException ex) {
-                ex.printStackTrace();
-                Obj = null;
-            }
-        }
-        
-        return Obj;
-    }
     
     private void readusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readusernameActionPerformed
         // TODO add your handling code here:
@@ -631,6 +626,7 @@ public class frontendGUI extends javax.swing.JFrame {
 
     private void nextpagebuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextpagebuttonMouseClicked
         // TODO add your handling code here:
+        //checking username is valid / isnt null
         String userName = readusername.getText();
         boolean uEmpty = userName.isEmpty();
         String feedback1 = isValidUsername(userName);
@@ -639,6 +635,7 @@ public class frontendGUI extends javax.swing.JFrame {
             validusername = feedback1.equals("Valid");
         }
         
+        //checking passwrord is valid
         String passWord = new String(readpassword.getPassword());
         boolean pEmpty = passWord.isEmpty();
         String feedback2 = isValidPassword(passWord);
@@ -776,7 +773,7 @@ public class frontendGUI extends javax.swing.JFrame {
             employee.setDepartment((String)departmentdropdown.getSelectedItem());
             employee.setContactNO(contact);
             
-            String response = sendUserData(employee);
+            String response = requestRegistration(employee);
             if (response.equals("Success")){
                 JOptionPane.showMessageDialog(rootPane, "User registered successfully!");
                 this.cardLayout.show(getContentPane(), "login");
@@ -806,21 +803,28 @@ public class frontendGUI extends javax.swing.JFrame {
 
     private void LoginButtongotoPayRollPage(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginButtongotoPayRollPage
         // TODO add your handling code here:
-        rmi_interface Obj = getRMIObject();
-        
+        rmi_interface Obj = Client.getRMIObject();
         try {
             char[] passwordChars = LoginPasswordInput.getPassword();
             String password = new String(passwordChars);
-            if(Obj.Login(LoginUsernameInput.getText(), password)){
+            currentUser = Obj.Login(LoginUsernameInput.getText(), password);
+
+            if(currentUser != null){
                 if(isRemenberMe){
                     String LoginUsername = LoginUsernameInput.getText();
                     FileOutputStream fout = new FileOutputStream("user.usr");
-                    ObjectOutputStream out = new ObjectOutputStream(fout);
-                    out.writeObject(LoginUsername);
-                    out.flush();
-                    out.close();
+                    try (
+                        ObjectOutputStream out = new ObjectOutputStream(fout)) {
+                        out.writeObject(LoginUsername);
+                        out.flush();
+                    }
                 }
-                this.cardLayout.show(getContentPane(), "card2");
+                
+                if ((currentUser.getDepartment()).equals("Human Resource")){
+                    this.cardLayout.show(getContentPane(), "card2");
+                } else{
+                    this.cardLayout.show(getContentPane(), "card2");
+                }
             }else{
                 LoginInvalidMsgTitle.setVisible(true);
                 LoginInvalidContent.setVisible(true);
@@ -905,6 +909,11 @@ public class frontendGUI extends javax.swing.JFrame {
     private void readICActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readICActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_readICActionPerformed
+
+    private void QuitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitButtonActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_QuitButtonActionPerformed
     
     private static String isValidContact (String contactno){
         StringBuilder feedback = new StringBuilder("<html>Invalid Contact Number: <br>");
@@ -948,12 +957,12 @@ public class frontendGUI extends javax.swing.JFrame {
         return feedback.toString();
     }
     
-    private static String sendUserData(Employee employee){
-        rmi_interface Obj = getRMIObject();
+    private static String requestRegistration(Employee employee){
+        rmi_interface Obj = Client.getRMIObject();
         try {
             String response = Obj.registrationRequest(employee);
             return response;
-        } catch (Exception e) {
+        } catch (RemoteException e) {
             e.printStackTrace();
             return "Error: Unable to connect to the server.";
         }
@@ -963,7 +972,7 @@ public class frontendGUI extends javax.swing.JFrame {
         boolean hasSpecial = username.matches(".*[!@#$%^&*(),.?\":{}|<>].*");
         boolean isUnique;
         StringBuilder feedback = new StringBuilder("<html>Invalid Username: <br>");
-        rmi_interface Obj = getRMIObject();
+        rmi_interface Obj = Client.getRMIObject();
         String response = "";
         
         if (hasSpecial) {
@@ -972,7 +981,7 @@ public class frontendGUI extends javax.swing.JFrame {
         
         try{
             response = Obj.uniqueName(username);
-        } catch (Exception e){
+        } catch (RemoteException e){
             e.printStackTrace();
         }
         
@@ -1071,6 +1080,7 @@ public class frontendGUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox LoginShowPasswordCheckBox;
     private javax.swing.JTextField LoginUsernameInput;
     private javax.swing.JLabel LoginUsernameLabel;
+    private javax.swing.JButton QuitButton;
     private javax.swing.JButton backbutton1;
     private javax.swing.JButton backbutton2;
     private javax.swing.JLabel contactNote;
