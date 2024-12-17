@@ -1301,7 +1301,13 @@ public class payrollGUI extends javax.swing.JFrame {
         Double ad = Double.parseDouble(ms_ad_tf.getText());
         String dr = ms_reason_tf.getText();
         
-        Client.updateMonthlySalary(current_date, emp_id, allowance, ot_hrs, late_d, ad, dr);
+        boolean update_result = Client.updateMonthlySalary(current_date, emp_id, allowance, ot_hrs, late_d, ad, dr);
+        if (update_result){
+            setOptionPane("Monthly Salary Details updated successfully","Successful",JOptionPane.PLAIN_MESSAGE);
+        }
+        else{
+            setOptionPane("Monthly Salary Details updated failed","Failed",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_ms_confirm_buttonActionPerformed
 
     private void bsd_confirm_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsd_confirm_buttonActionPerformed

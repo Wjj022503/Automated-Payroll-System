@@ -112,7 +112,7 @@ public class Client {
         return dd;
     }
     
-    public static void updateMonthlySalary(Date date, String emp_id,double allowance, double ot_hrs, double ld, double ad, String dr){
+    public static boolean updateMonthlySalary(Date date, String emp_id,double allowance, double ot_hrs, double ld, double ad, String dr){
         try{
             obj = (RMI_Interface)Naming.lookup(address);
             Deduction dd = new Deduction();
@@ -131,7 +131,7 @@ public class Client {
             sh.setOvertime_hours(ot_hrs);
             sh.setDate(date);
             
-            obj.updateSalaryHistory(dd,sh, date);
+            return obj.updateSalaryHistory(dd,sh, date);
         }
         catch(MalformedURLException e){
             e.printStackTrace();
@@ -142,6 +142,8 @@ public class Client {
         catch (RemoteException e){
             e.printStackTrace();
         }
+        
+        return false;
     }
     
     public static boolean updateBaseSalary(SalaryDetail sd){
