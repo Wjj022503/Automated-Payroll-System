@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/wjing/desktop/CS_general/Year3Sem1/DisCom/Assignment/DisCom/src/frontend/Client.java</file>
-            <file>file:/C:/Users/wjing/desktop/CS_general/Year3Sem1/DisCom/Assignment/DisCom/src/backend/connection/Server.java</file>
-            <file>file:/C:/Users/wjing/desktop/CS_general/Year3Sem1/DisCom/Assignment/DisCom/src/backend/Payroll.java</file>
-            <file>file:/C:/Users/wjing/desktop/CS_general/Year3Sem1/DisCom/Assignment/DisCom/src/backend/connection/Registry.java</file>
-            <file>file:/C:/Users/wjing/desktop/CS_general/Year3Sem1/DisCom/Assignment/DisCom/src/backend/connection/Database.java</file>
-            <file>file:/C:/Users/wjing/desktop/CS_general/Year3Sem1/DisCom/Assignment/DisCom/src/frontend/payrollGUI.java</file>
+            <file>file:/C:/Users/Asus/Desktop/sf/Automated-Payroll-System/src/backend/connection/Server.java</file>
+            <file>file:/C:/Users/Asus/Desktop/sf/Automated-Payroll-System/src/backend/connection/Registry.java</file>
+            <file>file:/C:/Users/Asus/Desktop/sf/Automated-Payroll-System/src/backend/Payroll.java</file>
+            <file>file:/C:/Users/Asus/Desktop/sf/Automated-Payroll-System/src/frontend/payrollGUI.java</file>
+            <file>file:/C:/Users/Asus/Desktop/sf/Automated-Payroll-System/src/backend/Employee.java</file>
+            <file>file:/C:/Users/Asus/Desktop/sf/Automated-Payroll-System/src/backend/connection/Database.java</file>
+            <file>file:/C:/Users/Asus/Desktop/sf/Automated-Payroll-System/src/frontend/Client.java</file>
         </group>
     </open-files>
 </project-private>
