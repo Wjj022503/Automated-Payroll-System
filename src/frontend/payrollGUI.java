@@ -159,7 +159,6 @@ public class payrollGUI extends javax.swing.JFrame {
         ms_reason_tf = new javax.swing.JTextField();
         ms_search_button = new javax.swing.JButton();
         ms_not_found = new javax.swing.JLabel();
-        sd_not_set = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -888,6 +887,8 @@ public class payrollGUI extends javax.swing.JFrame {
 
         getContentPane().add(hr_panel, "hr_card");
 
+        bsd_hr_tf.setEditable(false);
+
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel19.setText("Base Salary Update");
 
@@ -931,15 +932,17 @@ public class payrollGUI extends javax.swing.JFrame {
             .addGroup(bsd_update_panelLayout.createSequentialGroup()
                 .addGap(87, 87, 87)
                 .addComponent(bsd_return_button, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99)
                 .addGroup(bsd_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bsd_update_panelLayout.createSequentialGroup()
-                        .addGap(99, 99, 99)
                         .addGroup(bsd_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel23)
+                            .addComponent(bsd_wh_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel22)
-                            .addGroup(bsd_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(bsd_wh_tf)
-                                .addComponent(bsd_hr_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(bsd_hr_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(bsd_update_panelLayout.createSequentialGroup()
+                        .addGroup(bsd_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel24)
                             .addComponent(jLabel21)
                             .addGroup(bsd_update_panelLayout.createSequentialGroup()
@@ -950,9 +953,9 @@ public class payrollGUI extends javax.swing.JFrame {
                                 .addComponent(bsd_search_button))
                             .addComponent(jLabel19)
                             .addComponent(bsd_not_found))
-                        .addContainerGap(284, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bsd_update_panelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(303, Short.MAX_VALUE))
+                    .addGroup(bsd_update_panelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(bsd_confirm_button, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(104, 104, 104))))
         );
@@ -973,21 +976,21 @@ public class payrollGUI extends javax.swing.JFrame {
                 .addComponent(jLabel21)
                 .addGap(1, 1, 1)
                 .addComponent(bsd_bs_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel22)
-                .addGap(3, 3, 3)
-                .addComponent(bsd_hr_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(bsd_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bsd_update_panelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel23)
                         .addGap(0, 0, 0)
                         .addComponent(bsd_wh_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel22)
+                        .addGap(3, 3, 3)
+                        .addComponent(bsd_hr_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                         .addComponent(bsd_return_button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(66, 66, 66))
                     .addGroup(bsd_update_panelLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
+                        .addGap(123, 123, 123)
                         .addComponent(bsd_confirm_button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -1046,10 +1049,6 @@ public class payrollGUI extends javax.swing.JFrame {
         ms_not_found.setForeground(new java.awt.Color(255, 0, 0));
         ms_not_found.setText("Employee Not Found.");
 
-        sd_not_set.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        sd_not_set.setForeground(new java.awt.Color(255, 0, 0));
-        sd_not_set.setText("Employee's salary details are not set.");
-
         javax.swing.GroupLayout ms_update_panelLayout = new javax.swing.GroupLayout(ms_update_panel);
         ms_update_panel.setLayout(ms_update_panelLayout);
         ms_update_panelLayout.setHorizontalGroup(
@@ -1066,7 +1065,6 @@ public class payrollGUI extends javax.swing.JFrame {
                             .addComponent(jLabel15)
                             .addComponent(jLabel13)
                             .addComponent(jLabel16)
-                            .addComponent(jLabel17)
                             .addComponent(jLabel18)
                             .addComponent(jLabel25)
                             .addComponent(jLabel26)
@@ -1076,15 +1074,13 @@ public class payrollGUI extends javax.swing.JFrame {
                                 .addComponent(ms_empid_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(ms_search_button))
-                            .addGroup(ms_update_panelLayout.createSequentialGroup()
-                                .addGroup(ms_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ms_ot_tf)
-                                    .addComponent(ms_allowance_tf)
-                                    .addComponent(ms_ld_tf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ms_ad_tf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(sd_not_set, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(56, 56, 56)))
+                            .addGroup(ms_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(ms_ot_tf)
+                                .addComponent(ms_allowance_tf)
+                                .addComponent(ms_ld_tf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ms_ad_tf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel17))
+                        .addGap(172, 172, 172)))
                 .addComponent(ms_confirm_button, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(110, 110, 110))
         );
@@ -1104,9 +1100,7 @@ public class payrollGUI extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel16)
                 .addGap(1, 1, 1)
-                .addGroup(ms_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ms_allowance_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sd_not_set))
+                .addComponent(ms_allowance_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1227,7 +1221,7 @@ public class payrollGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(getContentPane(),"bsd_update_card");
-        bsd_not_found.setVisible(false);
+        empty_bsd_page();
     }//GEN-LAST:event_go_bsd_buttonActionPerformed
 
     private void go_ms_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_ms_buttonActionPerformed
@@ -1261,17 +1255,53 @@ public class payrollGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(getContentPane(), "hr_card");
+        empty_ms_page();
     }//GEN-LAST:event_ms_return_buttonActionPerformed
 
     private void ms_confirm_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ms_confirm_buttonActionPerformed
         // TODO add your handling code here:
         String emp_id = ms_empid_tf.getText();
+        Employee emp = Client.getEmployee(emp_id);
+        if(emp == null){
+            ms_not_found.setVisible(true);
+            ms_allowance_tf.setText("");
+            ms_ot_tf.setText("");
+            ms_ld_tf.setText("");
+            ms_ad_tf.setText("");
+            ms_reason_tf.setText("");
+            return;
+        }
+        else{
+            ms_not_found.setVisible(false);
+        }
+        
+        SalaryDetail sd = Client.getEmployeeSalaryDetail(emp_id);
+        if(sd == null){
+            int userOption = JOptionPane.showConfirmDialog(
+                                null, 
+                                "The employee's base salary details have not been set.\nSet now?", 
+                                "Incomplete information",
+                                JOptionPane.OK_CANCEL_OPTION
+                            );
+            if (userOption == JOptionPane.OK_OPTION) {
+                empty_bsd_page();
+                bsd_empid_tf.setText(emp_id);
+                empty_ms_page();
+                CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+                cardLayout.show(getContentPane(), "bsd_update_card");
+            } else if (userOption == JOptionPane.CANCEL_OPTION) {
+                empty_ms_page();
+            }
+            return;
+        }
+        
         Double allowance = Double.parseDouble(ms_allowance_tf.getText());
         Double ot_hrs = Double.parseDouble(ms_ot_tf.getText());
-        Double ld = Double.parseDouble(ms_ld_tf.getText());
+        Double late_d = Double.parseDouble(ms_ld_tf.getText());
         Double ad = Double.parseDouble(ms_ad_tf.getText());
         String dr = ms_reason_tf.getText();
         
+        Client.updateMonthlySalary(current_date, emp_id, allowance, ot_hrs, late_d, ad, dr);
     }//GEN-LAST:event_ms_confirm_buttonActionPerformed
 
     private void bsd_confirm_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsd_confirm_buttonActionPerformed
@@ -1280,14 +1310,29 @@ public class payrollGUI extends javax.swing.JFrame {
             setOptionPane("Please fill in complete informations.","Incomplete Information",JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
+        Double bs = Double.parseDouble(bsd_bs_tf.getText());
+        Double hrs_rt = Double.parseDouble(bsd_hr_tf.getText());
+        int wh = Integer.parseInt(bsd_wh_tf.getText());
+        
         String emp_id = bsd_empid_tf.getText();
-        SalaryDetail sd = Client.getEmployeeSalaryDetail(emp_id);
-        if(sd != null){
-            Double bs = Double.parseDouble(bsd_bs_tf.getText());
-            Double hrs_rt = Double.parseDouble(bsd_hr_tf.getText());
-            int wh = Integer.parseInt(bsd_wh_tf.getText());
-            if(Client.updateBaseSalary(sd.getSd_id(), bs, wh, hrs_rt,emp_id)){
+        Employee emp = Client.getEmployee(emp_id);
+        if(emp != null){
+            SalaryDetail sd = Client.getEmployeeSalaryDetail(emp_id);
+            if(sd == null){
+                sd = new SalaryDetail();
+            }
+            
+            sd.setBase_salary(bs);
+            sd.setEmployee_Id(emp_id);
+            sd.setWorking_hours(wh);
+            sd.setHourly_rate(hrs_rt);
+            if(Client.updateBaseSalary(sd)){
                 setOptionPane("Salary Detail Updated Successfully.","Success",JOptionPane.PLAIN_MESSAGE);
+                sd = Client.getEmployeeSalaryDetail(emp_id);
+                bsd_bs_tf.setText(String.valueOf(sd.getBase_salary()));
+                bsd_wh_tf.setText(String.valueOf(sd.getWorking_hours()));
+                bsd_hr_tf.setText(String.valueOf(sd.getHourly_rate()));
             }
             else{
                 setOptionPane("Salary Detail Updated Failed.","Fail",JOptionPane.ERROR_MESSAGE);
@@ -1343,14 +1388,20 @@ public class payrollGUI extends javax.swing.JFrame {
         else{
             bsd_not_found.setVisible(false);
             SalaryDetail sd = Client.getEmployeeSalaryDetail(emp.getId());
-            bsd_bs_tf.setText(String.valueOf(sd.getBase_salary()));
-            bsd_hr_tf.setText(String.valueOf(sd.getHourly_rate()));
-            bsd_wh_tf.setText(String.valueOf(sd.getWorking_hours()));
+            if(sd != null){
+                bsd_bs_tf.setText(String.valueOf(sd.getBase_salary()));
+                bsd_hr_tf.setText(String.valueOf(sd.getHourly_rate()));
+                bsd_wh_tf.setText(String.valueOf(sd.getWorking_hours()));
+            }
+            else{
+                bsd_bs_tf.setText("0");
+                bsd_hr_tf.setText("0");
+                bsd_wh_tf.setText("0");
+            }
         }
     }//GEN-LAST:event_bsd_search_buttonActionPerformed
 
     private void ms_search_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ms_search_buttonActionPerformed
-        // TODO add your handling code here:
         // TODO add your handling code here:
         if(ms_empid_tf.getText().isEmpty()){
             setOptionPane("Please fill in the employee id.","Warning",JOptionPane.WARNING_MESSAGE);
@@ -1360,11 +1411,44 @@ public class payrollGUI extends javax.swing.JFrame {
         Employee emp = Client.getEmployee(emp_id);
         if(emp == null){
             ms_not_found.setVisible(true);
+            ms_allowance_tf.setText("");
+            ms_ot_tf.setText("");
+            ms_ld_tf.setText("");
+            ms_ad_tf.setText("");
+            ms_reason_tf.setText("");
+            return;
         }
         else{
             ms_not_found.setVisible(false);
-            
         }
+        
+        SalaryDetail sd = Client.getEmployeeSalaryDetail(emp_id);
+        if(sd == null){
+            int userOption = JOptionPane.showConfirmDialog(
+                                null, 
+                                "The employee's base salary details have not been set.\nSet now?", 
+                                "Incomplete information",
+                                JOptionPane.OK_CANCEL_OPTION
+                            );
+            if (userOption == JOptionPane.OK_OPTION) {
+                empty_bsd_page();
+                bsd_empid_tf.setText(emp_id);
+                CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+                cardLayout.show(getContentPane(), "bsd_update_card");
+                empty_ms_page();
+            } else if (userOption == JOptionPane.CANCEL_OPTION) {
+                empty_ms_page();
+            }
+            return;
+        }
+        
+        SalaryHistory sh = Client.getEmpSH(sd.getSd_id(), current_date);
+        Deduction dd = Client.getDeduction(sh.getDD_ID());
+        ms_allowance_tf.setText(String.valueOf(sh.getAllowance()));
+        ms_ot_tf.setText(String.valueOf(sh.getOvertime_hours()));
+        ms_ld_tf.setText(String.valueOf(dd.getLeave_deduction()));
+        ms_ad_tf.setText(String.valueOf(dd.getOther_deduction()));
+        ms_reason_tf.setText(String.valueOf(dd.getOther_deduction_reason()));
     }//GEN-LAST:event_ms_search_buttonActionPerformed
     
     private void setOptionPane(String msg, String title, int error_message){
@@ -1406,18 +1490,21 @@ public class payrollGUI extends javax.swing.JFrame {
         personal_department_textfield.setText(current_user.getDepartment());
     }
     
-    private void setSHDetail(String emp_id){
-        SalaryDetail sd = Client.getEmployeeSalaryDetail(emp_id);
-        SalaryHistory sh = null;
-        if(sd == null){
-            setOptionPane("Employee Salary Detail haven't been set.","Warning",JOptionPane.WARNING_MESSAGE);
-            sd_not_set.setVisible(true);
-            return;
-        }
-        else{
-            sh = Client.getEmpSH(emp_id, current_date);
-        }
-        
+    private void empty_ms_page(){
+        ms_not_found.setVisible(false);
+        ms_empid_tf.setText("");
+        ms_allowance_tf.setText("");
+        ms_ot_tf.setText("");
+        ms_ld_tf.setText("");
+        ms_ad_tf.setText("");
+        ms_reason_tf.setText("");
+    }
+    
+    private void empty_bsd_page(){
+        bsd_not_found.setVisible(false);
+        bsd_bs_tf.setText("");
+        bsd_wh_tf.setText("");
+        bsd_hr_tf.setText("");
     }
     
     /**
@@ -1558,7 +1645,6 @@ public class payrollGUI extends javax.swing.JFrame {
     private javax.swing.JPanel salary_details_panel;
     private javax.swing.JLabel salary_name_label;
     private javax.swing.JTextField salary_name_textfield;
-    private javax.swing.JLabel sd_not_set;
     private javax.swing.JLabel socso_label;
     private javax.swing.JTextField socso_textfield;
     private javax.swing.JTable total_table;

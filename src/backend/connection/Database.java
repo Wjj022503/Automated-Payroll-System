@@ -252,7 +252,7 @@ public class Database{
     }
     
     public boolean updateSalaryDeduction(Deduction dd)throws SQLException{
-        String dd_update_query = "UPDATE EMPLOYEE_DEDUCTION_DETAILS SET epf = ?, socso = ?, eis = ?, income_tax = ?, leave_deductions = ?, additional_deductions = ?, deduction_reason = ? WHERE dd_id = ?";
+        String dd_update_query = "UPDATE EMPLOYEE_DEDUCTION_DETAILS SET epf = ?, socso = ?, eis = ?, income_tax = ?, leave_deductions = ?, ADDITIONAL_DEDUCTIONS = ?, deduction_reason = ? WHERE dd_id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(dd_update_query)){
             preparedStatement.setDouble(1, dd.getTax().getEPF());
             preparedStatement.setDouble(2, dd.getTax().getSOCSO());
@@ -274,10 +274,11 @@ public class Database{
         }
     }
       
-    public boolean addSalaryDetail(SalaryDetail sd)throws SQLException{
-        String add_sd_query = "INSERT INTO EMPLOYEE_SALARY_HISTORY (sd_id,base_salary,working_hours,hourly_rate,fk_emp_id) VALUES (?,?,?,?,?);";
+    public String addSalaryDetail(SalaryDetail sd)throws SQLException{
+        String add_sd_query = "INSERT INTO EMPLOYEE_SALARY_DETAILS (sd_id,base_salary,working_hours,hourly_rate,fk_emp_id) VALUES (?,?,?,?,?)";
+        String new_sd_id = getNew_SDID();
         try (PreparedStatement preparedStatement = connection.prepareStatement(add_sd_query)){
-            preparedStatement.setString(1, getNew_SDID());
+            preparedStatement.setString(1, new_sd_id);
             preparedStatement.setDouble(2, sd.getBase_salary());
             preparedStatement.setInt(3, sd.getWorking_hours());
             preparedStatement.setDouble(4, sd.getHourly_rate());
@@ -288,18 +289,18 @@ public class Database{
 
             if (rowsAffected > 0) {
                 System.out.println("Salary detail added successfully.");
-                return true;
+                return new_sd_id;
             } else {
                 System.out.println("No rows affected. Salary detail was not added.");
-                return false;
+                return null;
             }    
         }
     }
     
     public boolean addDeduction(Deduction deduction)throws SQLException{
-        String add_dd_query = "INSERT INTO EMPLOYEE_DEDUCTION_DETAILS (dd_id,epf,socso,eis,income_tax,leave_deductions,addtional_deductions,deduction_reason) VALUES (?,?,?,?,?,?,?,?);";
+        String add_dd_query = "INSERT INTO EMPLOYEE_DEDUCTION_DETAILS (dd_id,epf,socso,eis,income_tax,leave_deductions,ADDITIONAL_DEDUCTIONS,deduction_reason) VALUES (?,?,?,?,?,?,?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(add_dd_query)){
-            preparedStatement.setString(1, getNew_DDID());
+            preparedStatement.setString(1, deduction.getDd_id());
             preparedStatement.setDouble(2, deduction.getTax().getEPF());
             preparedStatement.setDouble(3, deduction.getTax().getSOCSO());
             preparedStatement.setDouble(4, deduction.getTax().getEIS());
@@ -321,7 +322,7 @@ public class Database{
     }
     
     public boolean addSalaryHistory(SalaryHistory sh)throws SQLException{
-        String add_sh_query = "INSERT INTO EMPLOYEE_SALARY_HISTORY (sh_id,date,allowance,overtime_hours,net_salary,gross_salary,fk_sd_id,fk_dd_id) VALUES (?,?,?,?,?,?,?,?);";
+        String add_sh_query = "INSERT INTO EMPLOYEE_SALARY_HISTORY (sh_id,date,allowance,overtime_hours,net_salary,gross_salary,fk_sd_id,fk_dd_id) VALUES (?,?,?,?,?,?,?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(add_sh_query)){
             preparedStatement.setString(1, getNew_SHID());
             preparedStatement.setDate(2, sh.getDate());
@@ -343,13 +344,33 @@ public class Database{
         }
     }
     
+    public String getNew_DDID()throws SQLException{
+        String new_ddid_query = "SELECT dd_id FROM EMPLOYEE_DEDUCTION_DETAILS ORDER BY dd_id DESC FETCH FIRST 1 ROW ONLY";
+        String ddid = "";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(new_ddid_query)){
+            try (ResultSet ddid_result = preparedStatement.executeQuery()){
+                if(ddid_result.next()){
+                    ddid = ddid_result.getString("dd_id");
+                }
+            }
+        }
+        String prefix = ddid.substring(0,2);
+        int numericPart = Integer.parseInt(ddid.substring(2));
+        
+        int new_numericPart = numericPart + 1;
+        
+        return String.format("%s%06d",prefix,new_numericPart);
+    }    
+    
     //private methods  
     private String getNew_SHID()throws SQLException{
-        String new_shid_query = "SELECT sh_id FROM EMPLOYEE_SALARY_HISTORY ORDER BY sd_id DESC LIMIT 1";
+        String new_shid_query = "SELECT sh_id FROM EMPLOYEE_SALARY_HISTORY ORDER BY sh_id DESC FETCH FIRST 1 ROW ONLY";
         String shid = "";
         try (PreparedStatement preparedStatement = connection.prepareStatement(new_shid_query)){
             try (ResultSet shid_result = preparedStatement.executeQuery()){
-                shid = shid_result.getString("sh_id");
+                if(shid_result.next()){
+                    shid = shid_result.getString("sh_id");
+                }
             }
         }
         String prefix = shid.substring(0,2);
@@ -360,28 +381,15 @@ public class Database{
         return String.format("%s%06d",prefix,new_numericPart);
     }
     
-    private String getNew_DDID()throws SQLException{
-        String new_ddid_query = "SELECT dd_id FROM EMPLOYEE_DEDUCTION_DETAILS ORDER BY dd_id DESC LIMIT 1";
-        String ddid = "";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(new_ddid_query)){
-            try (ResultSet ddid_result = preparedStatement.executeQuery()){
-                ddid = ddid_result.getString("dd_id");
-            }
-        }
-        String prefix = ddid.substring(0,2);
-        int numericPart = Integer.parseInt(ddid.substring(2));
-        
-        int new_numericPart = numericPart + 1;
-        
-        return String.format("%s%06d",prefix,new_numericPart);
-    }
-    
     private String getNew_SDID()throws SQLException{
-        String new_sdid_query = "SELECT sd_id FROM EMPLOYEE_SALARY_DETAILS ORDER BY sd_id DESC LIMIT 1";
+        String new_sdid_query = "SELECT sd_id FROM EMPLOYEE_SALARY_DETAILS ORDER BY sd_id DESC FETCH FIRST 1 ROW ONLY";
         String sdid = "";
         try (PreparedStatement preparedStatement = connection.prepareStatement(new_sdid_query)){
             try (ResultSet sdid_result = preparedStatement.executeQuery()){
-                sdid = sdid_result.getString("sd_id");
+                if(sdid_result.next()){
+                    sdid = sdid_result.getString("sd_id");
+            
+                }
             }
         }
         String prefix = sdid.substring(0,2);

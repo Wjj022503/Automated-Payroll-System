@@ -18,7 +18,7 @@ public class Deduction implements Serializable{
     
     //constructor
     public Deduction(){
-    
+        this.tax = new Tax();
     }
     public Deduction(String dd_id, Tax tax, double leave_deduction, double other_deduction, String other_deduction_reason) {
         this.dd_id = dd_id;
@@ -45,6 +45,10 @@ public class Deduction implements Serializable{
         return other_deduction;
     }
 
+    public String getOther_deduction_reason() {
+        return other_deduction_reason;
+    }
+
     public void setDd_id(String dd_id) {
         this.dd_id = dd_id;
     }
@@ -66,16 +70,8 @@ public class Deduction implements Serializable{
     }
 
     //public methods
-    public String getOther_deduction_reason() {
-        return other_deduction_reason;
-    }
-
-    public double getTotalDeductions(double gross_salary) {
+    public double getTotalDeductions(Double gross_salary) {
         tax.tax_update(gross_salary);
-        return tax.getTotalTax() + this.leave_deduction + this.other_deduction;
-    }
-    
-    public String getOtherDeductionReason(){
-        return this.other_deduction_reason;
+        return Double.parseDouble(String.format("%.2f",tax.getTotalTax() + this.leave_deduction + this.other_deduction));
     }
 }

@@ -157,23 +157,31 @@ public class Server extends UnicastRemoteObject implements RMI_Interface{
             boolean update_result = false;
             boolean add_result = false;
             
-            SalaryDetail sd_from_db = db.getSDByID(sd.getSd_id());
+            SalaryDetail sd_from_db = db.getEmpSD(sd.getEmployee_Id());
+            //re-calculate hourly rate
+            Double new_hrly_rate = Double.parseDouble(String.format("%.2f", sd.getBase_salary()/(sd.getWorking_hours()*22)));
+            sd.setHourly_rate(new_hrly_rate);
             
+            //check salary detail existing in DB
             if(sd_from_db.getSd_id() != null){
+                System.out.println("-----Running UPDATEEEE--------");
                 //update salary detail
                 update_result = db.updateSalaryDetail(sd);
                 SalaryHistory sh = db.getEmpSH(sd.getSd_id(), current_date);
                 Deduction dd = db.getEmpDeduction(sh.getDD_ID());
-                //update salary history
-                updateSalaryDeduction(sd.getEmployee_Id(),dd);
+                //update salary history and deduction
+                updateSalaryHistory(dd,sh,current_date);
             }else{
+                System.out.println("-----Running ADDD--------");
                 //add salary detail
-                add_result = db.addSalaryDetail(sd);
-                Payroll pr = new Payroll();
-                SalaryHistory sh =  new SalaryHistory();
-                sh.setDate(current_date);
-                //calculate and add tax deduction
-                db.addSalaryHistory(sh);
+                String sd_id = db.addSalaryDetail(sd);
+                if(sd_id != null){
+                    add_result = true;
+                }
+                //initial first salary history and deduction to DB
+                String new_dd_id = db.getNew_DDID();
+                initialDeductionToDB(new_dd_id);
+                initialSalaryHistoryToDB(sd_id,new_dd_id);
             }
             db.closeConnection();
             
@@ -184,7 +192,6 @@ public class Server extends UnicastRemoteObject implements RMI_Interface{
                 System.out.println("Salary detail update failed.");
                 return false;
             }
-            
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -201,29 +208,10 @@ public class Server extends UnicastRemoteObject implements RMI_Interface{
             
             if(dd_from_db.getDd_id() != null){
                 //update deduction detail to DB
-                update_result = db.updateSalaryDeduction(dd);
-                
-                //re-calculate gross salary, net salary and update
-                Payroll pr = new Payroll();
-                SalaryDetail sd = db.getEmpSD(employee_id);
-                SalaryHistory sh = db.getEmpSH(sd.getSd_id(), current_date);
-                double gross_salary = pr.getGrossSalary(sd.getBase_salary(), sd.getHourly_rate(), sh.getOvertime_hours(), sh.getAllowance());
-                double net_salary = pr.getNetSalary(gross_salary, dd.getTotalDeductions(gross_salary));
-                sh.setGrossSalary(gross_salary);
-                sh.setNetSalary(net_salary);
-                db.updateSalaryHistory(sh, current_date);
+                update_result = db.updateSalaryDeduction(dd);               
             }else{
                 //add deduction to DB
                 add_result = db.addDeduction(dd);
-                
-                //calculate net salary and update
-                Payroll pr = new Payroll();
-                SalaryDetail sd = db.getEmpSD(employee_id);
-                SalaryHistory sh = db.getEmpSH(sd.getSd_id(), current_date);
-                double gross_salary = pr.getGrossSalary(sd.getBase_salary(), sd.getHourly_rate(), sh.getOvertime_hours(), sh.getAllowance());
-                pr.getNetSalary(gross_salary, dd.getTotalDeductions(gross_salary));
-                sh.setNetSalary(gross_salary);                
-                db.updateSalaryHistory(sh, current_date);
             }
             
             db.closeConnection();
@@ -242,35 +230,101 @@ public class Server extends UnicastRemoteObject implements RMI_Interface{
         return false;
    }
    
-    public boolean updateSalaryHistory(SalaryHistory sh, Date date) throws RemoteException{
+    public boolean updateSalaryHistory(Deduction dd, SalaryHistory sh, Date date) throws RemoteException{
         try {
             Database db = new Database();
             boolean add_result = false;
             boolean update_result = false;
             
-            SalaryHistory sh_from_db = db.getSHById(sh.getSHId(), date);
+            SalaryHistory sh_from_db = db.getEmpSH(sh.getSD_ID(), date);
+            SalaryDetail sd = db.getSDByID(sh.getSD_ID());
             
             if(sh_from_db.getSHId() != null){
-                update_result = db.updateSalaryHistory(sh, date);
+                //calculate gross salary, net salary for update
+                Payroll pr = new Payroll();
+                double gross_salary = pr.getGrossSalary(sd.getBase_salary(), sd.getHourly_rate(), sh.getOvertime_hours(), sh.getAllowance());
+                double net_salary = pr.getNetSalary(gross_salary, dd.getTotalDeductions(gross_salary));
+                sh.setSHId(sh_from_db.getSHId());
+                sh.setGrossSalary(gross_salary);
+                sh.setNetSalary(net_salary);
+                dd.setDd_id(sh_from_db.getDD_ID());
+                
+                //update to DB
+                if(!db.updateSalaryDeduction(dd)){
+                    System.out.println("-----------UPDATE DD ERROR-------------------");
+                    System.out.println(dd.getDd_id());
+                    System.out.println(dd.getLeave_deduction());
+                    System.out.println(dd.getOther_deduction());
+                    System.out.println(dd.getOther_deduction_reason());
+                    System.out.println(dd.getTax().getEIS());
+                    System.out.println(dd.getTax().getSOCSO());
+                    System.out.println(dd.getTax().getIncomeTax());
+                    System.out.println(dd.getTax().getEPF());
+                }
+                else if (!db.updateSalaryHistory(sh, sh.getDate())){
+                    System.out.println("-----------UPDATE SH ERROR---------------");
+                    System.out.println(sh.getSHId());
+                    System.out.println(sh.getAllowance());
+                    System.out.println(sh.getDD_ID());
+                    System.out.println(sh.getGross_salary());
+                    System.out.println(sh.getNet_salary());
+                    System.out.println(sh.getOvertime_hours());
+                }
+                else{
+                    update_result = true;
+                }
             }
             else{
-                sh.setDate(date);
-                add_result = db.addSalaryHistory(sh);
+                //calculate gross salary, net salary for add
+                Payroll pr = new Payroll();
+                double gross_salary = pr.getGrossSalary(sd.getBase_salary(), sd.getHourly_rate(), sh.getOvertime_hours(), sh.getAllowance());
+                double net_salary = pr.getNetSalary(gross_salary, dd.getTotalDeductions(gross_salary));
+                sh.setGrossSalary(gross_salary);
+                sh.setNetSalary(net_salary);
+                dd.setDd_id(db.getNew_DDID());
+                sh.setDD_ID(dd.getDd_id());
+                add_result = (db.addDeduction(dd) && db.addSalaryHistory(sh));
             }
             
             db.closeConnection();
             
             if(update_result || add_result){
-                System.out.println("Salary detail update succesfully.");
+                System.out.println("Salary details & deduction update succesfully.");
                 return true;
             }
             else{
-                System.out.println("Salary detail update failed.");
+                System.out.println("Salary details & deduction update failed.");
                 return false;
             }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
         return false;
+   }
+   
+   //private method
+   private boolean initialSalaryHistoryToDB(String sd_id, String dd_id){
+       SalaryHistory sh = new SalaryHistory("",current_date,0,0,0,0,sd_id,dd_id);
+       try{
+           Database db = new Database();
+           
+           return db.addSalaryHistory(sh);
+       }catch(SQLException ex){
+           System.out.println(ex);
+       }
+       return false;
+   }
+   
+   private boolean initialDeductionToDB(String dd_id){
+       Tax tax = new Tax();
+       tax.tax_update(0);
+       Deduction dd = new Deduction(dd_id,tax,0,0,"");
+       try{
+           Database db = new Database();
+           return db.addDeduction(dd);
+       }catch(SQLException ex){
+           System.out.println(ex);
+       }
+       return false;
    }
 }

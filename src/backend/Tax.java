@@ -34,10 +34,10 @@ public class Tax implements Serializable{
     
     // public methods
     public void tax_update(double grossSalary){
-        this.epf = grossSalary * EPF_RATE;
-        this.socso = grossSalary * SOCSO_RATE;
-        this.eis = grossSalary * EIS_RATE;
-        this.income_tax = grossSalary * INCOME_TAX_RATE;
+        this.epf = Double.parseDouble(String.format("%.2f",grossSalary * EPF_RATE));
+        this.socso = Double.parseDouble(String.format("%.2f",grossSalary * SOCSO_RATE));
+        this.eis = Double.parseDouble(String.format("%.2f",grossSalary * EIS_RATE));
+        this.income_tax = Double.parseDouble(String.format("%.2f",grossSalary * INCOME_TAX_RATE));
     }
     
     public double getTotalTax(){

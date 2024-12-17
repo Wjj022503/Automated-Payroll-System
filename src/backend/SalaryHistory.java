@@ -24,11 +24,15 @@ public class SalaryHistory implements Serializable{
     
     }
     
-    public SalaryHistory(String sh_id, Employee employee, double base_salary, double hourly_rate, Date date, double working_hours, double allowance, double overtime_hours) {
+    public SalaryHistory(String sh_id, Date date,double allowance,double overtime_hours,double net_salary,double gross_salary,String sd_id,String dd_id){
         this.sh_id = sh_id;
         this.date = date;
         this.allowance = allowance;
         this.overtime_hours = overtime_hours;
+        this.net_salary = net_salary;
+        this.gross_salary = gross_salary;
+        this.sd_id = sd_id;
+        this.dd_id = dd_id;
     }
     
     //get set methods

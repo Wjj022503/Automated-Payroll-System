@@ -37,7 +37,7 @@ public class Client {
         catch (RemoteException e){
             e.printStackTrace();
         }
-        return emp; 
+        return emp;
     }
     
     public static SalaryDetail getEmployeeSalaryDetail(String employee_id){
@@ -112,10 +112,26 @@ public class Client {
         return dd;
     }
     
-    public static void updateMonthlySalary(Date date, String emp_id,double allowance, double ot_hrs, double ld, double ad, String reason){
+    public static void updateMonthlySalary(Date date, String emp_id,double allowance, double ot_hrs, double ld, double ad, String dr){
         try{
             obj = (RMI_Interface)Naming.lookup(address);
-
+            Deduction dd = new Deduction();
+            dd.setLeave_deduction(ld);
+            dd.setOther_deduction(ad);
+            if(dr.isEmpty()){
+                dr = "No reason.";
+            }
+            dd.setOther_deduction_reason(dr);
+            
+            SalaryDetail sd = obj.getEmpSD(emp_id);
+            SalaryHistory sh = new SalaryHistory();
+            sh.setSD_ID(sd.getSd_id());
+            sh.setDate(date);
+            sh.setAllowance(allowance);
+            sh.setOvertime_hours(ot_hrs);
+            sh.setDate(date);
+            
+            obj.updateSalaryHistory(dd,sh, date);
         }
         catch(MalformedURLException e){
             e.printStackTrace();
@@ -128,10 +144,9 @@ public class Client {
         }
     }
     
-    public static boolean updateBaseSalary(String sd_id,Double bs,int wh,Double hrs_rt,String emp_id){
+    public static boolean updateBaseSalary(SalaryDetail sd){
         try{
             obj = (RMI_Interface)Naming.lookup(address);
-            SalaryDetail sd = new SalaryDetail(sd_id,bs,wh,hrs_rt,emp_id);
             boolean update_result = obj.updateSalaryDetail(sd);
             return update_result;
         }
@@ -163,25 +178,6 @@ public class Client {
             e.printStackTrace();
         }
         return sh_list;
-    }
-    
-    public static double getBasicSalary(String emp_id)throws SQLException{
-        double bs = 0;
-        try{
-            obj = (RMI_Interface)Naming.lookup(address);
-            
-        }
-        catch(MalformedURLException e){
-            e.printStackTrace();
-        }
-        catch(NotBoundException e){
-            e.printStackTrace();
-        }
-        catch (RemoteException e){
-            e.printStackTrace();
-        }
-        
-        return bs;
     }
     
     public static int mapMonthToNumber(String month){

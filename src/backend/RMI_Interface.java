@@ -20,5 +20,5 @@ public interface RMI_Interface extends Remote{
     public List<SalaryHistory> searchHistoryByDate(Date date) throws RemoteException;
     public boolean updateSalaryDetail(SalaryDetail sd)throws RemoteException;
     public boolean updateSalaryDeduction(String employee_id,Deduction dd) throws RemoteException;
-    public boolean updateSalaryHistory(SalaryHistory sh, Date date) throws RemoteException;
+    public boolean updateSalaryHistory(Deduction dd, SalaryHistory sh, Date date) throws RemoteException;
 }

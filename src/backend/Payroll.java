@@ -24,10 +24,10 @@ public class Payroll implements Serializable{
     
     public double getGrossSalary(double base_salary, double hourly_rate, double overtime_hrs, double allowance){
         double overtime_pay = getOvertimePay(hourly_rate,overtime_hrs);
-        return base_salary + overtime_pay + allowance;
+        return Double.parseDouble(String.format("%.2f",base_salary + overtime_pay + allowance));
     }
     
-    public double getNetSalary(double gross_salary,double total_deduction) {
-        return gross_salary - total_deduction;
+    public double getNetSalary(double gross_salary,double total_deduction){
+        return Double.parseDouble(String.format("%.2f",gross_salary - total_deduction));
     }
 }
