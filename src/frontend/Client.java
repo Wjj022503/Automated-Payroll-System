@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class Client {
     private static RMI_Interface obj;
-    private static String address = "rmi://localhost:1040/main";
+    private static String address = "rmi://192.168.100.19:8888/main";
     
     public static Employee getEmployee(String emp_id){
         Employee emp = new Employee();

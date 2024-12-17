@@ -298,13 +298,13 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="year_combo_box" pref="140" max="32767" attributes="0"/>
-                              <Component id="base_salary_textfield" alignment="0" max="32767" attributes="0"/>
-                              <Component id="hourly_rate_textfield" alignment="0" max="32767" attributes="0"/>
-                              <Component id="working_hours_textfield" alignment="0" max="32767" attributes="0"/>
-                              <Component id="allowance_textfield" alignment="0" max="32767" attributes="0"/>
-                              <Component id="overtime_hours_textfield" alignment="0" max="32767" attributes="0"/>
-                              <Component id="gross_salary_textfield" alignment="0" max="32767" attributes="0"/>
-                              <Component id="salary_name_textfield" alignment="0" max="32767" attributes="0"/>
+                              <Component id="bs_tf" alignment="0" max="32767" attributes="0"/>
+                              <Component id="hr_tf" alignment="0" max="32767" attributes="0"/>
+                              <Component id="wh_tf" alignment="0" max="32767" attributes="0"/>
+                              <Component id="allowance_tf" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ot_tf" alignment="0" max="32767" attributes="0"/>
+                              <Component id="gs_tf" alignment="0" max="32767" attributes="0"/>
+                              <Component id="name_tf" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -320,13 +320,13 @@
                           </Group>
                           <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="epf_textfield" alignment="0" max="32767" attributes="0"/>
-                              <Component id="socso_textfield" alignment="0" max="32767" attributes="0"/>
-                              <Component id="eis_textfield" alignment="0" max="32767" attributes="0"/>
-                              <Component id="income_tax_textfield" alignment="0" max="32767" attributes="0"/>
-                              <Component id="leave_deduction_textfield" alignment="0" max="32767" attributes="0"/>
-                              <Component id="additional_deduction_textfield" alignment="0" max="32767" attributes="0"/>
-                              <Component id="net_salary_textfield" min="-2" pref="140" max="-2" attributes="0"/>
+                              <Component id="epf_tf" alignment="0" max="32767" attributes="0"/>
+                              <Component id="socso_tf" alignment="0" max="32767" attributes="0"/>
+                              <Component id="eis_tf" alignment="0" max="32767" attributes="0"/>
+                              <Component id="it_tf" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ld_tf" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ad_tf" alignment="0" max="32767" attributes="0"/>
+                              <Component id="mes_tf" min="-2" pref="140" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="view_reason_button" min="-2" max="-2" attributes="0"/>
@@ -350,63 +350,63 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="salary_name_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="salary_name_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="name_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="base_salary_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="base_salary_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="bs_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="hourly_rate_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="hourly_rate_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="hr_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="working_hours_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="working_hours_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="wh_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="allowance_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="allowance_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="allowance_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="overtime_hour_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="overtime_hours_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ot_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="epf_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="epf_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="epf_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="socso_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="socso_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="socso_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="eis_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="eis_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="eis_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="income_tax_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="income_tax_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="it_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="leave_deduction_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="leave_deduction_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ld_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="additional_deduction_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="additional_deduction_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ad_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="view_reason_button" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -415,10 +415,10 @@
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="gross_salary_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="gs_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="gross_salary_label" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="nnet_dalary_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="net_salary_textfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="mes_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                   <Component id="salary_back_button" min="-2" max="-2" attributes="0"/>
@@ -466,17 +466,17 @@
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="11">
-                <StringItem index="0" value="2024"/>
-                <StringItem index="1" value="2025"/>
-                <StringItem index="2" value="2026"/>
-                <StringItem index="3" value="2027"/>
-                <StringItem index="4" value="2028"/>
-                <StringItem index="5" value="2029"/>
-                <StringItem index="6" value="2030"/>
-                <StringItem index="7" value="2031"/>
-                <StringItem index="8" value="2032"/>
-                <StringItem index="9" value="2033"/>
-                <StringItem index="10" value="2034"/>
+                <StringItem index="0" value="2020"/>
+                <StringItem index="1" value="2021"/>
+                <StringItem index="2" value="2022"/>
+                <StringItem index="3" value="2023"/>
+                <StringItem index="4" value="2024"/>
+                <StringItem index="5" value="2025"/>
+                <StringItem index="6" value="2026"/>
+                <StringItem index="7" value="2027"/>
+                <StringItem index="8" value="2028"/>
+                <StringItem index="9" value="2029"/>
+                <StringItem index="10" value="2030"/>
               </StringArray>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Select Year"/>
@@ -537,7 +537,7 @@
             <Property name="text" type="java.lang.String" value="Overtime Hours:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="salary_name_textfield">
+        <Component class="javax.swing.JTextField" name="name_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -545,10 +545,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salary_name_textfieldActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="name_tfActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="base_salary_textfield">
+        <Component class="javax.swing.JTextField" name="bs_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -556,10 +556,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="base_salary_textfieldActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bs_tfActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="hourly_rate_textfield">
+        <Component class="javax.swing.JTextField" name="hr_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -567,7 +567,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="working_hours_textfield">
+        <Component class="javax.swing.JTextField" name="wh_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -575,7 +575,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="allowance_textfield">
+        <Component class="javax.swing.JTextField" name="allowance_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -583,7 +583,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="overtime_hours_textfield">
+        <Component class="javax.swing.JTextField" name="ot_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -599,7 +599,7 @@
             <Property name="text" type="java.lang.String" value="Gross Salary:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="gross_salary_textfield">
+        <Component class="javax.swing.JTextField" name="gs_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -655,7 +655,7 @@
             <Property name="text" type="java.lang.String" value="Additional Deduction:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="additional_deduction_textfield">
+        <Component class="javax.swing.JTextField" name="ad_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -663,7 +663,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="epf_textfield">
+        <Component class="javax.swing.JTextField" name="epf_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -671,7 +671,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="socso_textfield">
+        <Component class="javax.swing.JTextField" name="socso_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -679,7 +679,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="eis_textfield">
+        <Component class="javax.swing.JTextField" name="eis_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -687,7 +687,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="income_tax_textfield">
+        <Component class="javax.swing.JTextField" name="it_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -695,7 +695,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="leave_deduction_textfield">
+        <Component class="javax.swing.JTextField" name="ld_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -711,7 +711,7 @@
             <Property name="text" type="java.lang.String" value="Month End Salary:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="net_salary_textfield">
+        <Component class="javax.swing.JTextField" name="mes_tf">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

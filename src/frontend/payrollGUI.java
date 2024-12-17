@@ -11,18 +11,10 @@ import java.sql.Date;
 import java.time.LocalDate;
 import backend.Deduction;
 import backend.Employee;
-import backend.Payroll;
 import backend.SalaryDetail;
 import backend.SalaryHistory;
 import java.awt.CardLayout;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 /**
  *
  * @author wjing
@@ -77,28 +69,28 @@ public class payrollGUI extends javax.swing.JFrame {
         working_hours_label = new javax.swing.JLabel();
         allowance_label = new javax.swing.JLabel();
         overtime_hour_label = new javax.swing.JLabel();
-        salary_name_textfield = new javax.swing.JTextField();
-        base_salary_textfield = new javax.swing.JTextField();
-        hourly_rate_textfield = new javax.swing.JTextField();
-        working_hours_textfield = new javax.swing.JTextField();
-        allowance_textfield = new javax.swing.JTextField();
-        overtime_hours_textfield = new javax.swing.JTextField();
+        name_tf = new javax.swing.JTextField();
+        bs_tf = new javax.swing.JTextField();
+        hr_tf = new javax.swing.JTextField();
+        wh_tf = new javax.swing.JTextField();
+        allowance_tf = new javax.swing.JTextField();
+        ot_tf = new javax.swing.JTextField();
         gross_salary_label = new javax.swing.JLabel();
-        gross_salary_textfield = new javax.swing.JTextField();
+        gs_tf = new javax.swing.JTextField();
         epf_label = new javax.swing.JLabel();
         socso_label = new javax.swing.JLabel();
         eis_label = new javax.swing.JLabel();
         income_tax_label = new javax.swing.JLabel();
         leave_deduction_label = new javax.swing.JLabel();
         additional_deduction_label = new javax.swing.JLabel();
-        additional_deduction_textfield = new javax.swing.JTextField();
-        epf_textfield = new javax.swing.JTextField();
-        socso_textfield = new javax.swing.JTextField();
-        eis_textfield = new javax.swing.JTextField();
-        income_tax_textfield = new javax.swing.JTextField();
-        leave_deduction_textfield = new javax.swing.JTextField();
+        ad_tf = new javax.swing.JTextField();
+        epf_tf = new javax.swing.JTextField();
+        socso_tf = new javax.swing.JTextField();
+        eis_tf = new javax.swing.JTextField();
+        it_tf = new javax.swing.JTextField();
+        ld_tf = new javax.swing.JTextField();
         nnet_dalary_label = new javax.swing.JLabel();
-        net_salary_textfield = new javax.swing.JTextField();
+        mes_tf = new javax.swing.JTextField();
         salary_back_button = new javax.swing.JButton();
         view_reason_button = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -327,7 +319,7 @@ public class payrollGUI extends javax.swing.JFrame {
         });
 
         year_combo_box.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
-        year_combo_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034" }));
+        year_combo_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
         year_combo_box.setToolTipText("Select Year");
         year_combo_box.setName(""); // NOI18N
         year_combo_box.addActionListener(new java.awt.event.ActionListener() {
@@ -354,39 +346,39 @@ public class payrollGUI extends javax.swing.JFrame {
         overtime_hour_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         overtime_hour_label.setText("Overtime Hours:");
 
-        salary_name_textfield.setEditable(false);
-        salary_name_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        salary_name_textfield.addActionListener(new java.awt.event.ActionListener() {
+        name_tf.setEditable(false);
+        name_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        name_tf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salary_name_textfieldActionPerformed(evt);
+                name_tfActionPerformed(evt);
             }
         });
 
-        base_salary_textfield.setEditable(false);
-        base_salary_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        base_salary_textfield.addActionListener(new java.awt.event.ActionListener() {
+        bs_tf.setEditable(false);
+        bs_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        bs_tf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                base_salary_textfieldActionPerformed(evt);
+                bs_tfActionPerformed(evt);
             }
         });
 
-        hourly_rate_textfield.setEditable(false);
-        hourly_rate_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        hr_tf.setEditable(false);
+        hr_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
-        working_hours_textfield.setEditable(false);
-        working_hours_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        wh_tf.setEditable(false);
+        wh_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
-        allowance_textfield.setEditable(false);
-        allowance_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        allowance_tf.setEditable(false);
+        allowance_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
-        overtime_hours_textfield.setEditable(false);
-        overtime_hours_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        ot_tf.setEditable(false);
+        ot_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
         gross_salary_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         gross_salary_label.setText("Gross Salary:");
 
-        gross_salary_textfield.setEditable(false);
-        gross_salary_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        gs_tf.setEditable(false);
+        gs_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
         epf_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         epf_label.setText("EPF:");
@@ -406,29 +398,29 @@ public class payrollGUI extends javax.swing.JFrame {
         additional_deduction_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         additional_deduction_label.setText("Additional Deduction:");
 
-        additional_deduction_textfield.setEditable(false);
-        additional_deduction_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        ad_tf.setEditable(false);
+        ad_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
-        epf_textfield.setEditable(false);
-        epf_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        epf_tf.setEditable(false);
+        epf_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
-        socso_textfield.setEditable(false);
-        socso_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        socso_tf.setEditable(false);
+        socso_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
-        eis_textfield.setEditable(false);
-        eis_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        eis_tf.setEditable(false);
+        eis_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
-        income_tax_textfield.setEditable(false);
-        income_tax_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        it_tf.setEditable(false);
+        it_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
-        leave_deduction_textfield.setEditable(false);
-        leave_deduction_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        ld_tf.setEditable(false);
+        ld_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
         nnet_dalary_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         nnet_dalary_label.setText("Month End Salary:");
 
-        net_salary_textfield.setEditable(false);
-        net_salary_textfield.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        mes_tf.setEditable(false);
+        mes_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
         salary_back_button.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         salary_back_button.setText("<Back");
@@ -472,13 +464,13 @@ public class payrollGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(year_combo_box, 0, 140, Short.MAX_VALUE)
-                            .addComponent(base_salary_textfield)
-                            .addComponent(hourly_rate_textfield)
-                            .addComponent(working_hours_textfield)
-                            .addComponent(allowance_textfield)
-                            .addComponent(overtime_hours_textfield)
-                            .addComponent(gross_salary_textfield)
-                            .addComponent(salary_name_textfield))
+                            .addComponent(bs_tf)
+                            .addComponent(hr_tf)
+                            .addComponent(wh_tf)
+                            .addComponent(allowance_tf)
+                            .addComponent(ot_tf)
+                            .addComponent(gs_tf)
+                            .addComponent(name_tf))
                         .addGap(132, 132, 132)
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(additional_deduction_label)
@@ -491,13 +483,13 @@ public class payrollGUI extends javax.swing.JFrame {
                             .addComponent(nnet_dalary_label))
                         .addGap(86, 86, 86)
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(epf_textfield)
-                            .addComponent(socso_textfield)
-                            .addComponent(eis_textfield)
-                            .addComponent(income_tax_textfield)
-                            .addComponent(leave_deduction_textfield)
-                            .addComponent(additional_deduction_textfield)
-                            .addComponent(net_salary_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(epf_tf)
+                            .addComponent(socso_tf)
+                            .addComponent(eis_tf)
+                            .addComponent(it_tf)
+                            .addComponent(ld_tf)
+                            .addComponent(ad_tf)
+                            .addComponent(mes_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(view_reason_button))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -515,60 +507,60 @@ public class payrollGUI extends javax.swing.JFrame {
                     .addGroup(salary_details_panelLayout.createSequentialGroup()
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(salary_name_label)
-                            .addComponent(salary_name_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(base_salary_label)
-                            .addComponent(base_salary_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(bs_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(hourly_rate_label)
-                            .addComponent(hourly_rate_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(hr_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(working_hours_label)
-                            .addComponent(working_hours_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(wh_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(allowance_label)
-                            .addComponent(allowance_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(allowance_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(overtime_hour_label)
-                            .addComponent(overtime_hours_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(ot_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(salary_details_panelLayout.createSequentialGroup()
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(epf_label)
-                            .addComponent(epf_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(epf_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(socso_label)
-                            .addComponent(socso_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(socso_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(eis_label)
-                            .addComponent(eis_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(eis_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(income_tax_label)
-                            .addComponent(income_tax_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(it_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(leave_deduction_label)
-                            .addComponent(leave_deduction_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ld_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(additional_deduction_label)
-                            .addComponent(additional_deduction_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ad_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(view_reason_button, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gross_salary_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gs_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gross_salary_label)
                     .addComponent(nnet_dalary_label)
-                    .addComponent(net_salary_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mes_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(69, 69, 69)
                 .addComponent(salary_back_button)
                 .addGap(19, 19, 19))
@@ -1140,13 +1132,13 @@ public class payrollGUI extends javax.swing.JFrame {
         setPersonalDetail();
     }//GEN-LAST:event_salary_back_buttonActionPerformed
 
-    private void salary_name_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salary_name_textfieldActionPerformed
+    private void name_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_tfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_salary_name_textfieldActionPerformed
+    }//GEN-LAST:event_name_tfActionPerformed
 
-    private void base_salary_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_base_salary_textfieldActionPerformed
+    private void bs_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bs_tfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_base_salary_textfieldActionPerformed
+    }//GEN-LAST:event_bs_tfActionPerformed
 
     private void salary_back_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salary_back_buttonMouseClicked
         // TODO add your handling code here:
@@ -1168,11 +1160,11 @@ public class payrollGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(getContentPane(), "salary_details_card");
-        
-        SalaryDetail sd = Client.getEmployeeSalaryDetail(current_user.getId());
-        SalaryHistory sh = Client.getEmpSH(sd.getSd_id(),current_date);
-        Deduction dd = Client.getDeduction(sh.getDD_ID());
-        setSalaryDetails(sd,sh,dd);
+        setSalaryDetails();
+        int current_month = ld.getMonthValue() - 1;
+        int current_year = ld.getYear() - 2020;
+        month_combo_box.setSelectedIndex(current_month);
+        year_combo_box.setSelectedIndex(current_year);
     }//GEN-LAST:event_pd_salary_buttonActionPerformed
 
     private void month_combo_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_month_combo_boxActionPerformed
@@ -1183,6 +1175,8 @@ public class payrollGUI extends javax.swing.JFrame {
         LocalDate localdate = LocalDate.of(yearValue,monthValue,1);
         this.selected_date = Date.valueOf(localdate);
         
+        empty_sd_page();
+        setSalaryDetails();
     }//GEN-LAST:event_month_combo_boxActionPerformed
 
     private void year_combo_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_year_combo_boxActionPerformed
@@ -1192,6 +1186,9 @@ public class payrollGUI extends javax.swing.JFrame {
         int yearValue = Integer.parseInt((String) year_combo_box.getSelectedItem());
         LocalDate localdate = LocalDate.of(yearValue,monthValue,1);
         this.selected_date = Date.valueOf(localdate);
+        
+        empty_sd_page();
+        setSalaryDetails();
         
     }//GEN-LAST:event_year_combo_boxActionPerformed
 
@@ -1366,11 +1363,6 @@ public class payrollGUI extends javax.swing.JFrame {
         cardLayout.show(getContentPane(), "mrg_card");
     }//GEN-LAST:event_mr_view_back_buttonActionPerformed
 
-    private void view_reason_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_reason_buttonActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_view_reason_buttonActionPerformed
-
     private void go_mr_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_mr_buttonActionPerformed
         // TODO add your handling code here:
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
@@ -1456,36 +1448,81 @@ public class payrollGUI extends javax.swing.JFrame {
         ms_ad_tf.setText(String.valueOf(dd.getOther_deduction()));
         ms_reason_tf.setText(String.valueOf(dd.getOther_deduction_reason()));
     }//GEN-LAST:event_ms_search_buttonActionPerformed
+
+    private void view_reason_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_reason_buttonActionPerformed
+        // TODO add your handling code here:
+        SalaryDetail sd = Client.getEmployeeSalaryDetail(current_user.getId());
+        if(sd == null){
+            setOptionPane("No result.","Deduction Reason",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        SalaryHistory sh = Client.getEmpSH(sd.getSd_id(), this.selected_date);
+        if(sh == null){
+            setOptionPane("No result.","Deduction Reason",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }else{
+            Deduction dd = Client.getDeduction(sh.getDD_ID());
+            setOptionPane(dd.getOther_deduction_reason(),"Deduction Reason",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_view_reason_buttonActionPerformed
     
     private void setOptionPane(String msg, String title, int error_message){
         JOptionPane.showMessageDialog(null, msg, title, error_message);
     }
     
-    private void setSalaryDetails(SalaryDetail sd, SalaryHistory sh, Deduction dd){
+    private void setSalaryDetails(){
+        SalaryDetail sd = Client.getEmployeeSalaryDetail(current_user.getId());
         if(sd == null){
-            salary_name_textfield.setText(current_user.getFull_name());
+            name_tf.setText(current_user.getFull_name());
+            bs_tf.setText("0");
+            hr_tf.setText("0");
+            wh_tf.setText("0");
+            allowance_tf.setText("0");
+            ot_tf.setText("0");
+            gs_tf.setText("0");
+            epf_tf.setText("0");
+            socso_tf.setText("0");
+            eis_tf.setText("0");
+            it_tf.setText("0");
+            ld_tf.setText("0");
+            ad_tf.setText("0");
+            mes_tf.setText("0");
+            return;
         }
-        else if(sh == null){
-            salary_name_textfield.setText(current_user.getFull_name());
-            base_salary_textfield.setText(String.valueOf(sd.getBase_salary()));
-            hourly_rate_textfield.setText(String.valueOf(sd.getHourly_rate()));
-            working_hours_textfield.setText(String.valueOf(sd.getWorking_hours()));
+        SalaryHistory sh = Client.getEmpSH(sd.getSd_id(),selected_date);
+        if(sh == null){
+            name_tf.setText(current_user.getFull_name());
+            bs_tf.setText(String.valueOf(sd.getBase_salary()));
+            hr_tf.setText(String.valueOf(sd.getHourly_rate()));
+            wh_tf.setText(String.valueOf(sd.getWorking_hours()));
+            allowance_tf.setText("0");
+            ot_tf.setText("0");
+            gs_tf.setText("0");
+            epf_tf.setText("0");
+            socso_tf.setText("0");
+            eis_tf.setText("0");
+            it_tf.setText("0");
+            ld_tf.setText("0");
+            ad_tf.setText("0");
+            mes_tf.setText("0");
+            return;
         }
         else{
-            salary_name_textfield.setText(current_user.getFull_name());
-            base_salary_textfield.setText(String.valueOf(sd.getBase_salary()));
-            hourly_rate_textfield.setText(String.valueOf(sd.getHourly_rate()));
-            working_hours_textfield.setText(String.valueOf(sd.getWorking_hours()));
-            allowance_textfield.setText(String.valueOf(sh.getAllowance()));
-            overtime_hours_textfield.setText(String.valueOf(sh.getOvertime_hours()));
-            gross_salary_textfield.setText(String.valueOf(sh.getGross_salary()));
-            epf_textfield.setText(String.valueOf(dd.getTax().getEPF()));
-            socso_textfield.setText(String.valueOf(dd.getTax().getSOCSO()));
-            eis_textfield.setText(String.valueOf(dd.getTax().getEIS()));
-            income_tax_textfield.setText(String.valueOf(dd.getTax().getIncomeTax()));
-            leave_deduction_textfield.setText(String.valueOf(dd.getLeave_deduction()));
-            additional_deduction_textfield.setText(String.valueOf(dd.getOther_deduction()));
-            net_salary_textfield.setText(String.valueOf(sh.getNet_salary()));
+            Deduction dd = Client.getDeduction(sh.getDD_ID());
+            name_tf.setText(current_user.getFull_name());
+            bs_tf.setText(String.valueOf(sd.getBase_salary()));
+            hr_tf.setText(String.valueOf(sd.getHourly_rate()));
+            wh_tf.setText(String.valueOf(sd.getWorking_hours()));
+            allowance_tf.setText(String.valueOf(sh.getAllowance()));
+            ot_tf.setText(String.valueOf(sh.getOvertime_hours()));
+            gs_tf.setText(String.valueOf(sh.getGross_salary()));
+            epf_tf.setText(String.valueOf(dd.getTax().getEPF()));
+            socso_tf.setText(String.valueOf(dd.getTax().getSOCSO()));
+            eis_tf.setText(String.valueOf(dd.getTax().getEIS()));
+            it_tf.setText(String.valueOf(dd.getTax().getIncomeTax()));
+            ld_tf.setText(String.valueOf(dd.getLeave_deduction()));
+            ad_tf.setText(String.valueOf(dd.getOther_deduction()));
+            mes_tf.setText(String.valueOf(sh.getNet_salary()));
         }
     }
     
@@ -1511,6 +1548,23 @@ public class payrollGUI extends javax.swing.JFrame {
         bsd_bs_tf.setText("");
         bsd_wh_tf.setText("");
         bsd_hr_tf.setText("");
+    }
+    
+    private void empty_sd_page(){
+        name_tf.setText("");
+        bs_tf.setText("");
+        hr_tf.setText("");
+        wh_tf.setText("");
+        allowance_tf.setText("");
+        ot_tf.setText("");
+        epf_tf.setText("");
+        eis_tf.setText("");
+        it_tf.setText("");
+        socso_tf.setText("");
+        gs_tf.setText("");
+        mes_tf.setText("");
+        ld_tf.setText("");
+        ad_tf.setText("");
     }
     
     /**
@@ -1549,12 +1603,12 @@ public class payrollGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ad_tf;
     private javax.swing.JLabel additional_deduction_label;
-    private javax.swing.JTextField additional_deduction_textfield;
     private javax.swing.JLabel allowance_label;
-    private javax.swing.JTextField allowance_textfield;
+    private javax.swing.JTextField allowance_tf;
     private javax.swing.JLabel base_salary_label;
-    private javax.swing.JTextField base_salary_textfield;
+    private javax.swing.JTextField bs_tf;
     private javax.swing.JTextField bsd_bs_tf;
     private javax.swing.JButton bsd_confirm_button;
     private javax.swing.JTextField bsd_empid_tf;
@@ -1567,21 +1621,21 @@ public class payrollGUI extends javax.swing.JFrame {
     private javax.swing.JLabel contact_no_label;
     private javax.swing.JLabel department_label;
     private javax.swing.JLabel eis_label;
-    private javax.swing.JTextField eis_textfield;
+    private javax.swing.JTextField eis_tf;
     private javax.swing.JLabel epf_label;
-    private javax.swing.JTextField epf_textfield;
+    private javax.swing.JTextField epf_tf;
     private javax.swing.JButton go_bsd_button;
     private javax.swing.JButton go_mr_button;
     private javax.swing.JButton go_ms_button;
     private javax.swing.JLabel gross_salary_label;
-    private javax.swing.JTextField gross_salary_textfield;
+    private javax.swing.JTextField gs_tf;
     private javax.swing.JLabel hourly_rate_label;
-    private javax.swing.JTextField hourly_rate_textfield;
     private javax.swing.JButton hr_back_login_button;
     private javax.swing.JPanel hr_panel;
+    private javax.swing.JTextField hr_tf;
     private javax.swing.JLabel ic_no_label;
     private javax.swing.JLabel income_tax_label;
-    private javax.swing.JTextField income_tax_textfield;
+    private javax.swing.JTextField it_tf;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1611,8 +1665,9 @@ public class payrollGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextField ld_tf;
     private javax.swing.JLabel leave_deduction_label;
-    private javax.swing.JTextField leave_deduction_textfield;
+    private javax.swing.JTextField mes_tf;
     private javax.swing.JComboBox<String> month_combo_box;
     private javax.swing.JPanel monthly_report;
     private javax.swing.JTextField mr_date_tf;
@@ -1634,10 +1689,10 @@ public class payrollGUI extends javax.swing.JFrame {
     private javax.swing.JButton ms_return_button;
     private javax.swing.JButton ms_search_button;
     private javax.swing.JPanel ms_update_panel;
-    private javax.swing.JTextField net_salary_textfield;
+    private javax.swing.JTextField name_tf;
     private javax.swing.JLabel nnet_dalary_label;
+    private javax.swing.JTextField ot_tf;
     private javax.swing.JLabel overtime_hour_label;
-    private javax.swing.JTextField overtime_hours_textfield;
     private javax.swing.JButton pd_back_button;
     private javax.swing.JButton pd_salary_button;
     private javax.swing.JTextField personal_contact_textfield;
@@ -1650,13 +1705,12 @@ public class payrollGUI extends javax.swing.JFrame {
     private javax.swing.JButton salary_back_button;
     private javax.swing.JPanel salary_details_panel;
     private javax.swing.JLabel salary_name_label;
-    private javax.swing.JTextField salary_name_textfield;
     private javax.swing.JLabel socso_label;
-    private javax.swing.JTextField socso_textfield;
+    private javax.swing.JTextField socso_tf;
     private javax.swing.JTable total_table;
     private javax.swing.JButton view_reason_button;
+    private javax.swing.JTextField wh_tf;
     private javax.swing.JLabel working_hours_label;
-    private javax.swing.JTextField working_hours_textfield;
     private javax.swing.JComboBox<String> year_combo_box;
     // End of variables declaration//GEN-END:variables
 }
