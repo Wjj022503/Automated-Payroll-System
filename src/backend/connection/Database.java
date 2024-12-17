@@ -60,7 +60,8 @@ public class Database{
                 if (resultSet.next()) {
                     employee = new Employee();
                     employee.setId(resultSet.getString("employee_id"));
-                    employee.setName(resultSet.getString("name"));
+                    employee.setFull_name(resultSet.getString("full_name"));
+                    employee.setUsername(resultSet.getString("username"));
                     employee.setIc_no(resultSet.getString("ic_no"));
                     employee.setContact_no(resultSet.getString("contact"));
                     employee.setDepartment(resultSet.getString("department"));

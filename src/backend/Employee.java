@@ -12,8 +12,10 @@ import java.io.Serializable;
  */
 public class Employee implements Serializable{
     private String id;
-    private String name;
+    private String full_name;
+    private String username;
     private String password;
+    private String salt;
     private String ic_no;
     private String contact_no;
     private String department;
@@ -23,10 +25,12 @@ public class Employee implements Serializable{
     
     }
     
-    public Employee(String id,String name,String password,String ic_no,String contact_no,String department){
+    public Employee(String id,String full_name,String username,String password,String salt,String ic_no,String contact_no,String department){
         this.id = id;
-        this.name = name;
+        this.full_name = full_name;
+        this.username = username;
         this.password = password;
+        this.salt = salt;
         this.ic_no = ic_no;
         this.contact_no = contact_no;
         this.department = department;
@@ -37,12 +41,20 @@ public class Employee implements Serializable{
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getFull_name() {
+        return full_name;
+    }
+    
+    public String getUsername(){
+        return username;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public String getSalt() {
+        return salt;
     }
 
     public String getIc_no() {
@@ -61,12 +73,20 @@ public class Employee implements Serializable{
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
+    }
+    
+    public void setUsername(String username){
+        this.username = username;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public void setIc_no(String ic_no) {

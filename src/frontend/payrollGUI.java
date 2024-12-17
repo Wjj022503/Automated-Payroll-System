@@ -35,7 +35,7 @@ public class payrollGUI extends javax.swing.JFrame {
     private Date current_date = Date.valueOf(ld);
     private Date selected_date = Date.valueOf(ld);
     private Date hr_selected_date = Date.valueOf(ld);
-    private Employee current_user = new Employee("E100001","HappyMan","123","031234011234","0161231234","IT");
+    private Employee current_user = new Employee("E100001","HappyMan","Happyman123","123","456","031234011234","0161231234","IT");
     
     public payrollGUI() {
         initComponents();
@@ -1457,16 +1457,16 @@ public class payrollGUI extends javax.swing.JFrame {
     
     private void setSalaryDetails(SalaryDetail sd, SalaryHistory sh, Deduction dd){
         if(sd == null){
-            salary_name_textfield.setText(current_user.getName());
+            salary_name_textfield.setText(current_user.getFull_name());
         }
         else if(sh == null){
-            salary_name_textfield.setText(current_user.getName());
+            salary_name_textfield.setText(current_user.getFull_name());
             base_salary_textfield.setText(String.valueOf(sd.getBase_salary()));
             hourly_rate_textfield.setText(String.valueOf(sd.getHourly_rate()));
             working_hours_textfield.setText(String.valueOf(sd.getWorking_hours()));
         }
         else{
-            salary_name_textfield.setText(current_user.getName());
+            salary_name_textfield.setText(current_user.getFull_name());
             base_salary_textfield.setText(String.valueOf(sd.getBase_salary()));
             hourly_rate_textfield.setText(String.valueOf(sd.getHourly_rate()));
             working_hours_textfield.setText(String.valueOf(sd.getWorking_hours()));
@@ -1484,7 +1484,7 @@ public class payrollGUI extends javax.swing.JFrame {
     }
     
     private void setPersonalDetail(){
-        personal_name_textfield.setText(current_user.getName());
+        personal_name_textfield.setText(current_user.getFull_name());
         personal_contact_textfield.setText(current_user.getContact_no());
         personal_ic_textfield.setText(current_user.getIc_no());
         personal_department_textfield.setText(current_user.getDepartment());
