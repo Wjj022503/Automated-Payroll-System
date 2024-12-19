@@ -9,21 +9,31 @@ import java.io.*;
 import java.awt.*;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
-import database_table.Employee;
+import database_table.*;
 import shared.rmi_interface;
-
+import java.sql.Date;
+import java.time.LocalDate;
+import java.net.MalformedURLException;
+import java.time.Month;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
 /**
  *
  * @author Asus
  */
 public class frontendGUI extends javax.swing.JFrame {
-    
+    private LocalDate ld = LocalDate.now();
+    private Date current_date = Date.valueOf(ld);
+    private Date selected_date = Date.valueOf(ld);
+    private Date hr_selected_date = Date.valueOf(ld);
     private Employee currentUser = null;
     private CardLayout cardLayout;
     private boolean isShowPassword;    
     private boolean isRemenberMe;
     private boolean isUsernamePlaceholder = true;    
     private boolean isPasswordPlaceholder = true;
+    
     /**
      * Creates new form registrationGUI
      */
@@ -95,6 +105,13 @@ public class frontendGUI extends javax.swing.JFrame {
         LoginRemenberMeCheckBox = new javax.swing.JCheckBox();
         EmployeeLoginLabel = new javax.swing.JLabel();
         QuitButton = new javax.swing.JButton();
+        hr_panel = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        go_bsd_button = new javax.swing.JButton();
+        go_ms_button = new javax.swing.JButton();
+        hr_back_login_button = new javax.swing.JButton();
+        go_mr_button = new javax.swing.JButton();
+        hr_register_button = new javax.swing.JButton();
         firstpage = new javax.swing.JPanel();
         employeeregistrationLabelf = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
@@ -127,6 +144,105 @@ public class frontendGUI extends javax.swing.JFrame {
         nextpagebutton2 = new javax.swing.JButton();
         invalidinputNote2 = new javax.swing.JLabel();
         backbutton2 = new javax.swing.JButton();
+        personal_details_panel = new javax.swing.JPanel();
+        personal_details_label = new javax.swing.JLabel();
+        personal_name_label = new javax.swing.JLabel();
+        personal_ic_textfield = new javax.swing.JTextField();
+        ic_no_label = new javax.swing.JLabel();
+        contact_no_label = new javax.swing.JLabel();
+        personal_name_textfield = new javax.swing.JTextField();
+        personal_contact_textfield = new javax.swing.JTextField();
+        department_label = new javax.swing.JLabel();
+        personal_department_textfield = new javax.swing.JTextField();
+        pd_salary_button = new javax.swing.JButton();
+        pd_back_button = new javax.swing.JButton();
+        salary_details_panel = new javax.swing.JPanel();
+        month_combo_box = new javax.swing.JComboBox<>();
+        year_combo_box = new javax.swing.JComboBox<>();
+        salary_name_label = new javax.swing.JLabel();
+        base_salary_label = new javax.swing.JLabel();
+        hourly_rate_label = new javax.swing.JLabel();
+        working_hours_label = new javax.swing.JLabel();
+        allowance_label = new javax.swing.JLabel();
+        overtime_hour_label = new javax.swing.JLabel();
+        name_tf = new javax.swing.JTextField();
+        bs_tf = new javax.swing.JTextField();
+        hr_tf = new javax.swing.JTextField();
+        wh_tf = new javax.swing.JTextField();
+        allowance_tf = new javax.swing.JTextField();
+        ot_tf = new javax.swing.JTextField();
+        gross_salary_label = new javax.swing.JLabel();
+        gs_tf = new javax.swing.JTextField();
+        epf_label = new javax.swing.JLabel();
+        socso_label = new javax.swing.JLabel();
+        eis_label = new javax.swing.JLabel();
+        income_tax_label = new javax.swing.JLabel();
+        leave_deduction_label = new javax.swing.JLabel();
+        additional_deduction_label = new javax.swing.JLabel();
+        ad_tf = new javax.swing.JTextField();
+        epf_tf = new javax.swing.JTextField();
+        socso_tf = new javax.swing.JTextField();
+        eis_tf = new javax.swing.JTextField();
+        it_tf = new javax.swing.JTextField();
+        ld_tf = new javax.swing.JTextField();
+        nnet_dalary_label = new javax.swing.JLabel();
+        mes_tf = new javax.swing.JTextField();
+        salary_back_button = new javax.swing.JButton();
+        view_reason_button = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        monthly_report = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        mr_tb = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        mr_date_tf = new javax.swing.JTextField();
+        mr_no_emp_tf = new javax.swing.JTextField();
+        mr_view_back_button = new javax.swing.JButton();
+        total_table = new javax.swing.JTable();
+        mrg_panel = new javax.swing.JPanel();
+        mrg_view_button = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        mrg_month_cb = new javax.swing.JComboBox<>();
+        noteLabel = new javax.swing.JLabel();
+        mrg_year_cb = new javax.swing.JComboBox<>();
+        msg_back_button = new javax.swing.JButton();
+        bsd_update_panel = new javax.swing.JPanel();
+        bsd_hr_tf = new javax.swing.JTextField();
+        bsd_empid_tf = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        bsd_bs_tf = new javax.swing.JTextField();
+        bsd_wh_tf = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        bsd_confirm_button = new javax.swing.JButton();
+        bsd_return_button = new javax.swing.JButton();
+        bsd_search_button = new javax.swing.JButton();
+        bsd_not_found = new javax.swing.JLabel();
+        ms_update_panel = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        ms_empid_tf = new javax.swing.JTextField();
+        ms_ot_tf = new javax.swing.JTextField();
+        ms_allowance_tf = new javax.swing.JTextField();
+        ms_ld_tf = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        ms_confirm_button = new javax.swing.JButton();
+        ms_return_button = new javax.swing.JButton();
+        jLabel25 = new javax.swing.JLabel();
+        ms_ad_tf = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        ms_reason_tf = new javax.swing.JTextField();
+        ms_search_button = new javax.swing.JButton();
+        ms_not_found = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(750, 450));
@@ -239,7 +355,7 @@ public class frontendGUI extends javax.swing.JFrame {
                                     .addComponent(LoginShowPasswordCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                                     .addComponent(QuitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(3, 3, 3)))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(430, Short.MAX_VALUE))
         );
         LoginPageLayout.setVerticalGroup(
             LoginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,6 +390,86 @@ public class frontendGUI extends javax.swing.JFrame {
         );
 
         getContentPane().add(LoginPage, "login");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel9.setText("HR Menu");
+
+        go_bsd_button.setText("Update Employee Basic Salary");
+        go_bsd_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                go_bsd_buttonActionPerformed(evt);
+            }
+        });
+
+        go_ms_button.setText("Update Employee Monthly Pay");
+        go_ms_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                go_ms_buttonActionPerformed(evt);
+            }
+        });
+
+        hr_back_login_button.setText("Return to Login");
+        hr_back_login_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hr_back_login_buttonActionPerformed(evt);
+            }
+        });
+
+        go_mr_button.setText("View Payroll Monthly Report");
+        go_mr_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                go_mr_buttonActionPerformed(evt);
+            }
+        });
+
+        hr_register_button.setText("Register Employee");
+        hr_register_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hr_register_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout hr_panelLayout = new javax.swing.GroupLayout(hr_panel);
+        hr_panel.setLayout(hr_panelLayout);
+        hr_panelLayout.setHorizontalGroup(
+            hr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hr_panelLayout.createSequentialGroup()
+                .addContainerGap(206, Short.MAX_VALUE)
+                .addGroup(hr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hr_panelLayout.createSequentialGroup()
+                        .addGroup(hr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(go_ms_button, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(go_bsd_button, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(go_mr_button, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hr_register_button, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(213, 213, 213))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hr_panelLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(387, 387, 387))))
+            .addGroup(hr_panelLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(hr_back_login_button)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        hr_panelLayout.setVerticalGroup(
+            hr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hr_panelLayout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(go_bsd_button, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(go_ms_button, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(go_mr_button, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(hr_register_button, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addComponent(hr_back_login_button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
+        );
+
+        getContentPane().add(hr_panel, "hr_card");
 
         firstpage.setPreferredSize(new java.awt.Dimension(750, 450));
 
@@ -384,9 +580,9 @@ public class frontendGUI extends javax.swing.JFrame {
                     .addGroup(firstpageLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(backbutton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                 .addGroup(firstpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(retypepasswordNote, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                    .addComponent(retypepasswordNote, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
                     .addGroup(firstpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(retypepasswordLabel)
                         .addComponent(passwordLabel)
@@ -436,7 +632,7 @@ public class frontendGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(firstpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(firstpageLayout.createSequentialGroup()
-                        .addComponent(invalidinputNote, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                        .addComponent(invalidinputNote, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(firstpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nextpagebutton)
@@ -523,7 +719,7 @@ public class frontendGUI extends javax.swing.JFrame {
                             .addComponent(fullnameNote, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(readIC, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(icNote, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                         .addGroup(secondpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(departmentLabel)
                             .addComponent(contactnoLabel)
@@ -572,7 +768,7 @@ public class frontendGUI extends javax.swing.JFrame {
                 .addGroup(secondpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(contactNote, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(icNote, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(invalidinputNote2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(secondpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -582,6 +778,883 @@ public class frontendGUI extends javax.swing.JFrame {
         );
 
         getContentPane().add(secondpage, "register2");
+
+        personal_details_label.setFont(new java.awt.Font("Noto Sans", 1, 36)); // NOI18N
+        personal_details_label.setText("Personal Details");
+
+        personal_name_label.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+        personal_name_label.setText("Name:");
+
+        personal_ic_textfield.setEditable(false);
+        personal_ic_textfield.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+
+        ic_no_label.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+        ic_no_label.setText("IC No.:");
+
+        contact_no_label.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+        contact_no_label.setText("Contact No.:");
+
+        personal_name_textfield.setEditable(false);
+        personal_name_textfield.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+        personal_name_textfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                personal_name_textfieldActionPerformed(evt);
+            }
+        });
+
+        personal_contact_textfield.setEditable(false);
+        personal_contact_textfield.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+
+        department_label.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+        department_label.setText("Department:");
+
+        personal_department_textfield.setEditable(false);
+        personal_department_textfield.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+
+        pd_salary_button.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        pd_salary_button.setText("View Payslip");
+        pd_salary_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pd_salary_buttonMouseClicked(evt);
+            }
+        });
+        pd_salary_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pd_salary_buttonActionPerformed(evt);
+            }
+        });
+
+        pd_back_button.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        pd_back_button.setText("<Back");
+        pd_back_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pd_back_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout personal_details_panelLayout = new javax.swing.GroupLayout(personal_details_panel);
+        personal_details_panel.setLayout(personal_details_panelLayout);
+        personal_details_panelLayout.setHorizontalGroup(
+            personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(personal_details_panelLayout.createSequentialGroup()
+                .addContainerGap(220, Short.MAX_VALUE)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(department_label)
+                    .addComponent(contact_no_label)
+                    .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(personal_name_label)
+                        .addComponent(ic_no_label)))
+                .addGap(146, 146, 146)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(personal_department_textfield, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(personal_name_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(personal_ic_textfield)
+                        .addComponent(personal_contact_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(242, 242, 242))
+            .addGroup(personal_details_panelLayout.createSequentialGroup()
+                .addGap(317, 317, 317)
+                .addComponent(personal_details_label)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(personal_details_panelLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(pd_back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pd_salary_button)
+                .addGap(43, 43, 43))
+        );
+        personal_details_panelLayout.setVerticalGroup(
+            personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, personal_details_panelLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(personal_details_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(personal_name_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(personal_name_label))
+                .addGap(18, 18, 18)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(personal_ic_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ic_no_label))
+                .addGap(18, 18, 18)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(personal_contact_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contact_no_label))
+                .addGap(18, 18, 18)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(department_label)
+                    .addComponent(personal_department_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(110, 110, 110)
+                .addGroup(personal_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pd_back_button)
+                    .addComponent(pd_salary_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(38, 38, 38))
+        );
+
+        getContentPane().add(personal_details_panel, "personal_details_card");
+
+        month_combo_box.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        month_combo_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        month_combo_box.setToolTipText("Select Month");
+        month_combo_box.setName(""); // NOI18N
+        month_combo_box.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                month_combo_boxActionPerformed(evt);
+            }
+        });
+
+        year_combo_box.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        year_combo_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        year_combo_box.setToolTipText("Select Year");
+        year_combo_box.setName(""); // NOI18N
+        year_combo_box.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                year_combo_boxActionPerformed(evt);
+            }
+        });
+
+        salary_name_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        salary_name_label.setText("Name:");
+
+        base_salary_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        base_salary_label.setText("Base Salary:");
+
+        hourly_rate_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        hourly_rate_label.setText("Hourly Rate:");
+
+        working_hours_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        working_hours_label.setText("Working Hours:");
+
+        allowance_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        allowance_label.setText("Allowance:");
+
+        overtime_hour_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        overtime_hour_label.setText("Overtime Hours:");
+
+        name_tf.setEditable(false);
+        name_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        name_tf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                name_tfActionPerformed(evt);
+            }
+        });
+
+        bs_tf.setEditable(false);
+        bs_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        bs_tf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bs_tfActionPerformed(evt);
+            }
+        });
+
+        hr_tf.setEditable(false);
+        hr_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+
+        wh_tf.setEditable(false);
+        wh_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+
+        allowance_tf.setEditable(false);
+        allowance_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+
+        ot_tf.setEditable(false);
+        ot_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+
+        gross_salary_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        gross_salary_label.setText("Gross Salary:");
+
+        gs_tf.setEditable(false);
+        gs_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+
+        epf_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        epf_label.setText("EPF:");
+
+        socso_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        socso_label.setText("SOCSO:");
+
+        eis_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        eis_label.setText("EIS:");
+
+        income_tax_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        income_tax_label.setText("Income Tax:");
+
+        leave_deduction_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        leave_deduction_label.setText("Leave Deduction:");
+
+        additional_deduction_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        additional_deduction_label.setText("Additional Deduction:");
+
+        ad_tf.setEditable(false);
+        ad_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+
+        epf_tf.setEditable(false);
+        epf_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+
+        socso_tf.setEditable(false);
+        socso_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+
+        eis_tf.setEditable(false);
+        eis_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+
+        it_tf.setEditable(false);
+        it_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+
+        ld_tf.setEditable(false);
+        ld_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+
+        nnet_dalary_label.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        nnet_dalary_label.setText("Month End Salary:");
+
+        mes_tf.setEditable(false);
+        mes_tf.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+
+        salary_back_button.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        salary_back_button.setText("<Back");
+        salary_back_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salary_back_buttonMouseClicked(evt);
+            }
+        });
+        salary_back_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salary_back_buttonActionPerformed(evt);
+            }
+        });
+
+        view_reason_button.setText("Reason");
+        view_reason_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                view_reason_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout salary_details_panelLayout = new javax.swing.GroupLayout(salary_details_panel);
+        salary_details_panel.setLayout(salary_details_panelLayout);
+        salary_details_panelLayout.setHorizontalGroup(
+            salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(salary_details_panelLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(salary_back_button)
+                    .addGroup(salary_details_panelLayout.createSequentialGroup()
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(month_combo_box, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(salary_name_label)
+                            .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(hourly_rate_label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(base_salary_label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(working_hours_label)
+                            .addComponent(allowance_label)
+                            .addComponent(overtime_hour_label)
+                            .addComponent(gross_salary_label))
+                        .addGap(18, 18, 18)
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(year_combo_box, 0, 140, Short.MAX_VALUE)
+                            .addComponent(bs_tf)
+                            .addComponent(hr_tf)
+                            .addComponent(wh_tf)
+                            .addComponent(allowance_tf)
+                            .addComponent(ot_tf)
+                            .addComponent(gs_tf)
+                            .addComponent(name_tf))
+                        .addGap(132, 132, 132)
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(additional_deduction_label)
+                            .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(socso_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(epf_label, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(eis_label, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(income_tax_label)
+                            .addComponent(leave_deduction_label)
+                            .addComponent(nnet_dalary_label))
+                        .addGap(86, 86, 86)
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(epf_tf)
+                            .addComponent(socso_tf)
+                            .addComponent(eis_tf)
+                            .addComponent(it_tf)
+                            .addComponent(ld_tf)
+                            .addComponent(ad_tf)
+                            .addComponent(mes_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(view_reason_button))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        salary_details_panelLayout.setVerticalGroup(
+            salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(salary_details_panelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(month_combo_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(year_combo_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(salary_details_panelLayout.createSequentialGroup()
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(salary_name_label)
+                            .addComponent(name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(base_salary_label)
+                            .addComponent(bs_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hourly_rate_label)
+                            .addComponent(hr_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(working_hours_label)
+                            .addComponent(wh_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(allowance_label)
+                            .addComponent(allowance_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(overtime_hour_label)
+                            .addComponent(ot_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(salary_details_panelLayout.createSequentialGroup()
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(epf_label)
+                            .addComponent(epf_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(socso_label)
+                            .addComponent(socso_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(eis_label)
+                            .addComponent(eis_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(income_tax_label)
+                            .addComponent(it_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(leave_deduction_label)
+                            .addComponent(ld_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(additional_deduction_label)
+                            .addComponent(ad_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(view_reason_button, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addGroup(salary_details_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(gs_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gross_salary_label)
+                    .addComponent(nnet_dalary_label)
+                    .addComponent(mes_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(69, 69, 69)
+                .addComponent(salary_back_button)
+                .addGap(19, 19, 19))
+        );
+
+        getContentPane().add(salary_details_panel, "salary_details_card");
+
+        mr_tb.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "No", "Emp No.", "Employee name", "Basic Pay", "Gross Pay", "EPF", "Socso", "EIS", "Deduction", "Month End Pay"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        mr_tb.setToolTipText("");
+        mr_tb.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(mr_tb);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setText("Monthly Report");
+
+        jLabel1.setText("GRAND TOTAL:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Date:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("No. of Employees:");
+
+        mr_date_tf.setEditable(false);
+        mr_date_tf.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        mr_date_tf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mr_date_tfActionPerformed(evt);
+            }
+        });
+
+        mr_no_emp_tf.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        mr_no_emp_tf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mr_no_emp_tfActionPerformed(evt);
+            }
+        });
+
+        mr_view_back_button.setText("Back");
+        mr_view_back_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mr_view_back_buttonActionPerformed(evt);
+            }
+        });
+
+        total_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Total Basic Pay", "Total Gross Pay", "Total EPF", "Total Socso", "Total EIS", "Total Deduction", "Total Month End Pay"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        total_table.setAutoscrolls(false);
+
+        javax.swing.GroupLayout monthly_reportLayout = new javax.swing.GroupLayout(monthly_report);
+        monthly_report.setLayout(monthly_reportLayout);
+        monthly_reportLayout.setHorizontalGroup(
+            monthly_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(monthly_reportLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, monthly_reportLayout.createSequentialGroup()
+                .addContainerGap(843, Short.MAX_VALUE)
+                .addComponent(mr_view_back_button)
+                .addGap(24, 24, 24))
+            .addGroup(monthly_reportLayout.createSequentialGroup()
+                .addGroup(monthly_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(monthly_reportLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(total_table, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(monthly_reportLayout.createSequentialGroup()
+                        .addGroup(monthly_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(monthly_reportLayout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(mr_date_tf))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, monthly_reportLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(mr_no_emp_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)))
+                .addContainerGap())
+        );
+        monthly_reportLayout.setVerticalGroup(
+            monthly_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(monthly_reportLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addGroup(monthly_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(mr_no_emp_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mr_date_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
+                .addGroup(monthly_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(total_table, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addComponent(mr_view_back_button)
+                .addGap(19, 19, 19))
+        );
+
+        getContentPane().add(monthly_report, "report_card");
+
+        mrg_view_button.setText("View");
+        mrg_view_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mrg_view_buttonActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Month:");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Year:");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Select year and month to generate report:");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel8.setText("Monthly Report");
+
+        mrg_month_cb.setEditable(true);
+        mrg_month_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        mrg_month_cb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mrg_month_cbActionPerformed(evt);
+            }
+        });
+
+        mrg_year_cb.setEditable(true);
+        mrg_year_cb.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                mrg_year_cbItemStateChanged(evt);
+            }
+        });
+        mrg_year_cb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mrg_year_cbActionPerformed(evt);
+            }
+        });
+
+        msg_back_button.setText("<Back");
+        msg_back_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                msg_back_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout mrg_panelLayout = new javax.swing.GroupLayout(mrg_panel);
+        mrg_panel.setLayout(mrg_panelLayout);
+        mrg_panelLayout.setHorizontalGroup(
+            mrg_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mrg_panelLayout.createSequentialGroup()
+                .addGap(221, 221, 221)
+                .addGroup(mrg_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mrg_panelLayout.createSequentialGroup()
+                        .addGroup(mrg_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addGap(34, 34, 34)
+                        .addGroup(mrg_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(mrg_month_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mrg_year_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(34, 34, 34)
+                        .addComponent(noteLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(mrg_panelLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(0, 376, Short.MAX_VALUE))))
+            .addGroup(mrg_panelLayout.createSequentialGroup()
+                .addGap(325, 325, 325)
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mrg_panelLayout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(msg_back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mrg_view_button, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(142, 142, 142))
+        );
+        mrg_panelLayout.setVerticalGroup(
+            mrg_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mrg_panelLayout.createSequentialGroup()
+                .addGroup(mrg_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mrg_panelLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel8)
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel7)
+                        .addGap(43, 43, 43)
+                        .addGroup(mrg_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(mrg_year_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(mrg_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(mrg_month_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mrg_panelLayout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(noteLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addGroup(mrg_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mrg_view_button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(msg_back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(113, 113, 113))
+        );
+
+        getContentPane().add(mrg_panel, "mrg_card");
+
+        bsd_hr_tf.setEditable(false);
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel19.setText("Base Salary Update");
+
+        jLabel21.setText("Base Salary:");
+
+        jLabel22.setText("Hourly Rate:");
+
+        jLabel23.setText("Working Hour:");
+
+        jLabel24.setText("Employee ID:");
+
+        bsd_confirm_button.setText("Update");
+        bsd_confirm_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bsd_confirm_buttonActionPerformed(evt);
+            }
+        });
+
+        bsd_return_button.setText("Return");
+        bsd_return_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bsd_return_buttonActionPerformed(evt);
+            }
+        });
+
+        bsd_search_button.setText("Search");
+        bsd_search_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bsd_search_buttonActionPerformed(evt);
+            }
+        });
+
+        bsd_not_found.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bsd_not_found.setForeground(new java.awt.Color(255, 0, 0));
+        bsd_not_found.setText("Employee Not Found.");
+
+        javax.swing.GroupLayout bsd_update_panelLayout = new javax.swing.GroupLayout(bsd_update_panel);
+        bsd_update_panel.setLayout(bsd_update_panelLayout);
+        bsd_update_panelLayout.setHorizontalGroup(
+            bsd_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bsd_update_panelLayout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(bsd_return_button, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99)
+                .addGroup(bsd_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bsd_update_panelLayout.createSequentialGroup()
+                        .addGroup(bsd_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel23)
+                            .addComponent(bsd_wh_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22)
+                            .addComponent(bsd_hr_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(bsd_update_panelLayout.createSequentialGroup()
+                        .addGroup(bsd_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel21)
+                            .addGroup(bsd_update_panelLayout.createSequentialGroup()
+                                .addGroup(bsd_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(bsd_bs_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                                    .addComponent(bsd_empid_tf))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bsd_search_button))
+                            .addComponent(jLabel19)
+                            .addComponent(bsd_not_found))
+                        .addContainerGap(303, Short.MAX_VALUE))
+                    .addGroup(bsd_update_panelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(bsd_confirm_button, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(104, 104, 104))))
+        );
+        bsd_update_panelLayout.setVerticalGroup(
+            bsd_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bsd_update_panelLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel19)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel24)
+                .addGap(5, 5, 5)
+                .addGroup(bsd_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bsd_empid_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bsd_search_button))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bsd_not_found)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel21)
+                .addGap(1, 1, 1)
+                .addComponent(bsd_bs_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(bsd_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bsd_update_panelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel23)
+                        .addGap(0, 0, 0)
+                        .addComponent(bsd_wh_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel22)
+                        .addGap(3, 3, 3)
+                        .addComponent(bsd_hr_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                        .addComponent(bsd_return_button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66))
+                    .addGroup(bsd_update_panelLayout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(bsd_confirm_button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+
+        getContentPane().add(bsd_update_panel, "bsd_update_card");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel13.setText("Monthly Salary Update");
+
+        ms_empid_tf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ms_empid_tfActionPerformed(evt);
+            }
+        });
+
+        ms_ot_tf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ms_ot_tfActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("Employee ID:");
+
+        jLabel16.setText("Allowance:");
+
+        jLabel17.setText("Overtime Hours:");
+
+        jLabel18.setText("Leave Deduction:");
+
+        ms_confirm_button.setText("Update");
+        ms_confirm_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ms_confirm_buttonActionPerformed(evt);
+            }
+        });
+
+        ms_return_button.setText("Return");
+        ms_return_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ms_return_buttonActionPerformed(evt);
+            }
+        });
+
+        jLabel25.setText("Addtional Deduction:");
+
+        jLabel26.setText("Deduction Reason:");
+
+        ms_search_button.setText("Search");
+        ms_search_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ms_search_buttonActionPerformed(evt);
+            }
+        });
+
+        ms_not_found.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ms_not_found.setForeground(new java.awt.Color(255, 0, 0));
+        ms_not_found.setText("Employee Not Found.");
+
+        javax.swing.GroupLayout ms_update_panelLayout = new javax.swing.GroupLayout(ms_update_panel);
+        ms_update_panel.setLayout(ms_update_panelLayout);
+        ms_update_panelLayout.setHorizontalGroup(
+            ms_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ms_update_panelLayout.createSequentialGroup()
+                .addGroup(ms_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ms_update_panelLayout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(ms_return_button, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 521, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ms_update_panelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(ms_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel26)
+                            .addComponent(ms_reason_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ms_not_found, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(ms_update_panelLayout.createSequentialGroup()
+                                .addComponent(ms_empid_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ms_search_button))
+                            .addGroup(ms_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(ms_ot_tf)
+                                .addComponent(ms_allowance_tf)
+                                .addComponent(ms_ld_tf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ms_ad_tf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel17))
+                        .addGap(172, 172, 172)))
+                .addComponent(ms_confirm_button, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(110, 110, 110))
+        );
+        ms_update_panelLayout.setVerticalGroup(
+            ms_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ms_update_panelLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel13)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel15)
+                .addGap(4, 4, 4)
+                .addGroup(ms_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ms_empid_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ms_search_button))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ms_not_found)
+                .addGap(5, 5, 5)
+                .addComponent(jLabel16)
+                .addGap(1, 1, 1)
+                .addComponent(ms_allowance_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ms_ot_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ms_ld_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ms_ad_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ms_reason_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(ms_update_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ms_confirm_button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ms_return_button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(78, 78, 78))
+        );
+
+        getContentPane().add(ms_update_panel, "ms_update_card");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -776,7 +1849,7 @@ public class frontendGUI extends javax.swing.JFrame {
             String response = requestRegistration(employee);
             if (response.equals("Success")){
                 JOptionPane.showMessageDialog(rootPane, "User registered successfully!");
-                this.cardLayout.show(getContentPane(), "login");
+                this.cardLayout.show(getContentPane(), "hr_card");
                 invalidinputNote2.setVisible(false);
             } else{
                 JOptionPane.showMessageDialog(rootPane, response);
@@ -798,7 +1871,7 @@ public class frontendGUI extends javax.swing.JFrame {
 
     private void backbutton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbutton1ActionPerformed
         // TODO add your handling code here:
-        this.cardLayout.show(getContentPane(), "login");
+        this.cardLayout.show(getContentPane(), "hr_card");
     }//GEN-LAST:event_backbutton1ActionPerformed
 
     private void LoginButtongotoPayRollPage(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginButtongotoPayRollPage
@@ -821,9 +1894,13 @@ public class frontendGUI extends javax.swing.JFrame {
                 }
                 
                 if ((currentUser.getDepartment()).equals("Human Resource")){
-                    this.cardLayout.show(getContentPane(), "card2");
+                    this.cardLayout.show(getContentPane(), "hr_card");
                 } else{
-                    this.cardLayout.show(getContentPane(), "card2");
+                    personal_name_textfield.setText(currentUser.getFullName());
+                    personal_ic_textfield.setText(currentUser.getICNO());
+                    personal_contact_textfield.setText(currentUser.getContactNO());
+                    personal_department_textfield.setText(currentUser.getDepartment());
+                    this.cardLayout.show(getContentPane(), "personal_details_card");
                 }
             }else{
                 LoginInvalidMsgTitle.setVisible(true);
@@ -904,6 +1981,7 @@ public class frontendGUI extends javax.swing.JFrame {
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void readICActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readICActionPerformed
@@ -914,6 +1992,448 @@ public class frontendGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_QuitButtonActionPerformed
+
+    private void personal_name_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personal_name_textfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_personal_name_textfieldActionPerformed
+
+    private void pd_salary_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pd_salary_buttonMouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "salary_details_card");
+    }//GEN-LAST:event_pd_salary_buttonMouseClicked
+
+    private void pd_salary_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pd_salary_buttonActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "salary_details_card");
+        setSalaryDetails();
+        int current_month = ld.getMonthValue() - 1;
+        int current_year = ld.getYear() - 2020;
+        month_combo_box.setSelectedIndex(current_month);
+        year_combo_box.setSelectedIndex(current_year);
+    }//GEN-LAST:event_pd_salary_buttonActionPerformed
+
+    private void pd_back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pd_back_buttonActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "login");
+    }//GEN-LAST:event_pd_back_buttonActionPerformed
+
+    private void month_combo_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_month_combo_boxActionPerformed
+        // TODO add your handling code here:
+        String selectedMonth = (String)month_combo_box.getSelectedItem();
+        int monthValue = Client.mapMonthToNumber(selectedMonth);
+        int yearValue = Integer.parseInt((String) year_combo_box.getSelectedItem());
+        LocalDate localdate = LocalDate.of(yearValue,monthValue,1);
+        this.selected_date = Date.valueOf(localdate);
+
+        empty_sd_page();
+        setSalaryDetails();
+    }//GEN-LAST:event_month_combo_boxActionPerformed
+
+    private void year_combo_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_year_combo_boxActionPerformed
+        // TODO add your handling code here:
+        String selectedMonth = (String)month_combo_box.getSelectedItem();
+        int monthValue = Client.mapMonthToNumber(selectedMonth);
+        int yearValue = Integer.parseInt((String) year_combo_box.getSelectedItem());
+        LocalDate localdate = LocalDate.of(yearValue,monthValue,1);
+        this.selected_date = Date.valueOf(localdate);
+
+        empty_sd_page();
+        setSalaryDetails();
+
+    }//GEN-LAST:event_year_combo_boxActionPerformed
+
+    private void name_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_tfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_name_tfActionPerformed
+
+    private void bs_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bs_tfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bs_tfActionPerformed
+
+    private void salary_back_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salary_back_buttonMouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "personal_details_card");
+    }//GEN-LAST:event_salary_back_buttonMouseClicked
+
+    private void salary_back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salary_back_buttonActionPerformed
+        // TODO add your handling code here:
+        setPersonalDetail();
+    }//GEN-LAST:event_salary_back_buttonActionPerformed
+
+    private void view_reason_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_reason_buttonActionPerformed
+        // TODO add your handling code here:
+        SalaryDetail sd = Client.getEmployeeSalaryDetail(currentUser.getID());
+        if(sd == null){
+            setOptionPane("No result.","Deduction Reason",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        SalaryHistory sh = Client.getEmpSH(sd.getSd_id(), this.selected_date);
+        if(sh == null){
+            setOptionPane("No result.","Deduction Reason",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }else{
+            Deduction dd = Client.getDeduction(sh.getDD_ID());
+            setOptionPane(dd.getOther_deduction_reason(),"Deduction Reason",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_view_reason_buttonActionPerformed
+
+    private void mr_date_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mr_date_tfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mr_date_tfActionPerformed
+
+    private void mr_no_emp_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mr_no_emp_tfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mr_no_emp_tfActionPerformed
+
+    private void mr_view_back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mr_view_back_buttonActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "mrg_card");
+    }//GEN-LAST:event_mr_view_back_buttonActionPerformed
+
+    private void mrg_view_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mrg_view_buttonActionPerformed
+        // TODO add your handling code here:
+
+        // get the month and year from hr to query
+        int yr = Integer.parseInt(mrg_year_cb.getSelectedItem().toString());
+        String mt = (String)mrg_month_cb.getSelectedItem();
+        int monthValue = Client.mapMonthToNumber(mt);
+        LocalDate localdate = LocalDate.of(yr,monthValue,1);
+        this.hr_selected_date = Date.valueOf(localdate);
+        
+        List<SalaryHistory> salaryHistory = Client.searchHistorybyDate(hr_selected_date);
+        
+        if (salaryHistory != null){
+            setUpMonthlyReport(localdate, salaryHistory);
+            cardLayout.show(getContentPane(), "report_card");
+        }else{
+            noteLabel.setText("<html>Can't find the records in database<br>(this date return empty)</html>");
+        }
+    }//GEN-LAST:event_mrg_view_buttonActionPerformed
+
+    private void mrg_month_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mrg_month_cbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mrg_month_cbActionPerformed
+
+    private void go_bsd_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_bsd_buttonActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(),"bsd_update_card");
+        empty_bsd_page();
+    }//GEN-LAST:event_go_bsd_buttonActionPerformed
+
+    private void go_ms_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_ms_buttonActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "ms_update_card");
+        ms_not_found.setVisible(false);
+    }//GEN-LAST:event_go_ms_buttonActionPerformed
+
+    private void hr_back_login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hr_back_login_buttonActionPerformed
+        // TODO add your handling code here:
+        cardLayout.show(getContentPane(), "login");
+        hr_panel.hide();
+        //show login panel
+    }//GEN-LAST:event_hr_back_login_buttonActionPerformed
+
+    private void go_mr_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_mr_buttonActionPerformed
+        // TODO add your handling code here:
+        LocalDate firstDate = null;
+        LocalDate currentDate = LocalDate.now();
+        try {
+            firstDate = Client.getfirstSalaryDate();
+        } catch (MalformedURLException | NotBoundException | RemoteException ex) {
+            ex.printStackTrace();
+        }
+
+        if (firstDate == null){
+            //db dont have record
+            noteLabel.setText("<html>Database is empty<br>(DB don't have any records right now)</html>");
+            mrg_view_button.setVisible(false);
+            mrg_month_cb.removeAllItems();
+            mrg_month_cb.addItem("Empty");
+            mrg_year_cb.removeAllItems();
+            mrg_year_cb.addItem("Empty");
+            
+            javax.swing.Timer timer = new javax.swing.Timer(5000, e -> {
+                this.cardLayout.show(getContentPane(), "hr_card");
+                mrg_view_button.setVisible(true);
+                mrg_month_cb.removeAllItems();
+                mrg_year_cb.removeAllItems();
+            });
+            
+            timer.setRepeats(false);
+            timer.start();
+        } else {
+            for (int year = firstDate.getYear(); year <= currentDate.getYear(); year++) {
+                mrg_year_cb.removeAllItems();
+                mrg_year_cb.addItem(String.valueOf(year));
+            }
+            mrg_year_cb.setSelectedItem(currentDate.getYear());
+            mrg_month_cb.removeAllItems();
+            Month endMonth = currentDate.getMonth(); 
+            for (int i = 1; i <= endMonth.getValue(); i++) { 
+                String monthName = Month.of(i).name().toLowerCase(); 
+                monthName = monthName.substring(0, 1).toUpperCase() + monthName.substring(1); 
+                mrg_month_cb.addItem(monthName);
+            }
+        }
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "mrg_card");
+    }//GEN-LAST:event_go_mr_buttonActionPerformed
+
+    private void bsd_confirm_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsd_confirm_buttonActionPerformed
+        // TODO add your handling code here:
+        if(bsd_empid_tf.getText().isEmpty() || bsd_bs_tf.getText().isEmpty() || bsd_hr_tf.getText().isEmpty() || bsd_wh_tf.getText().isEmpty()){
+            setOptionPane("Please fill in complete informations.","Incomplete Information",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Double bs = Double.parseDouble(bsd_bs_tf.getText());
+        Double hrs_rt = Double.parseDouble(bsd_hr_tf.getText());
+        int wh = Integer.parseInt(bsd_wh_tf.getText());
+
+        String emp_id = bsd_empid_tf.getText();
+        Employee emp = Client.getEmployee(emp_id);
+        if(emp != null){
+            SalaryDetail sd = Client.getEmployeeSalaryDetail(emp_id);
+            if(sd == null){
+                sd = new SalaryDetail();
+            }
+
+            sd.setBase_salary(bs);
+            sd.setEmployee_Id(emp_id);
+            sd.setWorking_hours(wh);
+            sd.setHourly_rate(hrs_rt);
+            if(Client.updateBaseSalary(sd)){
+                setOptionPane("Salary Detail Updated Successfully.","Success",JOptionPane.PLAIN_MESSAGE);
+                sd = Client.getEmployeeSalaryDetail(emp_id);
+                bsd_bs_tf.setText(String.valueOf(sd.getBase_salary()));
+                bsd_wh_tf.setText(String.valueOf(sd.getWorking_hours()));
+                bsd_hr_tf.setText(String.valueOf(sd.getHourly_rate()));
+            }
+            else{
+                setOptionPane("Salary Detail Updated Failed.","Fail",JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            bsd_not_found.setVisible(true);
+        }
+    }//GEN-LAST:event_bsd_confirm_buttonActionPerformed
+
+    private void bsd_return_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsd_return_buttonActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "hr_card");
+        bsd_empid_tf.setText("");
+        bsd_bs_tf.setText("");
+        bsd_hr_tf.setText("");
+        bsd_wh_tf.setText("");
+        bsd_not_found.setVisible(false);
+    }//GEN-LAST:event_bsd_return_buttonActionPerformed
+
+    private void bsd_search_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsd_search_buttonActionPerformed
+        // TODO add your handling code here:
+        if(bsd_empid_tf.getText().isEmpty()){
+            setOptionPane("Please fill in the employee id.","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String emp_id = bsd_empid_tf.getText();
+        Employee emp = Client.getEmployee(emp_id);
+        if(emp == null){
+            bsd_not_found.setVisible(true);
+            bsd_bs_tf.setText("");
+            bsd_hr_tf.setText("");
+            bsd_wh_tf.setText("");
+        }
+        else{
+            bsd_not_found.setVisible(false);
+            SalaryDetail sd = Client.getEmployeeSalaryDetail(emp.getID());
+            if(sd != null){
+                bsd_bs_tf.setText(String.valueOf(sd.getBase_salary()));
+                bsd_hr_tf.setText(String.valueOf(sd.getHourly_rate()));
+                bsd_wh_tf.setText(String.valueOf(sd.getWorking_hours()));
+            }
+            else{
+                bsd_bs_tf.setText("0");
+                bsd_hr_tf.setText("0");
+                bsd_wh_tf.setText("0");
+            }
+        }
+    }//GEN-LAST:event_bsd_search_buttonActionPerformed
+
+    private void ms_empid_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ms_empid_tfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ms_empid_tfActionPerformed
+
+    private void ms_ot_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ms_ot_tfActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_ms_ot_tfActionPerformed
+
+    private void ms_confirm_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ms_confirm_buttonActionPerformed
+        // TODO add your handling code here:
+        String emp_id = ms_empid_tf.getText();
+        Employee emp = Client.getEmployee(emp_id);
+        if(emp == null){
+            ms_not_found.setVisible(true);
+            ms_allowance_tf.setText("");
+            ms_ot_tf.setText("");
+            ms_ld_tf.setText("");
+            ms_ad_tf.setText("");
+            ms_reason_tf.setText("");
+            return;
+        }
+        else{
+            ms_not_found.setVisible(false);
+        }
+
+        SalaryDetail sd = Client.getEmployeeSalaryDetail(emp_id);
+        if(sd == null){
+            int userOption = JOptionPane.showConfirmDialog(
+                null,
+                "The employee's base salary details have not been set.\nSet now?",
+                "Incomplete information",
+                JOptionPane.OK_CANCEL_OPTION
+            );
+            if (userOption == JOptionPane.OK_OPTION) {
+                empty_bsd_page();
+                bsd_empid_tf.setText(emp_id);
+                empty_ms_page();
+                CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+                cardLayout.show(getContentPane(), "bsd_update_card");
+            } else if (userOption == JOptionPane.CANCEL_OPTION) {
+                empty_ms_page();
+            }
+            return;
+        }
+
+        Double allowance = Double.parseDouble(ms_allowance_tf.getText());
+        Double ot_hrs = Double.parseDouble(ms_ot_tf.getText());
+        Double late_d = Double.parseDouble(ms_ld_tf.getText());
+        Double ad = Double.parseDouble(ms_ad_tf.getText());
+        String dr = ms_reason_tf.getText();
+
+        boolean update_result = Client.updateMonthlySalary(current_date, emp_id, allowance, ot_hrs, late_d, ad, dr);
+        if (update_result){
+            setOptionPane("Monthly Salary Details updated successfully","Successful",JOptionPane.PLAIN_MESSAGE);
+        }
+        else{
+            setOptionPane("Monthly Salary Details updated failed","Failed",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_ms_confirm_buttonActionPerformed
+
+    private void ms_return_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ms_return_buttonActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "hr_card");
+        empty_ms_page();
+    }//GEN-LAST:event_ms_return_buttonActionPerformed
+
+    private void ms_search_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ms_search_buttonActionPerformed
+        // TODO add your handling code here:
+        if(ms_empid_tf.getText().isEmpty()){
+            setOptionPane("Please fill in the employee id.","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String emp_id = ms_empid_tf.getText();
+        Employee emp = Client.getEmployee(emp_id);
+        if(emp == null){
+            ms_not_found.setVisible(true);
+            ms_allowance_tf.setText("");
+            ms_ot_tf.setText("");
+            ms_ld_tf.setText("");
+            ms_ad_tf.setText("");
+            ms_reason_tf.setText("");
+            return;
+        }
+        else{
+            ms_not_found.setVisible(false);
+        }
+
+        SalaryDetail sd = Client.getEmployeeSalaryDetail(emp_id);
+        if(sd == null){
+            int userOption = JOptionPane.showConfirmDialog(
+                null,
+                "The employee's base salary details have not been set.\nSet now?",
+                "Incomplete information",
+                JOptionPane.OK_CANCEL_OPTION
+            );
+            if (userOption == JOptionPane.OK_OPTION) {
+                empty_bsd_page();
+                bsd_empid_tf.setText(emp_id);
+                cardLayout.show(getContentPane(), "bsd_update_card");
+                empty_ms_page();
+            } else if (userOption == JOptionPane.CANCEL_OPTION) {
+                empty_ms_page();
+            }
+            return;
+        }
+        System.out.println(sd.getSd_id());
+        SalaryHistory sh = Client.getEmpSH(sd.getSd_id(), current_date);
+        Deduction dd = Client.getDeduction(sh.getDD_ID());
+        ms_allowance_tf.setText(String.valueOf(sh.getAllowance()));
+        ms_ot_tf.setText(String.valueOf(sh.getOvertime_hours()));
+        ms_ld_tf.setText(String.valueOf(dd.getLeave_deduction()));
+        ms_ad_tf.setText(String.valueOf(dd.getOther_deduction()));
+        ms_reason_tf.setText(String.valueOf(dd.getOther_deduction_reason()));
+    }//GEN-LAST:event_ms_search_buttonActionPerformed
+
+    private void mrg_year_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mrg_year_cbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mrg_year_cbActionPerformed
+
+    private void mrg_year_cbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_mrg_year_cbItemStateChanged
+        // TODO add your handling code here:
+        LocalDate firstDate = null;
+        LocalDate currentDate = LocalDate.now();
+        int selectedYear = 0;
+        try {
+            firstDate = Client.getfirstSalaryDate();
+        } catch (MalformedURLException | NotBoundException | RemoteException ex) {
+            ex.printStackTrace();
+        }
+        
+        if (mrg_year_cb.getSelectedItem() != null) {selectedYear = Integer.parseInt(mrg_year_cb.getSelectedItem().toString());}
+        
+        if (selectedYear == firstDate.getYear()){
+            mrg_month_cb.removeAllItems();
+            Month startMonth = firstDate.getMonth(); 
+            for (int i = startMonth.getValue(); i <= 12; i++) { 
+                String monthName = Month.of(i).name().toLowerCase(); 
+                monthName = monthName.substring(0, 1).toUpperCase() + monthName.substring(1); 
+                mrg_month_cb.addItem(monthName);
+            }
+        } else if (selectedYear == currentDate.getYear()){
+            mrg_month_cb.removeAllItems();
+            Month endMonth = currentDate.getMonth(); 
+            for (int i = 1; i <= endMonth.getValue(); i++) { 
+                String monthName = Month.of(i).name().toLowerCase(); 
+                monthName = monthName.substring(0, 1).toUpperCase() + monthName.substring(1); 
+                mrg_month_cb.addItem(monthName);
+            }
+        } else {
+            mrg_month_cb.removeAllItems();
+            for (int i = 1; i <= 12; i++) { 
+                String monthName = Month.of(i).name().toLowerCase(); 
+                monthName = monthName.substring(0, 1).toUpperCase() + monthName.substring(1); 
+                mrg_month_cb.addItem(monthName);
+            }
+        }
+    }//GEN-LAST:event_mrg_year_cbItemStateChanged
+
+    private void hr_register_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hr_register_buttonActionPerformed
+        // TODO add your handling code here:
+        cardLayout.show(getContentPane(), "register1");
+    }//GEN-LAST:event_hr_register_buttonActionPerformed
+
+    private void msg_back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_back_buttonActionPerformed
+        // TODO add your handling code here:
+        cardLayout.show(getContentPane(), "hr_card");
+    }//GEN-LAST:event_msg_back_buttonActionPerformed
     
     private static String isValidContact (String contactno){
         StringBuilder feedback = new StringBuilder("<html>Invalid Contact Number: <br>");
@@ -1032,6 +2552,177 @@ public class frontendGUI extends javax.swing.JFrame {
         return feedback.toString();
     }
     
+    private void setOptionPane(String msg, String title, int error_message){
+        JOptionPane.showMessageDialog(null, msg, title, error_message);
+    }
+    
+    private void setSalaryDetails(){
+        SalaryDetail sd = Client.getEmployeeSalaryDetail(currentUser.getID());
+        if(sd == null){
+            name_tf.setText(currentUser.getFullName());
+            bs_tf.setText("0");
+            hr_tf.setText("0");
+            wh_tf.setText("0");
+            allowance_tf.setText("0");
+            ot_tf.setText("0");
+            gs_tf.setText("0");
+            epf_tf.setText("0");
+            socso_tf.setText("0");
+            eis_tf.setText("0");
+            it_tf.setText("0");
+            ld_tf.setText("0");
+            ad_tf.setText("0");
+            mes_tf.setText("0");
+            return;
+        }
+        SalaryHistory sh = Client.getEmpSH(sd.getSd_id(),selected_date);
+        if(sh == null){
+            name_tf.setText(currentUser.getFullName());
+            bs_tf.setText(String.valueOf(sd.getBase_salary()));
+            hr_tf.setText(String.valueOf(sd.getHourly_rate()));
+            wh_tf.setText(String.valueOf(sd.getWorking_hours()));
+            allowance_tf.setText("0");
+            ot_tf.setText("0");
+            gs_tf.setText("0");
+            epf_tf.setText("0");
+            socso_tf.setText("0");
+            eis_tf.setText("0");
+            it_tf.setText("0");
+            ld_tf.setText("0");
+            ad_tf.setText("0");
+            mes_tf.setText("0");
+            return;
+        }
+        else{
+            Deduction dd = Client.getDeduction(sh.getDD_ID());
+            name_tf.setText(currentUser.getFullName());
+            bs_tf.setText(String.valueOf(sd.getBase_salary()));
+            hr_tf.setText(String.valueOf(sd.getHourly_rate()));
+            wh_tf.setText(String.valueOf(sd.getWorking_hours()));
+            allowance_tf.setText(String.valueOf(sh.getAllowance()));
+            ot_tf.setText(String.valueOf(sh.getOvertime_hours()));
+            gs_tf.setText(String.valueOf(sh.getGross_salary()));
+            epf_tf.setText(String.valueOf(dd.getTax().getEPF()));
+            socso_tf.setText(String.valueOf(dd.getTax().getSOCSO()));
+            eis_tf.setText(String.valueOf(dd.getTax().getEIS()));
+            it_tf.setText(String.valueOf(dd.getTax().getIncomeTax()));
+            ld_tf.setText(String.valueOf(dd.getLeave_deduction()));
+            ad_tf.setText(String.valueOf(dd.getOther_deduction()));
+            mes_tf.setText(String.valueOf(sh.getNet_salary()));
+        }
+    }
+    
+    private void setPersonalDetail(){
+        personal_name_textfield.setText(currentUser.getFullName());
+        personal_contact_textfield.setText(currentUser.getContactNO());
+        personal_ic_textfield.setText(currentUser.getICNO());
+        personal_department_textfield.setText(currentUser.getDepartment());
+    }
+    
+    private void empty_ms_page(){
+        ms_not_found.setVisible(false);
+        ms_empid_tf.setText("");
+        ms_allowance_tf.setText("");
+        ms_ot_tf.setText("");
+        ms_ld_tf.setText("");
+        ms_ad_tf.setText("");
+        ms_reason_tf.setText("");
+    }
+    
+    private void empty_bsd_page(){
+        bsd_not_found.setVisible(false);
+        bsd_bs_tf.setText("");
+        bsd_wh_tf.setText("");
+        bsd_hr_tf.setText("");
+    }
+    
+    private void empty_sd_page(){
+        name_tf.setText("");
+        bs_tf.setText("");
+        hr_tf.setText("");
+        wh_tf.setText("");
+        allowance_tf.setText("");
+        ot_tf.setText("");
+        epf_tf.setText("");
+        eis_tf.setText("");
+        it_tf.setText("");
+        socso_tf.setText("");
+        gs_tf.setText("");
+        mes_tf.setText("");
+        ld_tf.setText("");
+        ad_tf.setText("");
+    }
+    
+    private void setUpMonthlyReport(LocalDate localdate, List<SalaryHistory> salaryHistory) {
+        List<MonthlyReport> historyList = null;
+        
+        //setup the date
+        int year = localdate.getYear();
+        String monthName = localdate.getMonth().name().toLowerCase();
+        monthName = monthName.substring(0, 1).toUpperCase() + monthName.substring(1);
+        mr_date_tf.setText(String.valueOf(year) + monthName);
+        
+        //set up the employee number
+        int count = salaryHistory.size();
+        mr_no_emp_tf.setText(String.valueOf(count));
+        
+        try {
+            historyList = Client.getMontlyReportData(localdate);
+        } catch (NotBoundException | MalformedURLException | RemoteException ex) {
+            ex.printStackTrace();
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) mr_tb.getModel();
+        model.setRowCount(0);
+        int rowNumber = 1;
+        
+        double baseSalary = 0;
+        double grossSalary = 0;
+        double epf = 0;
+        double socso = 0;
+        double eis = 0;
+        double accDeductions = 0;
+        double netSalary = 0;
+        
+        for (MonthlyReport mr : historyList) {
+            Vector<Object> row = new Vector<>();
+            row.add(rowNumber++); 
+            row.add(mr.getEmployeeId()); 
+            row.add(mr.getFullName()); 
+            row.add(mr.getBaseSalary()); 
+            row.add(mr.getGrossSalary()); 
+            row.add(mr.getEpf());
+            row.add(mr.getSocso());
+            row.add(mr.getEis()); 
+            double deductions = mr.getLeaveDeductions() + mr.getAdditionalDeductions();
+            row.add(deductions); 
+            row.add(mr.getNetSalary()); 
+            model.addRow(row);
+            
+            baseSalary = baseSalary + mr.getBaseSalary();
+            grossSalary = grossSalary + mr.getGrossSalary();
+            epf = epf + mr.getEpf();
+            socso = socso + mr.getSocso();
+            eis = eis + mr.getEis();
+            accDeductions = accDeductions + deductions;
+            netSalary = netSalary + mr.getNetSalary();
+        }
+        
+        DefaultTableModel model2 = (DefaultTableModel) total_table.getModel();
+        model2.setRowCount(0);
+        Vector<Object> row2 = new Vector<>();
+        row2.add(baseSalary); 
+        row2.add(grossSalary); 
+        row2.add(epf);
+        row2.add(socso);
+        row2.add(eis); 
+        row2.add(accDeductions); 
+        row2.add(netSalary);
+        model2.addRow(row2);
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -1081,26 +2772,122 @@ public class frontendGUI extends javax.swing.JFrame {
     private javax.swing.JTextField LoginUsernameInput;
     private javax.swing.JLabel LoginUsernameLabel;
     private javax.swing.JButton QuitButton;
+    private javax.swing.JTextField ad_tf;
+    private javax.swing.JLabel additional_deduction_label;
+    private javax.swing.JLabel allowance_label;
+    private javax.swing.JTextField allowance_tf;
     private javax.swing.JButton backbutton1;
     private javax.swing.JButton backbutton2;
+    private javax.swing.JLabel base_salary_label;
+    private javax.swing.JTextField bs_tf;
+    private javax.swing.JTextField bsd_bs_tf;
+    private javax.swing.JButton bsd_confirm_button;
+    private javax.swing.JTextField bsd_empid_tf;
+    private javax.swing.JTextField bsd_hr_tf;
+    private javax.swing.JLabel bsd_not_found;
+    private javax.swing.JButton bsd_return_button;
+    private javax.swing.JButton bsd_search_button;
+    private javax.swing.JPanel bsd_update_panel;
+    private javax.swing.JTextField bsd_wh_tf;
     private javax.swing.JLabel contactNote;
+    private javax.swing.JLabel contact_no_label;
     private javax.swing.JLabel contactnoLabel;
     private javax.swing.JLabel departmentLabel;
+    private javax.swing.JLabel department_label;
     private javax.swing.JComboBox<String> departmentdropdown;
+    private javax.swing.JLabel eis_label;
+    private javax.swing.JTextField eis_tf;
     private javax.swing.JLabel employeeregistrationLabelf;
     private javax.swing.JLabel employeeregistrationLabels;
+    private javax.swing.JLabel epf_label;
+    private javax.swing.JTextField epf_tf;
     private javax.swing.JPanel firstpage;
     private javax.swing.JLabel fullnameLabel;
     private javax.swing.JLabel fullnameNote;
+    private javax.swing.JButton go_bsd_button;
+    private javax.swing.JButton go_mr_button;
+    private javax.swing.JButton go_ms_button;
+    private javax.swing.JLabel gross_salary_label;
+    private javax.swing.JTextField gs_tf;
+    private javax.swing.JLabel hourly_rate_label;
+    private javax.swing.JButton hr_back_login_button;
+    private javax.swing.JPanel hr_panel;
+    private javax.swing.JButton hr_register_button;
+    private javax.swing.JTextField hr_tf;
     private javax.swing.JLabel icLabel;
     private javax.swing.JLabel icNote;
+    private javax.swing.JLabel ic_no_label;
+    private javax.swing.JLabel income_tax_label;
     private javax.swing.JLabel invalidinputNote;
     private javax.swing.JLabel invalidinputNote2;
+    private javax.swing.JTextField it_tf;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField ld_tf;
+    private javax.swing.JLabel leave_deduction_label;
+    private javax.swing.JTextField mes_tf;
+    private javax.swing.JComboBox<String> month_combo_box;
+    private javax.swing.JPanel monthly_report;
+    private javax.swing.JTextField mr_date_tf;
+    private javax.swing.JTextField mr_no_emp_tf;
+    private javax.swing.JTable mr_tb;
+    private javax.swing.JButton mr_view_back_button;
+    private javax.swing.JComboBox<String> mrg_month_cb;
+    private javax.swing.JPanel mrg_panel;
+    private javax.swing.JButton mrg_view_button;
+    private javax.swing.JComboBox<String> mrg_year_cb;
+    private javax.swing.JTextField ms_ad_tf;
+    private javax.swing.JTextField ms_allowance_tf;
+    private javax.swing.JButton ms_confirm_button;
+    private javax.swing.JTextField ms_empid_tf;
+    private javax.swing.JTextField ms_ld_tf;
+    private javax.swing.JLabel ms_not_found;
+    private javax.swing.JTextField ms_ot_tf;
+    private javax.swing.JTextField ms_reason_tf;
+    private javax.swing.JButton ms_return_button;
+    private javax.swing.JButton ms_search_button;
+    private javax.swing.JPanel ms_update_panel;
+    private javax.swing.JButton msg_back_button;
+    private javax.swing.JTextField name_tf;
     private javax.swing.JButton nextpagebutton;
     private javax.swing.JButton nextpagebutton2;
+    private javax.swing.JLabel nnet_dalary_label;
+    private javax.swing.JLabel noteLabel;
+    private javax.swing.JTextField ot_tf;
+    private javax.swing.JLabel overtime_hour_label;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel passwordNote;
     private javax.swing.JCheckBox passwordvisible;
+    private javax.swing.JButton pd_back_button;
+    private javax.swing.JButton pd_salary_button;
+    private javax.swing.JTextField personal_contact_textfield;
+    private javax.swing.JTextField personal_department_textfield;
+    private javax.swing.JLabel personal_details_label;
+    private javax.swing.JPanel personal_details_panel;
+    private javax.swing.JTextField personal_ic_textfield;
+    private javax.swing.JLabel personal_name_label;
+    private javax.swing.JTextField personal_name_textfield;
     private javax.swing.JTextField readIC;
     private javax.swing.JTextField readcontactnumber;
     private javax.swing.JTextField readfullname;
@@ -1110,8 +2897,18 @@ public class frontendGUI extends javax.swing.JFrame {
     private javax.swing.JLabel retypepasswordLabel;
     private javax.swing.JLabel retypepasswordNote;
     private javax.swing.JCheckBox retypepasswordvisible;
+    private javax.swing.JButton salary_back_button;
+    private javax.swing.JPanel salary_details_panel;
+    private javax.swing.JLabel salary_name_label;
     private javax.swing.JPanel secondpage;
+    private javax.swing.JLabel socso_label;
+    private javax.swing.JTextField socso_tf;
+    private javax.swing.JTable total_table;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JLabel usernameNote;
+    private javax.swing.JButton view_reason_button;
+    private javax.swing.JTextField wh_tf;
+    private javax.swing.JLabel working_hours_label;
+    private javax.swing.JComboBox<String> year_combo_box;
     // End of variables declaration//GEN-END:variables
 }
